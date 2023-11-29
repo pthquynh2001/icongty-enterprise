@@ -1,0 +1,72 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-text-2');
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-color: #f5f5f5;
+  --primary-color: #2f61e6;
+  --secondary-color: #6ae2f8;
+  --complementary-color: #595959;
+  --text-color: #595959;
+  --gradient-title: linear-gradient(273deg, #2f61e6 -3.78%, #6ae2f8 140.09%);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-start-rgba: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  font-family: 'SF UI Text', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  /* background: var(--background-color); */
+  background: pink;
+}
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.flexStart {
+  @apply flex items-center justify-start;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--complementary-color);
+  border-radius: 12px;
+}
+
+.max-container {
+  @apply mx-auto max-w-[1440px];
+}
+
+.padding-container {
+  @apply px-6 lg:px-20 2xl:px-0;
+}
+
+/* Primary button */
+.btn--primary {
+  background: var(--primary-color);
+}
+
+/* Header */
+.header {
+  @apply px-4 lg:px-6 h-20;
+}
