@@ -10,7 +10,7 @@ import './styles/global.css';
 export const metadata = {
   title: 'iCongty',
   description:
-    'Personal project using Typescript, ReactJS, NextJS, and TailwindCSS',
+    'Personal project using Typescript, ReactJS, NextJS, Antdesign and TailwindCSS',
 };
 
 export default function RootLayout({

@@ -20,6 +20,7 @@
     --background-start-rgba: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+
 } */
 
 body {
@@ -30,6 +31,10 @@ body {
   /* background: var(--background-color); */
   background: pink;
 }
+
+/* button {
+  font-family: 'SF UI Display', sans-serif;
+} */
 
 .flexCenter {
   @apply flex justify-center items-center;
