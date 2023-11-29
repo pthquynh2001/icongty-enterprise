@@ -6,7 +6,7 @@ import { Button, Flex } from 'antd';
 
 const Header: React.FC = () => {
   return (
-    <header className='header flexBetween relative z-30 border-b border-white/[.4]'>
+    <header className='header flexBetween z-30 border-b border-white/[.4] fixed top-0 left-0 right-0'>
       <div className='left flexStart gap-11'>
         <div className='logo'>
           <Link href='/'>
@@ -20,22 +20,17 @@ const Header: React.FC = () => {
             />
           </Link>
         </div>
-        <div className='hidden lg:flex'>
+        <ul className='hidden lg:flex gap-4'>
           {NAV_LINKS.map((link) => (
-            <Button key={link.key} type='link'>
+            <li key={link.key} className='text-white font-light px-2'>
               <Link href={link.href}>{link.label}</Link>
-            </Button>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-      <div className='right flex gap-4'>
-        <Button ghost className='font-semibold'>
-          Đăng nhập
-        </Button>
-        <Button
-          type='primary'
-          className='btn--primary font-semibold flexStart gap-2'
-        >
+      <div className='right hidden lg:flex gap-4'>
+        <Button ghost>Đăng nhập</Button>
+        <Button type='primary' className='btn--primary flexStart gap-2'>
           <Image
             src='/images/user-add.svg'
             width={14}
@@ -48,6 +43,9 @@ const Header: React.FC = () => {
           <p className='flag'>flag</p>
           <div className='VN'>VN</div>
         </div>
+      </div>
+      <div className='menu flex lg:hidden'>
+        <Image src='/images/menu.svg' width={32} height={32} alt='menu' />
       </div>
     </header>
   );

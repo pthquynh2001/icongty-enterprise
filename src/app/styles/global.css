@@ -29,6 +29,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
   /* background: var(--background-color); */
+  font-size: 14px;
+  line-height: 22px;
   background: pink;
 }
 
@@ -49,7 +51,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   height: 4px;
 }
 

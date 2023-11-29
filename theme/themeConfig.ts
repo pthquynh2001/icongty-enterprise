@@ -7,6 +7,7 @@ const theme: ThemeConfig = {
     colorLink: 'white',
     colorLinkHover: '#2f61e6',
     fontFamily: '"SF UI Text", sans-serif',
+    borderRadius: 4,
   },
 };
 
