@@ -5,7 +5,7 @@ import StyledComponentsRegistry from '@libs/AntdRegistry';
 import { ConfigProvider } from 'antd';
 import theme from '@theme/themeConfig';
 
-import './styles/global.css';
+import './styles/global.scss';
 
 export const metadata = {
   title: 'iCongty',

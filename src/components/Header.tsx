@@ -6,7 +6,7 @@ import { Button, Flex } from 'antd';
 
 const Header: React.FC = () => {
   return (
-    <header className='header flexBetween z-30 border-b border-white/[.4] fixed top-0 left-0 right-0'>
+    <header className='header'>
       <div className='left flexStart gap-11'>
         <div className='logo'>
           <Link href='/'>
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         </div>
         <ul className='hidden lg:flex gap-4'>
           {NAV_LINKS.map((link) => (
-            <li key={link.key} className='text-white font-light px-2'>
+            <li key={link.key} className='text-white px-2'>
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}

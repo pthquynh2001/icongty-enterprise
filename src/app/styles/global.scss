@@ -11,6 +11,7 @@
   --complementary-color: #595959;
   --text-color: #595959;
   --gradient-title: linear-gradient(273deg, #2f61e6 -3.78%, #6ae2f8 140.09%);
+  --footer-color: #072a88;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -31,6 +32,7 @@ body {
   /* background: var(--background-color); */
   font-size: 14px;
   line-height: 22px;
+  font-weight: 300;
   background: pink;
 }
 
@@ -61,11 +63,11 @@ body {
 }
 
 .max-container {
-  @apply mx-auto max-w-[1440px];
+  @apply mx-auto max-w-[1156px];
 }
 
 .padding-container {
-  @apply px-6 lg:px-20 2xl:px-0;
+  @apply px-4 md:px-10 xl:px-0;
 }
 
 /* Primary button */
@@ -75,5 +77,21 @@ body {
 
 /* Header */
 .header {
-  @apply px-4 lg:px-6 h-20;
+  @apply flexBetween px-4 lg:px-6 h-20 border-b border-white/[.4] fixed top-0 left-0 right-0 z-30;
+}
+
+/* Footer */
+
+.footer {
+  background: var(--footer-color);
+  @apply min-h-[470px];
+  a {
+    @apply transition duration-300;
+    &:hover {
+      color: var(--secondary-color);
+      use {
+        fill: var(--secondary-color);
+      }
+    }
+  }
 }
