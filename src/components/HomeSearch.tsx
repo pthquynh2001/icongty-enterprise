@@ -24,7 +24,7 @@ const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
 
 // START Select menu setting
 const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
+  console.log(value);
 };
 
 // END: Select menu setting

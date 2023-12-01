@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Banner = () => {
   return (
-    <div className='h-[600px]'>
+    <div className='h-[600px] w-full relative'>
       <Image
         src='/images/banner.png'
         fill={true}
@@ -10,6 +10,7 @@ const Banner = () => {
         style={{
           objectFit: 'cover', // cover, contain, none
         }}
+        priority={true}
       />
     </div>
   );
