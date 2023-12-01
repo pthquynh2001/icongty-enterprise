@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Banner = () => {
   return (
-    <div className='h-[600px] relative'>
+    <div className='h-[600px]'>
       <Image
         src='/images/banner.png'
         fill={true}

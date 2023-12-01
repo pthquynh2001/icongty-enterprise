@@ -8,12 +8,12 @@ type ColumnProps = {
   links: Array<string>;
 };
 
-// Column component
+// Column component for links
 const FooterColumn = ({ title, links }: ColumnProps) => {
   return (
-    <div className='flex flex-col gap-6 max-w-[210px]'>
+    <div className='flex-col flexCenter md:items-start gap-6 w-full md:max-w-[30%] grow mt-8 mb-8'>
       <h4 className='opacity-70 px-2 font-medium'>{title}</h4>
-      <ul className='flex flex-col gap-4'>
+      <ul className='flexCenter flex-col md:items-start  gap-4'>
         {links.map((link) => (
           <Link href='/' key={link} className='px-2 py-[1px] truncate'>
             {link}
@@ -29,8 +29,8 @@ const Footer = () => {
   return (
     <footer className='footer  text-white flex-col flexBetween'>
       <div className='  max-container padding-container flex-col flexBetween w-full h-full'>
-        <div className='flexBetween gap-12 w-full mt-16 mb-12'>
-          <div className='flex items-start flex-col gap-6 max-w-[330px]'>
+        <div className='flexBetween flex-wrap  w-full mt-16 mb-12'>
+          <div className='flex items-start flex-col gap-6 w-[330px] grow md:mr-36 '>
             <Image
               src='/images/logo-white.svg'
               width={330}
@@ -55,7 +55,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className='flex flex-wrap gap-[75px]'>
+          <div className='flex flex-wrap md:flex-nowrap md:items-start md:justify-between basis-[56%] grow'>
             {FOOTER_LINKS.map((links, index) => (
               <FooterColumn
                 key={index}
@@ -65,7 +65,8 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        <div className='flexBetween py-4 border-t border-white/[.4] w-full'>
+
+        <div className='flexBetween flex-col md:flex-row py-4 gap-4 border-t border-white/[.4] w-full'>
           <ul className='flex gap-4'>
             {SOCIALS.map((social) => (
               <li key={social.title}>

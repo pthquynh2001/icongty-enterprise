@@ -30,7 +30,7 @@ const Header: React.FC = () => {
       </div>
       <div className='right hidden lg:flex gap-4'>
         <Button ghost>Đăng nhập</Button>
-        <Button type='primary' className='btn--primary flexStart gap-2'>
+        <Button type='primary' className='flexStart gap-2'>
           <Image
             src='/images/user-add.svg'
             width={14}

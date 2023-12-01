@@ -1,5 +1,7 @@
+// 'use client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { StyleProvider } from '@ant-design/cssinjs';
 import StyledComponentsRegistry from '@libs/AntdRegistry';
 
 import { ConfigProvider } from 'antd';
