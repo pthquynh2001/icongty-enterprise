@@ -40,8 +40,13 @@ const Header: React.FC = () => {
           Đăng ký
         </Button>
         <div className='language flexStart gap-2'>
-          <p className='flag'>flag</p>
-          <div className='VN'>VN</div>
+          <Image
+            src='/images/flag-en.svg'
+            width={24}
+            height={24}
+            alt='flag US'
+          />
+          <div className='text-white font-semibold'>VN</div>
         </div>
       </div>
       <div className='menu flex lg:hidden'>
