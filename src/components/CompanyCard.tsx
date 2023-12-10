@@ -41,7 +41,7 @@ const CompanyCard = ({ card }: any) => {
         <Divider className='mt-4 mb-2' />
         <div className='text-xs'>
           <div className='grid grid-cols-8'>
-            <p className='col-span-3'>
+            <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
                   src={'/images/location.svg'}
@@ -51,11 +51,11 @@ const CompanyCard = ({ card }: any) => {
                 />
                 <span className='font-semibold inline-block '>Địa điểm</span>
               </div>
-            </p>
+            </div>
             <span className='col-span-5'>{card.address}</span>
           </div>
           <div className='grid grid-cols-8 mt-2 mb-2'>
-            <p className='col-span-3'>
+            <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
                   src={'/images/company.svg'}
@@ -65,13 +65,13 @@ const CompanyCard = ({ card }: any) => {
                 />
                 <span className='font-semibold  inline-block'>Quy mô</span>
               </div>
-            </p>
+            </div>
             <span className='col-span-5'>
               {card.companySize ? `Trên ${card.companySize} nhân sự` : ''}
             </span>
           </div>
           <div className='grid grid-cols-8'>
-            <p className='col-span-3'>
+            <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
                   src={'/images/members.svg'}
@@ -81,7 +81,7 @@ const CompanyCard = ({ card }: any) => {
                 />
                 <span className='font-semibold'>Năm thành lập</span>
               </div>
-            </p>
+            </div>
             <span className='col-span-5'>
               {card.foundationDate?.split('-')[0]}
             </span>
