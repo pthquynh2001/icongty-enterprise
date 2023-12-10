@@ -1,13 +1,11 @@
 // 'use client';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { StyleProvider } from '@ant-design/cssinjs';
 import StyledComponentsRegistry from '@libs/AntdRegistry';
-
 import { ConfigProvider } from 'antd';
 import theme from '@theme/themeConfig';
 
 import './styles/global.scss';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'iCongty',

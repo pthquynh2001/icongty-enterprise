@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { AudioOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
+import { AudioOutlined } from '@ant-design/icons';
 import { Input, Select, ConfigProvider, Button } from 'antd';
 import Search from 'antd/lib/input/Search';
 import type { SearchProps } from 'antd/lib/input/Search';
