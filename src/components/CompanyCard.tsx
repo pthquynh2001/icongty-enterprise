@@ -1,41 +1,50 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Divider } from 'antd';
 import Categories from '@/components/Categories';
 
 const CompanyCard = ({ card }: any) => {
   return (
     card && (
-      <div className='relative w-full p-6 bg-white rounded-lg hover:shadow-lg transition-all	'>
+      <div className='relative w-full p-6 bg-white rounded-lg hover:shadow-card transition-all	'>
         <div className='w-full h-[92px] relative'>
-          <Image
-            src={
-              card.coverPhoto?.location ||
-              'https://s3.cloud.cmctelecom.vn/icongty-upload/b3-208-f.webp'
-            }
-            alt={card.coverPhoto?.name || 'company-banner'}
-            fill
-            sizes="width:'100%'"
-            className='rounded object-cover'
-          />
-          <Image
-            src={
-              card.logo?.location ||
-              'https://s3.cloud.cmctelecom.vn/icongty-upload/b3-208-f.webp'
-            }
-            alt={card.logo?.name || 'company-logo'}
-            width={76}
-            height={76}
-            className='rounded-[2px] object-cover z-10 absolute top-2 left-2'
-          />
+          <Link
+            href={`/company/${card._id}`}
+            className='block w-full h-full absolute'
+          >
+            <Image
+              src={
+                card.coverPhoto?.location ||
+                'https://s3.cloud.cmctelecom.vn/icongty-upload/b3-208-f.webp'
+              }
+              alt={card.coverPhoto?.name || 'company-banner'}
+              fill
+              sizes="width:'100%'"
+              className='rounded object-cover'
+              priority
+            />
+            <Image
+              src={
+                card.logo?.location ||
+                'https://s3.cloud.cmctelecom.vn/icongty-upload/b3-208-f.webp'
+              }
+              alt={card.logo?.name || 'company-logo'}
+              width={76}
+              height={76}
+              className='rounded-[2px] object-cover z-10 absolute top-2 left-2'
+            />
+          </Link>
           <p className='absolute right-5 bottom-2 text-xs text-white'>
             MST: {card.taxCode}
           </p>
         </div>
         <div className='min-h-[78px]'>
-          <h5 className='text-base text-neutral-800 line-clamp-2 mt-6 mb-2'>
-            {card.name}
-          </h5>
+          <Link href={`/company/${card._id}`}>
+            <h5 className='text-base text-neutral-10 line-clamp-2 mt-6 mb-2 hover:text-royalBlue'>
+              {card.name}
+            </h5>
+          </Link>
           <Categories data={card.categories} />
         </div>
         <Divider className='mt-4 mb-2' />
@@ -44,7 +53,7 @@ const CompanyCard = ({ card }: any) => {
             <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
-                  src={'/images/location.svg'}
+                  src={'/icons/location.svg'}
                   width={12}
                   height={12}
                   alt='Location-icon'
@@ -58,7 +67,7 @@ const CompanyCard = ({ card }: any) => {
             <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
-                  src={'/images/company.svg'}
+                  src={'/icons/company.svg'}
                   width={12}
                   height={12}
                   alt='company-icon'
@@ -74,7 +83,7 @@ const CompanyCard = ({ card }: any) => {
             <div className='col-span-3'>
               <div className='flexStart gap-2'>
                 <Image
-                  src={'/images/members.svg'}
+                  src={'/icons/members.svg'}
                   width={12}
                   height={12}
                   alt='members-icon'

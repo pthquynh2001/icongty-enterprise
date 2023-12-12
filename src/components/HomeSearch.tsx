@@ -93,7 +93,7 @@ const HomeSearch: React.FC = () => {
       >
         <div className='flexBetween w-full mb-3'>
           <div className='flexStart gap-2'>
-            <Image src='/images/dots.svg' width={16} height={16} alt='dots' />
+            <Image src='/icons/dots.svg' width={16} height={16} alt='dots' />
             <p className='font-semibold text-white'>Tìm kiếm nâng cao:</p>
           </div>
           <div className='flexBetween md:hidden'>
@@ -115,7 +115,7 @@ const HomeSearch: React.FC = () => {
                 className='flexBetween'
                 icon={
                   <Image
-                    src='/images/collapse.svg'
+                    src='/icons/collapse.svg'
                     alt='collapse'
                     width={16}
                     height={16}

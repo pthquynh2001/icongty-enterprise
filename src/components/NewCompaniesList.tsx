@@ -1,10 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
-
+import { Button, ConfigProvider } from 'antd';
+import Link from 'next/link';
 import * as companyServices from '@/apiServices/companyServices';
-import CompanyCard from '@/components/CompanyCard';
+import CompanyCardSmall from '@/components/CompanyCardSmall';
 import Pagination from './Pagination/Pagination';
-const CompaniesList = () => {
+const NewCompaniesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -25,23 +26,34 @@ const CompaniesList = () => {
   return (
     data && (
       <div className='padding-container max-container w-full mt-[120px] mb-20'>
-        <div className='flex-col flexStart gap-6 text-center mb-12 '>
-          <h2 className='font-semibold text-neutral-11'>Công ty tiêu biểu</h2>
-          <p className='text-neutral-9 max-w-2xl leading-[22px]'>
-            Trong số hơn +16,000 doanh nghiệp đang phát triển mạnh mẽ tại Việt
-            Nam, cùng khám phá danh sách các công ty tiêu biểu để tìm ra đối tác
-            tiềm năng với doanh nghiệp của bạn.
-          </p>
+        <div className='flexBetween gap-6 text-center mb-12 '>
+          <h2 className='font-semibold text-neutral-11'>Doanh nghiệp mới</h2>
+          <Link href={`/`}>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Button: {
+                    contentFontSize: 16,
+                    fontWeight: 600,
+                  },
+                },
+              }}
+            >
+              <Button type='primary' size='large'>
+                Xem tất cả
+              </Button>
+            </ConfigProvider>
+          </Link>
         </div>
         <div className='flexStart flex-col'>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
             {data.map((card, index) => {
-              return <CompanyCard key={index} card={card} />;
+              return <CompanyCardSmall key={index} card={card} />;
             })}
           </div>
 
           {pagination.totalItems / pagination.limit > 1 && (
-            <div className='mt-12'>
+            <div className='mt-12 '>
               <Pagination
                 pagination={pagination}
                 onPageChange={(page) => {
@@ -56,4 +68,4 @@ const CompaniesList = () => {
   );
 };
 
-export default CompaniesList;
+export default NewCompaniesList;

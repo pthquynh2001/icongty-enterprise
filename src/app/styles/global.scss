@@ -1,9 +1,27 @@
 @import url('https://fonts.cdnfonts.com/css/sf-ui-text-2');
 @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
 @import 'normalize.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  h1 {
+    @apply text-[56px];
+  }
+  h2 {
+    @apply text-[38px];
+  }
+  h3 {
+    @apply text-[24px];
+  }
+  h4 {
+    @apply text-[20px];
+  }
+  h5 {
+    @apply text-[16px];
+  }
+}
 
 // Reset CSS
 

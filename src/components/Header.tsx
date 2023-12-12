@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         <div className='logo'>
           <Link href='/'>
             <Image
-              src='/images/logo.svg'
+              src='/icons/logo.svg'
               width={186}
               height={48}
               alt='iCongty-logo'
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         <Button ghost>Đăng nhập</Button>
         <Button type='primary' className='flexStart gap-2'>
           <Image
-            src='/images/user-add.svg'
+            src='/icons/user-add.svg'
             width={14}
             height={14}
             alt='user-add'
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         </Button>
         <div className='language flexStart gap-2'>
           <Image
-            src='/images/flag-en.svg'
+            src='/icons/flag-en.svg'
             width={24}
             height={24}
             alt='flag US'
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
         </div>
       </div>
       <div className='menu flex lg:hidden'>
-        <Image src='/images/menu.svg' width={32} height={32} alt='menu' />
+        <Image src='/icons/menu.svg' width={32} height={32} alt='menu' />
       </div>
     </header>
   );

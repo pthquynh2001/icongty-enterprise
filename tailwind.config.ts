@@ -16,22 +16,24 @@ const config: Config = {
         gradientTitle:
           'linear-gradient(273deg, #2f61e6 -3.78%, #6ae2f8 140.09%)',
         royalBlue: {
-          600: '#82a0f0',
-          700: '#6e91ee',
-          800: '#5981eb',
-          900: '#4471e9',
+          60: '#82a0f0',
+          70: '#6e91ee',
+          80: '#5981eb',
+          90: '#4471e9',
           DEFAULT: '#2F61E6',
         },
         neutral: {
-          600: '#9b9b9b',
-          700: '#7a7a7a',
-          800: '#6a6a6a',
-          900: '#595959',
-          DEFAULT: '#2F61E6',
+          8: '#595959',
+          9: '#434343',
+          10: '#262626',
+          11: '#1F1F1F',
         },
       },
       transitionProperty: {
         'transition-duration': '300ms',
+      },
+      boxShadow: {
+        card: '0px 6px 15px 0px rgba(44, 61, 106, 0.15)',
       },
     },
   },

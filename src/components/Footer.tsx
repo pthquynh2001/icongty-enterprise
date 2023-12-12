@@ -32,7 +32,7 @@ const Footer = () => {
         <div className='flexBetween flex-wrap  w-full mt-16 mb-12'>
           <div className='flex items-start flex-col gap-6 w-[330px] grow md:mr-36 '>
             <Image
-              src='/images/logo-white.svg'
+              src='/icons/logo-white.svg'
               width={330}
               height={91}
               alt='iCongty-logo'
@@ -73,7 +73,7 @@ const Footer = () => {
                 <Link href={social.link}>
                   <svg width='32' height='32'>
                     <use
-                      xlinkHref={`/images/${social.icon}#${social.title}-icon`}
+                      xlinkHref={`/icons/${social.icon}#${social.title}-icon`}
                       className='social-icon'
                     />
                   </svg>
