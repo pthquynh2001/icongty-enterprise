@@ -2,16 +2,18 @@ import Banner from '@/components/Banner';
 import HomeSearch from '@/components/HomeSearch';
 import CompaniesList from '@/components/CompaniesList';
 import NewCompaniesList from '@/components/NewCompaniesList';
+import Carousel from '@/components/Carousel';
 
 const Home = () => {
   return (
-    <section className='flexStart flex-col mb-16 relative'>
+    <section className='flexStart flex-col relative'>
       <Banner />
       <HomeSearch />
-      <CompaniesList />
-      <NewCompaniesList />
-      <h2>banner</h2>
-      <h2>companies</h2>
+      <div className='flexStart  flex-col relative my-[140px]  gap-20'>
+        <CompaniesList />
+        <NewCompaniesList />
+        <Carousel />
+      </div>
     </section>
   );
 };

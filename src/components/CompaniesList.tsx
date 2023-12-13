@@ -24,7 +24,7 @@ const CompaniesList = () => {
 
   return (
     data && (
-      <div className='padding-container max-container w-full mt-[120px] mb-20'>
+      <div className='padding-container max-container w-full '>
         <div className='flex-col flexStart gap-6 text-center mb-12 '>
           <h2 className='font-semibold text-neutral-11'>Công ty tiêu biểu</h2>
           <p className='text-neutral-9 max-w-2xl leading-[22px]'>

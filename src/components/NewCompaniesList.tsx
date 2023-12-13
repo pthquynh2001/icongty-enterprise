@@ -9,7 +9,7 @@ const NewCompaniesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const pagination = { limit: 6, totalItems: 9, page: page };
+  const pagination = { limit: 9, totalItems: 9, page: page };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,7 @@ const NewCompaniesList = () => {
 
   return (
     data && (
-      <div className='padding-container max-container w-full mt-[120px] mb-20'>
+      <div className='padding-container max-container w-full'>
         <div className='flexBetween gap-6 text-center mb-12 '>
           <h2 className='font-semibold text-neutral-11'>Doanh nghiệp mới</h2>
           <Link href={`/`}>
