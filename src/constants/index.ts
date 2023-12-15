@@ -127,3 +127,31 @@ export const HOME_SEARCH_SELECT = [
     ],
   },
 ];
+
+// HOME CAROUSEL
+export const HOME_CAROUSEL_SLIDES = [
+  {
+    title: 'Tìm kiếm đối tác',
+    slogan: 'Nhanh chóng - Uy tín - Tiết kiệm',
+    desc: ' Trong số hơn +16,000 doanh nghiệp đang phát triển mạnh mẽ tại Việt Nam, cùng iCongTy tìm ra đối tác tiềm năng với doanh nghiệp của bạn',
+    link: '/',
+  },
+  {
+    title: "Slide's title",
+    slogan: 'Slogan Slide 2 - SLOGAN',
+    desc: 'Description of slide 2, among over 16,000 enterprises are developing strongly in Vietnam alongside with iCongty ',
+    link: '/',
+  },
+  {
+    title: "Slide's title",
+    slogan: 'Slogan Slide 3 - SLOGAN',
+    desc: 'Description of slide 3, among over 16,000 enterprises are developing strongly in Vietnam alongside with iCongty ',
+    link: '/',
+  },
+  {
+    title: "Slide's title",
+    slogan: 'Slogan Slide 4 - SLOGAN',
+    desc: 'Description of slide 4, among over 16,000 enterprises are developing strongly in Vietnam alongside with iCongty ',
+    link: '/',
+  },
+];

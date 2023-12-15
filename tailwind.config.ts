@@ -23,6 +23,7 @@ const config: Config = {
           DEFAULT: '#2F61E6',
         },
         neutral: {
+          1: '#FFFFFF',
           8: '#595959',
           9: '#434343',
           10: '#262626',
@@ -34,6 +35,7 @@ const config: Config = {
       },
       boxShadow: {
         card: '0px 6px 15px 0px rgba(44, 61, 106, 0.15)',
+        cardHover: '0px 10px 20px 0px rgba(44, 61, 106, 0.27)',
       },
     },
   },

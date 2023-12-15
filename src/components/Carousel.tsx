@@ -1,38 +1,49 @@
 import React from 'react';
 import Slider from '@/components/Slider/Slider';
-import { Button, ConfigProvider } from 'antd';
-const slides = [
-  { url: '/images/slide1.png', alt: 'test1' },
-  { url: '/images/slide1.png', alt: 'test2' },
-  { url: '/images/slide1.png', alt: 'test3' },
-  { url: '/images/slide1.png', alt: 'test4' },
-];
+import Image from 'next/image';
+import { HOME_CAROUSEL_SLIDES } from '@/constants';
+
+const slides = HOME_CAROUSEL_SLIDES;
 const Carousel = () => {
   return (
-    <div className='max-container w-full h-[420px] rounded-2xl overflow-hidden shadow-lg relative'>
-      <Slider slides={slides} />
-      <div className='flex z-10 w-[330px] h-full inset-y-0 left-[118px]  absolute'>
-        <div className='flex justify-center flex-col w-full h-full text-white'>
-          <p className='text-base'>Tìm kiếm đối tác</p>
-          <h2 className='mt-2 mb-8'>Nhanh chóng - Uy tín - Tiết kiệm</h2>
-          <p className='mb-6 leading-[22px]'>
-            Trong số hơn +16,000 doanh nghiệp đang phát triển mạnh mẽ tại Việt
-            Nam, cùng iCongTy tìm ra đối tác tiềm năng với doanh nghiệp của bạn.
-          </p>
-          <div className='inline-block'>
-            <ConfigProvider
-              theme={{
-                components: {
-                  Button: {
-                    fontWeight: 600,
-                  },
-                },
-              }}
-            >
-              <Button ghost size='large'>
-                Khám phá ngay
-              </Button>
-            </ConfigProvider>
+    <div className='max-container lg:px-10 xl:px-0 w-full'>
+      <div className='w-full flex flex-col lg:flex-row h-[600px] md:h-[420px] lg:rounded-2xl  overflow-hidden shadow-lg relative bg-royalBlue'>
+        <div className=' w-full h-full absolute top-0 right-0 z-20'>
+          <div className='md:hidden w-[188px] h-[242px] absolute top-0 right-0'>
+            <Image src='/images/slide-ele-3.svg' fill alt='element' />
+          </div>
+          <Slider slides={slides} />
+        </div>
+        <div className=' flexCenter w-full h-1/2 bottom-0 md:w-1/2 lg:w-3/5 md:h-full md:right-0 absolute'>
+          <div className='absolute w-full h-full max-w-[450px] max-h-[280px] md:max-w-[530px] md:max-h-[375px] z-10  bottom-0'>
+            <Image
+              src='/images/slide1.png'
+              fill
+              sizes='max-width:100%'
+              alt='slide-image'
+              className='object-contain'
+              quality={100}
+              priority={true}
+            />
+          </div>
+          <div className='flex w-full h-full relative'>
+            <div className='absolute w-full h-full max-w-[180px] max-h-[180px] md:max-w-[230px] md:max-h-[230px]  z-10  left-2 md:-left-5  lg:-left-10 -translate-y-1/2 top-1/2 '>
+              <Image
+                src='/images/slide-ele-1.svg'
+                fill
+                alt='element'
+                className='object-contain'
+              />
+            </div>
+            <div className='absolute w-full h-full max-w-[180px] max-h-[180px] md:max-w-[230px] md:max-h-[230px]  z-10 mr-1 right-0 lg:right-14 bottom-0'>
+              <Image
+                src='/images/slide-ele-2.svg'
+                fill
+                sizes='width:100%; height:auto;'
+                alt='element'
+                className='object-contain'
+              />
+            </div>
           </div>
         </div>
       </div>

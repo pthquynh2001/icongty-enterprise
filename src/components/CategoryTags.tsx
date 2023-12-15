@@ -1,4 +1,4 @@
-const Categories = ({ data }: any) => {
+const CategoryTags = ({ data }: any) => {
   return (
     <div className='h-[22px] flex flex-wrap gap-2 line-clamp-1  list'>
       {data &&
@@ -14,4 +14,4 @@ const Categories = ({ data }: any) => {
   );
 };
 
-export default Categories;
+export default CategoryTags;

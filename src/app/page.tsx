@@ -3,6 +3,7 @@ import HomeSearch from '@/components/HomeSearch';
 import CompaniesList from '@/components/CompaniesList';
 import NewCompaniesList from '@/components/NewCompaniesList';
 import Carousel from '@/components/Carousel';
+import CategoriesList from '@/components/CategoriesList';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <CompaniesList />
         <NewCompaniesList />
         <Carousel />
+        <CategoriesList />
       </div>
     </section>
   );

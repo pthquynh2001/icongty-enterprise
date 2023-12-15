@@ -2,19 +2,19 @@
 import { useState, useEffect } from 'react';
 import { Button, ConfigProvider } from 'antd';
 import Link from 'next/link';
-import * as companyServices from '@/apiServices/companyServices';
-import CompanyCardSmall from '@/components/CompanyCardSmall';
+import * as categoryServices from '@/apiServices/categoryServices';
+import CategoryCard from '@/components/CategoryCard';
 import Pagination from './Pagination/Pagination';
-const NewCompaniesList = () => {
+const CategoriesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const pagination = { limit: 9, totalItems: 9, page: page };
+  const pagination = { limit: 12, totalItems: 100, page: page };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await companyServices.getAll({
+      const res = await categoryServices.getAll({
         params: { page: page, limit: pagination.limit },
       });
       setLoading(false);
@@ -27,11 +27,11 @@ const NewCompaniesList = () => {
     data && (
       <div className='padding-container max-container w-full'>
         <div className='flexBetween gap-6 text-center mb-12 '>
-          <h3 className='font-semibold text-neutral-11 md:hidden'>
-            Doanh nghiệp mới
+          <h3 className='font-semibold text-neutral-11  md:hidden'>
+            Danh mục ngành nghề
           </h3>
           <h2 className='font-semibold text-neutral-11 hidden md:block'>
-            Doanh nghiệp mới
+            Danh mục ngành nghề
           </h2>
           <Link href={`/`}>
             <ConfigProvider
@@ -51,9 +51,9 @@ const NewCompaniesList = () => {
           </Link>
         </div>
         <div className='flexStart flex-col'>
-          <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
+          <div className='w-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6 '>
             {data.map((card, index) => {
-              return <CompanyCardSmall key={index} card={card} />;
+              return <CategoryCard key={index} card={card} />;
             })}
           </div>
 
@@ -73,4 +73,4 @@ const NewCompaniesList = () => {
   );
 };
 
-export default NewCompaniesList;
+export default CategoriesList;

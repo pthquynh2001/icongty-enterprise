@@ -18,18 +18,51 @@ function Pagination(props: PaginationProps) {
   const { pagination, onPageChange } = props;
   const { page, limit, totalItems } = pagination;
   const totalPages = Math.ceil(totalItems / limit);
+  type PageNumberItem = number | string;
 
-  const [numbers, setNumbers] = useState<number[]>([]);
+  const [numbers, setNumbers] = useState<PageNumberItem[]>([]);
   const [active, setActive] = useState(page ? page : 1);
 
   // Use effect to update page numbers on total pages change
   useEffect(() => {
-    const newNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      newNumbers.push(i);
+    const newNumbers: PageNumberItem[] = [];
+    // set max visible buttons
+    const maxVisibleButtons = 5;
+    if (totalPages <= maxVisibleButtons) {
+      for (let i = 1; i <= totalPages; i++) {
+        newNumbers.push(i);
+      }
+    } else {
+      const halfVisibleButtons = Math.floor(maxVisibleButtons / 2);
+      const start =
+        active <= halfVisibleButtons
+          ? 1
+          : Math.min(
+              active - halfVisibleButtons,
+              totalPages - maxVisibleButtons + 1
+            );
+      const end = Math.min(start + maxVisibleButtons - 1, totalPages);
+
+      if (start > 1) {
+        newNumbers.push(1);
+        if (start > 2) {
+          newNumbers.push('...'); // Display ellipsis
+        }
+      }
+
+      for (let i = start; i <= end; i++) {
+        newNumbers.push(i);
+      }
+
+      if (end < totalPages) {
+        if (end < totalPages - 1) {
+          newNumbers.push('...'); // Display ellipsis
+        }
+        newNumbers.push(totalPages);
+      }
     }
     setNumbers(newNumbers);
-  }, [totalPages]);
+  }, [totalPages, active]);
 
   // Handle page change event
   function handlePageChange(newPage: number) {
@@ -45,23 +78,26 @@ function Pagination(props: PaginationProps) {
       <button
         disabled={page <= 1}
         onClick={() => handlePageChange(page - 1)}
-        className='flexCenter w-8 h-8 rounded bg-royalBlue-80 text-white cursor-pointer disabled:bg-royalBlue-60  disabled:cursor-default'
+        className='flexCenter w-8 h-8 rounded bg-royalBlue-80 text-white cursor-pointer  hover:bg-royalBlue disabled:bg-royalBlue-60  disabled:cursor-default'
+        title='Previous page'
       >
         <Image src='/icons/left.svg' height={12} width={12} alt='left-icon' />
       </button>
 
       {/* Page number list */}
       <ul className='flexCenter gap-2'>
-        {numbers.map((number) => (
+        {numbers.map((number, index) => (
           <li
-            key={number}
+            key={index}
             // className={cx('number', number === active ? 'active' : '')}
-            className={`flexCenter w-8 h-8 inline-block border rounded cursor-pointer ${
+            className={`flexCenter w-8 h-8 inline-block border rounded cursor-pointer hover:border-royalBlue hover:text-royalBlue ${
               number === active
                 ? 'border-royalBlue text-royalBlue bg-[#e1e6f3] font-semibold'
                 : 'border-royalBlue-60 text-royalBlue-80'
             }`}
-            onClick={() => handlePageChange(number)}
+            onClick={() =>
+              typeof number === 'number' ? handlePageChange(number) : null
+            }
           >
             {number}
           </li>
@@ -72,7 +108,8 @@ function Pagination(props: PaginationProps) {
       <button
         disabled={page >= totalPages}
         onClick={() => handlePageChange(page + 1)}
-        className='flexCenter w-8 h-8 rounded bg-royalBlue-80 text-white cursor-pointer disabled:bg-royalBlue-60 disabled:cursor-default'
+        className='flexCenter w-8 h-8 rounded bg-royalBlue-80 text-white cursor-pointer  hover:bg-royalBlue disabled:bg-royalBlue-60 disabled:cursor-default'
+        title='Next page'
       >
         <Image src='/icons/right.svg' height={12} width={12} alt='right-icon' />
       </button>

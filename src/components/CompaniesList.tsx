@@ -26,7 +26,12 @@ const CompaniesList = () => {
     data && (
       <div className='padding-container max-container w-full '>
         <div className='flex-col flexStart gap-6 text-center mb-12 '>
-          <h2 className='font-semibold text-neutral-11'>Công ty tiêu biểu</h2>
+          <h2 className='font-semibold text-neutral-11 hidden md:block'>
+            Công ty tiêu biểu
+          </h2>
+          <h3 className='font-semibold text-neutral-11 md:hidden'>
+            Công ty tiêu biểu
+          </h3>
           <p className='text-neutral-9 max-w-2xl leading-[22px]'>
             Trong số hơn +16,000 doanh nghiệp đang phát triển mạnh mẽ tại Việt
             Nam, cùng khám phá danh sách các công ty tiêu biểu để tìm ra đối tác

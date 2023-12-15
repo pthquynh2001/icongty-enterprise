@@ -2,12 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from 'antd';
-import Categories from '@/components/Categories';
+import Categories from '@/components/CategoryTags';
 
 const CompanyCardSmall = ({ card }: any) => {
   return (
     card && (
-      <div className='flex relative w-full h-[162px] p-6 bg-white rounded-lg hover:shadow-card transition-all	'>
+      <div className='flex relative w-full h-[162px] p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
         <div className='mr-[18px]'>
           <Link href={`/company/${card._id}`}>
             <Image
