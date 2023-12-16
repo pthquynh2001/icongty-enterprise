@@ -24,6 +24,7 @@ const config: Config = {
         },
         neutral: {
           1: '#FFFFFF',
+          7: '#8C8C8C',
           8: '#595959',
           9: '#434343',
           10: '#262626',
@@ -36,6 +37,7 @@ const config: Config = {
       boxShadow: {
         card: '0px 6px 15px 0px rgba(44, 61, 106, 0.15)',
         cardHover: '0px 10px 20px 0px rgba(44, 61, 106, 0.27)',
+        banner: '0px 10px 20px -8px rgba(44, 61, 106, 0.25);',
       },
     },
   },

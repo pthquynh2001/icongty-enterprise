@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { Mousewheel, Pagination, Autoplay } from 'swiper/modules';
 import Swiper from 'swiper';
 import { SwiperOptions } from 'swiper/types';
@@ -10,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './Slider.css';
-import { Button, ConfigProvider } from 'antd';
+import { Button } from 'antd';
 import Link from 'next/link';
 
 interface SwiperComponentProps {
@@ -54,8 +53,6 @@ const Slider: React.FC<SwiperComponentProps> = ({ slides }) => {
     };
     handleResize();
     window.addEventListener('resize', handleResize);
-    console.log('render');
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -66,10 +63,14 @@ const Slider: React.FC<SwiperComponentProps> = ({ slides }) => {
       <div className='swiper-wrapper wrapper'>
         {slides.map((content, index) => (
           <div key={index} className='swiper-slide w-full h-full '>
-            <div className='w-[255px] lg:w-[330px] flex flex-col text-left text-neutral-1  ml-4 md:ml-[118px] absolute top-12 left-0'>
+            <div className='flex flex-col absolute top-12 left-0 w-[255px] text-left text-neutral-1 ml-4 md:w-[330px] md:max-w-[30%] md:ml-[118px] '>
               <p className='text-base '>{content.title}</p>
-              <h3 className='mt-2 mb-8 lg:hidden'>{content.slogan}</h3>
-              <h2 className='mt-2 mb-8 hidden lg:block'>{content.slogan}</h2>
+              <h3 className='mt-2 mb-8 lg:hidden text-neutral-1'>
+                {content.slogan}
+              </h3>
+              <h2 className='mt-2 mb-8 hidden lg:block  text-neutral-1'>
+                {content.slogan}
+              </h2>
               <p className='mb-6 leading-[22px] text-xs text-[#E9F3FF]'>
                 {content.desc}
               </p>

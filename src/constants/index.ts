@@ -155,3 +155,28 @@ export const HOME_CAROUSEL_SLIDES = [
     link: '/',
   },
 ];
+
+// HOME HIGHLIGHT
+
+export const HOME_HIGHLIGHT = [
+  {
+    value: '1 triệu+',
+    desc: 'Doanh nghiệp đã xác minh trên iCongTy',
+    icon: '/icons/highlight-1.svg',
+  },
+  {
+    value: '50k+',
+    desc: 'Tài khoản truy cập thường xuyên mỗi ngày',
+    icon: '/icons/highlight-2.svg',
+  },
+  {
+    value: '800%',
+    desc: 'Tăng trưởng số lượng hồ sơ đối tác tiềm năng',
+    icon: '/icons/highlight-3.svg',
+  },
+  {
+    value: '100%',
+    desc: 'Xác suất tìm kiếm đối tác phù hợp với tiêu chí',
+    icon: '/icons/highlight-4.svg',
+  },
+];

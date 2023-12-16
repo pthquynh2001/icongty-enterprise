@@ -12,7 +12,7 @@ type ColumnProps = {
 const FooterColumn = ({ title, links }: ColumnProps) => {
   return (
     <div className='flex-col flexCenter md:items-start gap-6 w-full md:max-w-[30%] grow mt-8 mb-8'>
-      <h4 className='opacity-70 px-2 font-medium'>{title}</h4>
+      <h4 className='opacity-70 px-2 font-medium text-neutral-1 '>{title}</h4>
       <ul className='flexCenter flex-col md:items-start  gap-4'>
         {links.map((link) => (
           <Link href='/' key={link} className='px-2 py-[1px] truncate'>
@@ -27,7 +27,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => {
 // Footer component
 const Footer = () => {
   return (
-    <footer className='footer  text-white flex-col flexBetween'>
+    <footer className='footer  text-neutral-1 flex-col flexBetween'>
       <div className='  max-container padding-container flex-col flexBetween w-full h-full'>
         <div className='flexBetween flex-wrap  w-full mt-16 mb-12'>
           <div className='flex items-start flex-col gap-6 w-[330px] grow md:mr-36 '>

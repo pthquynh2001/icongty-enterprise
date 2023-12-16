@@ -4,6 +4,7 @@ import CompaniesList from '@/components/CompaniesList';
 import NewCompaniesList from '@/components/NewCompaniesList';
 import Carousel from '@/components/Carousel';
 import CategoriesList from '@/components/CategoriesList';
+import Highlight from '@/components/Highlight';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <NewCompaniesList />
         <Carousel />
         <CategoriesList />
+        <Highlight />
       </div>
     </section>
   );

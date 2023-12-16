@@ -27,7 +27,7 @@ function Pagination(props: PaginationProps) {
   useEffect(() => {
     const newNumbers: PageNumberItem[] = [];
     // set max visible buttons
-    const maxVisibleButtons = 5;
+    const maxVisibleButtons = 4;
     if (totalPages <= maxVisibleButtons) {
       for (let i = 1; i <= totalPages; i++) {
         newNumbers.push(i);
