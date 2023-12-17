@@ -5,6 +5,7 @@ const Highlight = () => {
   return (
     <div className='max-container lg:px-10 xl:px-0 w-full h-[510px]   lg:h-[422px]'>
       <div className='shadow-banner relative w-full h-full overflow-hidden lg:rounded-2xl bg-white '>
+        {/* Background */}
         <div className=' absolute bottom-0 h-full w-full  max-h-[70%] md:max-h-full'>
           <div className="absolute w-full h-full bg-[url('/images/highlight-banner.png')] bg-cover bg-no-repeat bg-[left_30%_bottom_-20px] md:bg-[left_0_bottom_-150px] md:bg-[length:115%_auto] lg:bg-[left_0_bottom_-300px]"></div>
           <div className='absolute w-full h-full  bg-royalBlue mix-blend-soft-light'></div>
@@ -12,6 +13,8 @@ const Highlight = () => {
           <div className='absolute fade-bg-b'></div>
           <div className='absolute fade-bg-r'></div>
         </div>
+
+        {/* Content */}
         <div className='absolute inset-0 w-full h-full  flexCenter flex-col'>
           <div className='py-12 flexCenter flex-col gap-2 lg:py-16'>
             <p className='text-neutral-7 md:text-base'>
