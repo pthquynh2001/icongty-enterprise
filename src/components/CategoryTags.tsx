@@ -5,7 +5,7 @@ const CategoryTags = ({ data }: any) => {
         data.map((cate: any, index: number) => (
           <span
             key={index}
-            className='h-full rounded border inline-block border-royalBlue-60 text-royalBlue-80 text-[12px] leading-[22px] pl-2 pr-2'
+            className='h-full rounded border inline-block border-royalBlue-60 text-royalBlue-80 text-[12px] leading-[22px] px-2'
           >
             {cate.name}
           </span>

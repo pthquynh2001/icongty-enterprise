@@ -1,0 +1,15 @@
+.tag {
+  @apply inline-block;
+
+  &.line {
+  }
+  &.block {
+    @apply leading-[22px] text-center rounded min-w-[50px] h-[22px] items-center text-xs text-royalBlue-80   px-2 py-[1px]  bg-[#e1e6f3] transition;
+    &:hover {
+      @apply hover:bg-royalBlue hover:text-neutral-1 cursor-pointer;
+    }
+    + .tag {
+      @apply ml-2;
+    }
+  }
+}

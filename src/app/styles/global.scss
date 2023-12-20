@@ -22,7 +22,17 @@
     @apply text-[16px] text-neutral-11 leading-6 font-semibold;
   }
 }
+.flexCenter {
+  @apply flex justify-center items-center;
+}
 
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.flexStart {
+  @apply flex items-center justify-start;
+}
 // Reset CSS
 
 * {
@@ -71,18 +81,6 @@ body {
   line-height: 22px;
   font-weight: 400;
   background: var(--background-color);
-}
-
-.flexCenter {
-  @apply flex justify-center items-center;
-}
-
-.flexBetween {
-  @apply flex justify-between items-center;
-}
-
-.flexStart {
-  @apply flex items-center justify-start;
 }
 
 ::-webkit-scrollbar {

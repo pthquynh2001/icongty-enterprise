@@ -29,12 +29,13 @@ const Carousel = () => {
         el: '.swiper-pagination',
         clickable: true,
       },
-      // autoplay: {
-      //   delay: 4000,
-      // },
+      autoplay: {
+        delay: 4000,
+      },
+      loop: true,
     };
 
-    const swiper = new Swiper('.swiper', swiperParams);
+    const swiper = new Swiper('.my-swiper', swiperParams);
     swiper.update();
     return () => {
       swiper.destroy(true, true);

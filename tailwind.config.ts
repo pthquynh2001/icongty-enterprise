@@ -24,6 +24,8 @@ const config: Config = {
         },
         neutral: {
           1: '#FFFFFF',
+          5: '#D9D9D9',
+          6: '#BFBFBF',
           7: '#8C8C8C',
           8: '#595959',
           9: '#434343',
@@ -38,6 +40,18 @@ const config: Config = {
         card: '0px 6px 15px 0px rgba(44, 61, 106, 0.15)',
         cardHover: '0px 10px 20px 0px rgba(44, 61, 106, 0.27)',
         banner: '0px 10px 20px -8px rgba(44, 61, 106, 0.25);',
+      },
+      keyframes: {
+        toLeft: {
+          '0%': {
+            transform: 'translateX(50%) scale(0.5)',
+            opacity: '0',
+          },
+          ' 100%': { transform: 'translateX(0) scale(1)', opacity: '1' },
+        },
+      },
+      animation: {
+        toLeft: 'toLeft 1s ease-in-out',
       },
     },
   },

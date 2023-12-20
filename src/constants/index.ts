@@ -180,3 +180,81 @@ export const HOME_HIGHLIGHT = [
     icon: '/icons/highlight-4.svg',
   },
 ];
+
+export const HOME_NEWS_SLIDES = [
+  {
+    title:
+      'Tin tức số 1: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    image: '/images/news1.png',
+    link: 'https://example.com/news1',
+    tags: ['tag1', 'tag2'],
+  },
+  {
+    title:
+      'Tin tức số 2: Nhìn lại một năm nổi bật của nền kinh tế Việt Nam 2022: Có nhiều điểm sáng',
+    image: '/images/news2.png',
+    link: 'https://example.com/news2',
+    tags: ['tag2', 'tag3'],
+  },
+  {
+    title: 'Tin tức số 3',
+    image: '/images/news3.png',
+    link: 'https://example.com/news3',
+    tags: ['tag1', 'tag3'],
+  },
+  {
+    title: 'Tin tức số 4',
+    image: '/images/news4.png',
+    link: 'https://example.com/news4',
+    tags: ['tag1', 'tag2'],
+  },
+  {
+    title: 'Tin tức số 5',
+    image: '/images/news5.png',
+    link: 'https://example.com/news5',
+    tags: ['tag2', 'tag3'],
+  },
+];
+
+export const HOME_NEWS_ARTICLES = [
+  {
+    id: 1,
+    title:
+      'Tin tức số 1: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.',
+    image: '/images/news.png',
+    link: 'https://example.com/news1',
+    credit: 'VnExpress',
+    tags: ['tag1', 'tag2'],
+  },
+  {
+    id: 2,
+    title:
+      'Tin tức số 2: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.',
+    image: '/images/news.png',
+    link: 'https://example.com/news1',
+    credit: 'Bao moi',
+    tags: ['tag 3', 'tag 2'],
+  },
+  {
+    id: 3,
+    title:
+      'Tin tức số 3: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.',
+    image: '/images/news.png',
+    link: 'https://example.com/news1',
+    credit: 'Kenh 24',
+    tags: ['tag 4', 'tag 2'],
+  },
+  {
+    id: 4,
+    title:
+      'Tin tức số 4: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.',
+    image: '/images/news.png',
+    link: 'https://example.com/news1',
+    credit: 'Bao tuoi tre',
+    tags: ['tag 3', 'tag 4'],
+  },
+];

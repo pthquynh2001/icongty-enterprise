@@ -19,29 +19,37 @@
   }
 
   .pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 16px;
-    color: #333;
-    padding: 10px;
-  }
+    @apply flex justify-between items-baseline absolute bottom-0 right-0 w-[172px];
 
-  .progress-bar {
-    height: 8px;
-    width: 100%;
-    background-color: #ddd;
-    margin: 0 10px;
+    .progress-bar {
+      @apply bg-[#d9d9d9] h-[2.5px] w-full mx-2 rounded-sm overflow-hidden;
+      .progress-bar-inner {
+        @apply bg-royalBlue h-full;
+      }
+    }
+    .swiper-pagination-current,
+    .swiper-pagination-total {
+      @apply text-royalBlue font-semibold align-middle;
+    }
+    h3 {
+      color: var(--neutral-7);
+    }
+  }
+  .swiper-slide-active h3 {
+    color: var(--neutral-10);
+
+    opacity: 0.3 !important;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    left: auto;
+    right: auto;
+    top: auto;
     position: relative;
   }
-
-  .progress-bar-inner {
-    height: 100%;
-    background-color: #4caf50;
-  }
-
-  .swiper-pagination-current,
-  .swiper-pagination-total {
-    color: #333;
-  }
+  --swiper-navigation-size: 12px;
 }

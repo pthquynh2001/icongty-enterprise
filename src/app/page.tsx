@@ -12,7 +12,7 @@ const Home = () => {
     <section className='flexStart flex-col relative'>
       <Banner />
       <HomeSearch />
-      <div className='flexStart flex-col relative my-[140px]  gap-20'>
+      <div className='flexStart flex-col relative my-[140px] w-full gap-20'>
         <CompaniesList />
         <NewCompaniesList />
         <Carousel />
