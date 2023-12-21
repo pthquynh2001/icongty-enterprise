@@ -6,6 +6,7 @@ import Carousel from '@/components/Carousel';
 import CategoriesList from '@/components/CategoriesList';
 import Highlight from '@/components/Highlight';
 import News from '@/components/News/News';
+import SubscribeBanner from '@/components/SubscribeBanner';
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
         <CategoriesList />
         <Highlight />
         <News />
+        <SubscribeBanner />
       </div>
     </section>
   );

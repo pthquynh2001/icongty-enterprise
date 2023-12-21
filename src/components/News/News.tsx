@@ -153,7 +153,7 @@ const News = () => {
         </div>
       </div>
 
-      <div className='w-[408px] h-full relative text-neutral-1'>
+      <div className='w-[408px] h-full relative text-neutral-1 ml-4'>
         <div className='flexBetween mb-4 mt-[66px]'>
           <h3>Tin mới</h3>
 
