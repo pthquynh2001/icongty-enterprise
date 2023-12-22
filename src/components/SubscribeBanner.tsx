@@ -14,6 +14,7 @@ const SubscribeBanner = () => {
               src='/images/subscribe-right.png'
               alt='right img'
               fill
+              sizes='max-width:100%; max-height:100%'
               quality={100}
               className='object-contain object-right-bottom md:object-center'
             />
@@ -23,6 +24,7 @@ const SubscribeBanner = () => {
               src='/images/subscribe-left.png'
               alt='left img'
               fill
+              sizes='max-width:100%; max-height:100%'
               className='object-contain object-bottom'
             />
           </div>
@@ -31,6 +33,7 @@ const SubscribeBanner = () => {
               src='/images/subscribe-ele.svg'
               alt='ele left img'
               fill
+              sizes='max-width:100%; max-height:100%'
               quality={100}
               className='object-contain '
             />
@@ -54,6 +57,7 @@ const SubscribeBanner = () => {
               src='/images/subscribe-ele.svg'
               alt='ele left img'
               fill
+              sizes='max-width:100%; max-height:100%'
               className='object-contain '
             />
           </div>

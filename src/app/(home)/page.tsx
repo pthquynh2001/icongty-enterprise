@@ -7,22 +7,26 @@ import CategoriesList from '@/components/CategoriesList';
 import Highlight from '@/components/Highlight';
 import News from '@/components/News/News';
 import SubscribeBanner from '@/components/SubscribeBanner';
+import Header from '@/components/Header';
 
 const Home = () => {
   return (
-    <section className='flexStart flex-col relative'>
-      <Banner />
-      <HomeSearch />
-      <div className='flexStart flex-col relative my-[140px] w-full gap-20'>
-        <CompaniesList />
-        <NewCompaniesList />
-        <Carousel />
-        <CategoriesList />
-        <Highlight />
-        <News />
-        <SubscribeBanner />
-      </div>
-    </section>
+    <>
+      <Header type='home' />
+      <main className='flexStart flex-col relative'>
+        <Banner />
+        <HomeSearch />
+        <div className='flexStart flex-col relative my-[140px] w-full gap-20'>
+          <CompaniesList />
+          <NewCompaniesList />
+          <Carousel />
+          <CategoriesList />
+          <Highlight />
+          <News />
+          <SubscribeBanner />
+        </div>
+      </main>
+    </>
   );
 };
 

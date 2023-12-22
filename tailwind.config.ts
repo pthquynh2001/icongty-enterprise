@@ -33,9 +33,7 @@ const config: Config = {
           11: '#1F1F1F',
         },
       },
-      transitionProperty: {
-        'transition-duration': '300ms',
-      },
+      transitionProperty: {},
       boxShadow: {
         card: '0px 6px 15px 0px rgba(44, 61, 106, 0.15)',
         cardHover: '0px 10px 20px 0px rgba(44, 61, 106, 0.27)',
@@ -52,6 +50,9 @@ const config: Config = {
       },
       animation: {
         toLeft: 'toLeft 1s ease-in-out',
+      },
+      fontFamily: {
+        mont: ['Montserrat', 'sans-serif'],
       },
     },
   },

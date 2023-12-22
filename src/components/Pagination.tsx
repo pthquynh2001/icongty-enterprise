@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Pagination.module.scss';
-import classNames from 'classnames/bind';
 import Image from 'next/image';
-const cx = classNames.bind(styles);
 
 // Define the interface for pagination props
 interface PaginationProps {
@@ -89,7 +86,6 @@ function Pagination(props: PaginationProps) {
         {numbers.map((number, index) => (
           <li
             key={index}
-            // className={cx('number', number === active ? 'active' : '')}
             className={`flexCenter w-8 h-8 inline-block border rounded cursor-pointer hover:border-royalBlue hover:text-royalBlue ${
               number === active
                 ? 'border-royalBlue text-royalBlue bg-[#e1e6f3] font-semibold'

@@ -1,35 +1,115 @@
-import React from 'react';
+'use client';
+import React, { use, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { NAV_LINKS } from '@/constants';
 import { Button, Flex } from 'antd';
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  type?: 'home' | null; // Change the type according to your needs
+};
+const Header: React.FC<HeaderProps> = ({ type }) => {
+  const [screenScroll, setScreenScroll] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+  const [transparent, setTransparent] = useState(false);
+
+  // lang nghe su kien scroll
+  useEffect(() => {
+    if (type && type === 'home') {
+      const handleScroll = () => {
+        const newScreenScroll = window.scrollY;
+        setScreenScroll(newScreenScroll);
+      };
+      handleScroll();
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [type]);
+
+  useEffect(() => {
+    if (type && type === 'home') {
+      if (screenScroll > 600) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    }
+  }, [screenScroll, type]);
+
+  useEffect(() => {
+    if (type && type === 'home') {
+      if (!scrolled) {
+        setTransparent(true);
+      } else {
+        setTransparent(false);
+      }
+    }
+  }, [scrolled, type]);
   return (
-    <header className='header'>
+    <header
+      className={`header shadow-banner transition-all duration-300 ${
+        type === 'home'
+          ? transparent
+            ? 'bg-transparent shadow-none'
+            : 'bg-[#072A88] lg:bg-neutral-1'
+          : 'bg-neutral-1 '
+      }`}
+    >
       <div className='left flexStart gap-11'>
-        <div className='logo'>
-          <Link href='/'>
+        <div className='h-[50px]'>
+          <Link
+            href='/'
+            className='flexCenter w-full h-full relative'
+            scroll={false}
+          >
             <Image
               src='/icons/logo.svg'
-              width={186}
-              height={48}
+              width={50}
+              height={50}
               alt='iCongty-logo'
               priority={true}
-              className='w-auto h-auto'
             />
+            <p
+              className={`hidden lg:block ml-3 tracking-[0.5px] font-bold text-[25px] font-mont  ${
+                type === 'home'
+                  ? transparent
+                    ? 'text-neutral-1'
+                    : 'text-neutral-1 lg:text-neutral-8'
+                  : 'text-neutral-8'
+              }`}
+            >
+              iCONGTY
+            </p>
           </Link>
         </div>
         <ul className='hidden lg:flex gap-4'>
           {NAV_LINKS.map((link) => (
-            <li key={link.key} className='text-white px-2'>
+            <li
+              key={link.key}
+              className={`px-2  ${
+                type === 'home'
+                  ? transparent
+                    ? 'text-neutral-1'
+                    : 'text-neutral-1 lg:text-neutral-8 lg:hover:text-royalBlue'
+                  : 'text-neutral-8 hover:text-royalBlue'
+              }`}
+            >
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
         </ul>
       </div>
       <div className='right hidden lg:flex gap-4'>
-        <Button ghost>Đăng nhập</Button>
+        <Button
+          ghost
+          type={
+            type === 'home' ? (transparent ? 'default' : 'primary') : 'primary'
+          }
+        >
+          Đăng nhập
+        </Button>
         <Button type='primary' className='flexStart gap-2'>
           <Image
             src='/icons/user-add.svg'
@@ -50,7 +130,12 @@ const Header: React.FC = () => {
         </div>
       </div>
       <div className='menu flex lg:hidden'>
-        <Image src='/icons/menu.svg' width={32} height={32} alt='menu' />
+        <Image
+          src={type === 'home' ? '/icons/menu.svg' : '/icons/menu-blue.svg'}
+          width={32}
+          height={32}
+          alt='menu'
+        />
       </div>
     </header>
   );

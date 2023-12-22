@@ -4,7 +4,7 @@ import { Button, ConfigProvider } from 'antd';
 import Link from 'next/link';
 import * as categoryServices from '@/apiServices/categoryServices';
 import CategoryCard from '@/components/CategoryCard';
-import Pagination from './Pagination/Pagination';
+import Pagination from './Pagination';
 const CategoriesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -33,7 +33,7 @@ const CategoriesList = () => {
           <h2 className='font-semibold text-neutral-11 hidden md:block'>
             Danh mục ngành nghề
           </h2>
-          <Link href={`/`}>
+          <Link href={`/categories`}>
             <ConfigProvider
               theme={{
                 components: {

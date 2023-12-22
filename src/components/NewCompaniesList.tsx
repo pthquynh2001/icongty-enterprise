@@ -4,7 +4,7 @@ import { Button, ConfigProvider } from 'antd';
 import Link from 'next/link';
 import * as companyServices from '@/apiServices/companyServices';
 import CompanyCardSmall from '@/components/CompanyCardSmall';
-import Pagination from './Pagination/Pagination';
+import Pagination from './Pagination';
 const NewCompaniesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
