@@ -9,7 +9,7 @@ import News from '@/components/News/News';
 import SubscribeBanner from '@/components/SubscribeBanner';
 import Header from '@/components/Header';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Header type='home' />
@@ -30,4 +30,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

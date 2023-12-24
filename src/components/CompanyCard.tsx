@@ -10,7 +10,7 @@ const CompanyCard = ({ card }: any) => {
       <div className='relative w-full p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
         <div className='w-full h-[92px] relative'>
           <Link
-            href={`/company/${card._id}`}
+            href={`/companies/${card._id}`}
             className='block w-full h-full absolute'
           >
             <Image
@@ -40,7 +40,7 @@ const CompanyCard = ({ card }: any) => {
           </p>
         </div>
         <div className='min-h-[78px]'>
-          <Link href={`/company/${card._id}`}>
+          <Link href={`/companies/${card._id}`}>
             <h5 className='text-base text-neutral-10 line-clamp-2 mt-6 mb-2 hover:text-royalBlue'>
               {card.name}
             </h5>

@@ -1,8 +1,8 @@
 // NAVIGATION
 export const NAV_LINKS = [
-  { href: '/', key: 'home', label: 'Tìm công ty' },
-  { href: '/', key: 'how_hilink_work', label: 'Tin tức' },
-  { href: '/', key: 'services', label: 'Liên hệ' },
+  { href: '/companies', key: 'companies', label: 'Tìm công ty' },
+  { href: '/news', key: 'news', label: 'Tin tức' },
+  { href: '/contact', key: 'contact', label: 'Liên hệ' },
 ];
 
 // FOOTER

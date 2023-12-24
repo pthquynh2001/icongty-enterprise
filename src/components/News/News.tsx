@@ -157,7 +157,7 @@ const News = () => {
         <div className='flexBetween mb-4 mt-[66px]'>
           <h3>Tin mới</h3>
 
-          <Link href={`/`}>
+          <Link href={`/news`}>
             <ConfigProvider
               theme={{
                 components: {

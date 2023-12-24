@@ -102,23 +102,32 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
         </ul>
       </div>
       <div className='right hidden lg:flex gap-4'>
-        <Button
-          ghost
-          type={
-            type === 'home' ? (transparent ? 'default' : 'primary') : 'primary'
-          }
-        >
-          Đăng nhập
-        </Button>
-        <Button type='primary' className='flexStart gap-2'>
-          <Image
-            src='/icons/user-add.svg'
-            width={14}
-            height={14}
-            alt='user-add'
-          />
-          Đăng ký
-        </Button>
+        <Link href='/login'>
+          <Button
+            ghost
+            type={
+              type === 'home'
+                ? transparent
+                  ? 'default'
+                  : 'primary'
+                : 'primary'
+            }
+          >
+            Đăng nhập
+          </Button>
+        </Link>
+        <Link href='/register'>
+          <Button type='primary' className='flexStart gap-2'>
+            <Image
+              src='/icons/user-add.svg'
+              width={14}
+              height={14}
+              alt='user-add'
+            />
+            Đăng ký
+          </Button>
+        </Link>
+
         <div className='language flexStart gap-2'>
           <Image
             src='/icons/flag-en.svg'

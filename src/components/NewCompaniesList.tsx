@@ -33,7 +33,7 @@ const NewCompaniesList = () => {
           <h2 className='font-semibold text-neutral-11 hidden md:block'>
             Doanh nghiệp mới
           </h2>
-          <Link href={`/`}>
+          <Link href={`/companies`}>
             <ConfigProvider
               theme={{
                 components: {

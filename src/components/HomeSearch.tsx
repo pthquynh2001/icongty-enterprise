@@ -72,7 +72,6 @@ const HomeSearch: React.FC = () => {
           <Search
             placeholder='Nhập tên công ty, mã số thuế, ngành nghề...'
             enterButton={true}
-            allowClear
             size='large'
             suffix={suffix}
             onSearch={onSearch}
@@ -119,7 +118,6 @@ const HomeSearch: React.FC = () => {
                     alt='collapse'
                     width={16}
                     height={16}
-                    // className='leading-[22px]'
                   />
                 }
                 onClick={btnCollapse}
@@ -146,6 +144,7 @@ const HomeSearch: React.FC = () => {
                 defaultValue={menu.title}
                 onChange={handleChange}
                 options={menu.options}
+                allowClear
               />
             ))}
           </div>

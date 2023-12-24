@@ -12,24 +12,24 @@ import SubpageSearch from '@/components/SubpageSearch';
 //     absolute: 'Danh mục ngành nghề',
 //   },
 // };
-const CategoriesPage = () => {
+const CompaniesPage = () => {
   const items = [
     { title: 'Trang chủ', href: '/' },
     {
-      title: 'Danh mục ngành nghề',
+      title: 'Danh mục công ty',
     },
   ];
   return (
     <div className=''>
       <SubpageBreadcrumb items={items} />
       <SubpageBanner
-        title='Danh mục ngành nghề'
+        title='Danh mục công ty'
         desc='Khám phá đối tác tiềm năng của bạn trong hơn 3,000+ doanh nghiệp trên iCongty'
-        image='/images/categories-banner.png'
+        image='/images/companies-banner.png'
       />
       <SubpageSearch />
     </div>
   );
 };
 
-export default CategoriesPage;
+export default CompaniesPage;
