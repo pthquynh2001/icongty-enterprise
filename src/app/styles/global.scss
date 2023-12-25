@@ -33,6 +33,9 @@
 .flexStart {
   @apply flex items-center justify-start;
 }
+.flexEnd {
+  @apply flex items-center justify-end;
+}
 // Reset CSS
 
 * {

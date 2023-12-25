@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import * as companyServices from '@/apiServices/companyServices';
 import CompanyCard from '@/components/CompanyCard';
-import Pagination from './Pagination';
+import Pagination from '@/components/Pagination';
 const CompaniesList = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
