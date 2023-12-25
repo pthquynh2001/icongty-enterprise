@@ -6,7 +6,7 @@ import * as categoryServices from '@/apiServices/categoryServices';
 import CategoryCard from '@/components/CategoryCard';
 import Pagination from './Pagination';
 const CategoriesList = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const pagination = { limit: 12, totalItems: 100, page: page };
@@ -52,11 +52,17 @@ const CategoriesList = () => {
         </div>
         <div className='flexStart flex-col'>
           <div className='w-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-6 '>
-            {data.map((card, index) => {
-              return <CategoryCard key={index} card={card} />;
-            })}
+            {data &&
+              data.map((card, index) => {
+                return (
+                  <CategoryCard
+                    key={index}
+                    name={card.name}
+                    companyCount={card.companyCount}
+                  />
+                );
+              })}
           </div>
-
           {pagination.totalItems / pagination.limit > 1 && (
             <div className='mt-12 '>
               <Pagination
