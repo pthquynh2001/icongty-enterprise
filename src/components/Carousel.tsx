@@ -100,7 +100,7 @@ const Carousel = () => {
                     </p>
                     <div className='inline-block'>
                       {content.link && (
-                        <Link href={content.link}>
+                        <Link href={content.link} scroll={false}>
                           <Button ghost size='large'>
                             <p className='font-semibold text-sm lg:text-base'>
                               Khám phá ngay

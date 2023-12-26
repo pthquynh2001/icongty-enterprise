@@ -24,6 +24,8 @@ const config: Config = {
         },
         neutral: {
           1: '#FFFFFF',
+          2: '#FAFAFA',
+          3: '#F5F5F5',
           5: '#D9D9D9',
           6: '#BFBFBF',
           7: '#8C8C8C',
@@ -31,6 +33,7 @@ const config: Config = {
           9: '#434343',
           10: '#262626',
           11: '#1F1F1F',
+          13: '#000000',
         },
       },
       transitionProperty: {},

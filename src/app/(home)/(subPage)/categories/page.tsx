@@ -59,12 +59,17 @@ const CategoriesPage = () => {
     alphabetCategoriesProps[]
   >([]);
   const [filteredLetters, setFilteredLetters] = useState<any[]>([]);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+
+  // pagination
   const [page, setPage] = useState(1);
   const pagination = {
     limit: 3,
     totalItems: filteredLetters.length || 0,
     page: page,
   };
+
+  // START: featch data
   useEffect(() => {
     const fetchData = async () => {
       const res = await categoryServices.getAll();
@@ -73,7 +78,9 @@ const CategoriesPage = () => {
     fetchData();
   }, []);
 
-  // tao array moi chua cac object co key la chu cai dau tien cua ten nganh nghe
+  // END: featch data
+
+  //START: tao array moi chua cac object co key la chu cai dau tien cua ten nganh nghe
   useEffect(() => {
     if (categoriesData) {
       const newArray = alphabet.map((letter) => {
@@ -85,7 +92,9 @@ const CategoriesPage = () => {
       setAlphabetCategories(newArray);
     }
   }, [categoriesData]);
+  // END
 
+  // START: filter array moi chua theo chu cai dau tien
   useEffect(() => {
     const newArray = alphabetCategories.filter((item) => {
       if (item.categories.length > 0) {
@@ -94,8 +103,14 @@ const CategoriesPage = () => {
     });
     setFilteredLetters(newArray);
   }, [alphabetCategories]);
+  // END: filter array moi chua theo chu cai dau tien
+
+  const handleLetterClick = (letter: string) => {
+    setSelectedLetter(letter);
+  };
+
   return (
-    <div className=''>
+    <>
       <SubpageBreadcrumb items={items} />
       <SubpageBanner
         title='Danh mục ngành nghề'
@@ -103,7 +118,7 @@ const CategoriesPage = () => {
         image='/images/categories-banner.png'
       />
       <SubpageSearch />
-      <div className='max-container padding-container  mb-[120px]'>
+      <div className='max-container padding-container mb-[120px]'>
         <div className='flexBetween pb-4 mb-8 '>
           <div className='flexStart gap-4 max-w-[50%]'>
             <h3 className=''>Tất cả ngành nghề</h3>
@@ -130,18 +145,25 @@ const CategoriesPage = () => {
             </ConfigProvider>
           </div>
         </div>
-        <h5 className='text-neutral-7 text-base font-semibold w-full max-w-[550px] flexBetween  border-b border-black border-opacity-5 pb-6 mb-12'>
-          {alphabet.map((item, index) => (
-            <span
-              key={index}
-              className='hover:cursor-pointer hover:text-royalBlue transition-all duration-300'
-            >
-              {item}
-            </span>
-          ))}
-        </h5>
+        <div className='block  w-full  border-b border-black border-opacity-5 pb-6 mb-12'>
+          <h5 className=' text-base font-semibold max-w-[550px] flexBetween '>
+            {alphabet.map((letter, index) => (
+              <span
+                key={index}
+                className={`hover:cursor-pointer hover:text-royalBlue-70 transition-all duration-300 ${
+                  selectedLetter === letter
+                    ? 'text-royalBlue'
+                    : 'text-neutral-7'
+                }`}
+                onClick={() => handleLetterClick(letter)}
+              >
+                {letter}
+              </span>
+            ))}
+          </h5>
+        </div>
         {alphabetCategories && (
-          <div className='max-container padding-container'>
+          <>
             <div className=''>
               {alphabetCategories
                 .filter((item) => item.categories.length > 0)
@@ -152,12 +174,12 @@ const CategoriesPage = () => {
                     index < pagination.limit * page && (
                       <div
                         key={index}
-                        className='flex  border-b border-black border-opacity-5 pb-12 mb-12'
+                        className='flex flex-wrap lg:flex-nowrap border-b border-black border-opacity-5 pb-12 mb-12'
                       >
-                        <h4 className='text-2xl font-semibold mb-4 w-[200px] block shrink-0'>
+                        <h3 className='text-2xl font-semibold mb-4 w-full block shrink-0  lg:w-[200px]'>
                           {item.letter}
-                        </h4>
-                        <div className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-[73px] gap-y-6'>
+                        </h3>
+                        <div className='w-full grid grid-cols-2  gap-x-6  gap-y-6 md:grid-cols-3 lg:gap-x-[73px] '>
                           {item.categories.map((category, index) => (
                             <CategoryCard
                               key={index}
@@ -180,10 +202,10 @@ const CategoriesPage = () => {
                 />
               )}
             </div>
-          </div>
+          </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
