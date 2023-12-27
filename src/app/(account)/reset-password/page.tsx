@@ -23,7 +23,7 @@ const ResetPasswordPage = () => {
       }
       setAlertPassword(false);
     }
-  }, [password]);
+  }, [password, confirmPassword]);
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;

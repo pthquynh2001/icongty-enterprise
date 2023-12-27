@@ -42,7 +42,7 @@ const RegisterPage = () => {
       }
       setAlertPassword(false);
     }
-  }, [password]);
+  }, [password, confirmPassword]);
 
   const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
@@ -128,7 +128,7 @@ const RegisterPage = () => {
               <div className='relative'>
                 <input
                   placeholder='Nhập username'
-                  id='password'
+                  id='username'
                   value={username}
                   onChange={handleUsernameChange}
                   minLength={3}

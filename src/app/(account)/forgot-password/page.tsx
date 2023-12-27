@@ -1,11 +1,29 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
+import { useWatch } from 'antd/es/form/Form';
 const ResetPasswordPage = () => {
-  const [countdown, setCountdown] = useState(15);
+  const [countdown, setCountdown] = useState(13);
+  const [emailInput, setEmailInput] = useState('');
   const [isSent, setIsSent] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const validateEmail = (value: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const handleEmailSend = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (validateEmail(emailInput)) {
+      setIsSent(true);
+      setIsValidEmail(true);
+    } else {
+      setIsValidEmail(false);
+      console.log('Email không hợp lệ');
+    }
+  };
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (countdown > 0 && isSent) {
@@ -48,8 +66,17 @@ const ResetPasswordPage = () => {
                 id='email'
                 type='email'
                 required
-                className='w-full h-12 border rounded border-[#BFBFBF] p-3   placeholder:text-neutral-6 bg-transparent mb-10'
+                onChange={(e) => setEmailInput(e.target.value)}
+                value={emailInput}
+                className='w-full h-12 border rounded border-[#BFBFBF] p-3   placeholder:text-neutral-6 bg-transparent'
               />
+              <div className='w-full h-10 relative'>
+                {!isValidEmail && (
+                  <p className='text-red-600 absolute top-2'>
+                    Email không hợp lệ
+                  </p>
+                )}
+              </div>
               <ConfigProvider
                 theme={{
                   token: {
@@ -60,9 +87,7 @@ const ResetPasswordPage = () => {
                 <Button
                   type='primary'
                   block
-                  onClick={() => {
-                    setIsSent(!isSent);
-                  }}
+                  onClick={(e) => handleEmailSend(e)}
                 >
                   <input
                     type='submit'
