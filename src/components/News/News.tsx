@@ -77,12 +77,16 @@ const News = () => {
                 <div className='swiper-slide z-20 absolute !w-full' key={index}>
                   <div className='w-full h-[130px] '>
                     <div
-                      className='flexStart'
+                      className='flexStart w-[400px] flex-wrap max-h-[22px] overflow-hidden'
                       data-swiper-parallax-opacity='0'
                       data-swiper-parallax='500'
                     >
                       {news.tags.map((tag, index) => (
-                        <Tag key={index} type='block'>
+                        <Tag
+                          key={index}
+                          type='block'
+                          className='h-[22px] text-xs'
+                        >
                           {tag}
                         </Tag>
                       ))}
@@ -174,44 +178,43 @@ const News = () => {
           </Link>
         </div>
         {articlesData.slice(0, 3).map((article, index) => (
-          <div key={index}>
-            <div
-              className={`flexBetween gap-[30px] w-full min-h-[182px] py-4${
-                index !== 2 ? ' border-b border-b-neutral-5' : ''
-              } `}
-            >
-              <div>
-                <Link href={article.link}>
-                  <div className='w-[120px] h-[120px] relative rounded-lg overflow-hidden'>
-                    <Image
-                      src={article.image}
-                      alt='news img'
-                      fill
-                      sizes='max-width:100%; height:auto;'
-                    />
-                  </div>
-                </Link>
-                <p className='text-xs text-neutral-6 font-semibold mt-[10px] line-clamp-1'>
-                  Theo: {article.credit}
-                </p>
-              </div>
-              <div className='flex flex-col grow h-full'>
-                <div className='mb-2'>
-                  {article.tags.map((tag, index) => (
-                    <Tag key={index} type='block'>
-                      {tag}
-                    </Tag>
-                  ))}
+          <div
+            key={index}
+            className={`flexBetween gap-[30px] w-full min-h-[182px] py-4${
+              index !== 2 ? ' border-b border-b-neutral-5' : ''
+            } `}
+          >
+            <div className='flex flex-wrap'>
+              <Link href={article.link}>
+                <div className='w-[120px] h-[120px] relative rounded-lg overflow-hidden'>
+                  <Image
+                    src={article.image}
+                    alt='news img'
+                    fill
+                    sizes='max-width:100%; height:auto;'
+                  />
                 </div>
-                <Link href={article.link}>
-                  <p className='text-neutral-10 font-semibold line-clamp-2 mb-4'>
-                    {article.title}
-                  </p>
-                </Link>
-                <p className='text-neutral-8 text-xs line-clamp-3 leading-5'>
-                  {article.desc}
-                </p>
+              </Link>
+              <p className='text-xs text-neutral-6 font-semibold mt-[10px] line-clamp-1'>
+                Theo: {article.credit}
+              </p>
+            </div>
+            <div className='flex flex-col grow h-full'>
+              <div className='flex flex-wrap  mb-2  max-h-[22px] overflow-hidden'>
+                {article.tags.map((tag, index) => (
+                  <Tag key={index} type='block' className='h-[22px] text-xs'>
+                    {tag}
+                  </Tag>
+                ))}
               </div>
+              <Link href={article.link}>
+                <p className='text-neutral-10 font-semibold line-clamp-2 mb-4'>
+                  {article.title}
+                </p>
+              </Link>
+              <p className='text-neutral-8 text-xs line-clamp-3 leading-5'>
+                {article.desc}
+              </p>
             </div>
           </div>
         ))}

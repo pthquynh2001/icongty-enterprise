@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { NAV_LINKS } from '@/constants';
@@ -161,7 +161,7 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
         >
           <Select
             defaultValue='en'
-            className='w-20 -ml-[2px]'
+            className='w-20 -ml-[2px] -mr-4'
             popupMatchSelectWidth={64}
             dropdownRender={(menu) => <div>{menu}</div>}
           >
@@ -174,7 +174,7 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
                   alt='flag US'
                   className='inline-block'
                 />
-                <p className=' font-semibold'>US</p>
+                <p className='font-semibold  text-neutral-8'>US</p>
               </div>
             </Option>
             <Option value='vi'>
@@ -186,7 +186,7 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
                   alt='flag US'
                   className='inline-block'
                 />
-                <p className=' font-semibold'>VN</p>
+                <p className='font-semibold  text-neutral-8'>VN</p>
               </div>
             </Option>
           </Select>
@@ -291,7 +291,7 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
                           alt='flag US'
                           className='inline-block'
                         />
-                        <p className=' font-semibold'>US</p>
+                        <p className='font-semibold  text-neutral-8'>US</p>
                       </div>
                     </Option>
                     <Option value='vi'>
@@ -303,7 +303,7 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
                           alt='flag US'
                           className='inline-block'
                         />
-                        <p className=' font-semibold'>VN</p>
+                        <p className='font-semibold  text-neutral-8'>VN</p>
                       </div>
                     </Option>
                   </Select>

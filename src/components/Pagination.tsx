@@ -11,9 +11,11 @@ interface PaginationProps {
   onPageChange: (newPage: number) => void;
 }
 
-function Pagination(props: PaginationProps) {
-  const { pagination, onPageChange } = props;
-  const { page, limit, totalItems } = pagination;
+const Pagination: React.FC<PaginationProps> = ({
+  pagination,
+  onPageChange,
+}) => {
+  const { page, limit, totalItems } = pagination || {};
   const totalPages = Math.ceil(totalItems / limit);
   type PageNumberItem = number | string;
 
@@ -111,6 +113,6 @@ function Pagination(props: PaginationProps) {
       </button>
     </div>
   );
-}
+};
 
 export default Pagination;

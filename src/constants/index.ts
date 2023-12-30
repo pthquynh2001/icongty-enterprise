@@ -187,7 +187,7 @@ export const HOME_NEWS_SLIDES = [
       'Tin tức số 1: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
     image: '/images/news1.png',
     link: 'https://example.com/news1',
-    tags: ['tag1', 'tag2'],
+    tags: ['tag1', 'tag2', 'tag1', 'tag2', 'tag1', 'tag2', 'tag1', 'tag2'],
   },
   {
     title:
@@ -226,6 +226,7 @@ export const HOME_NEWS_ARTICLES = [
     link: 'https://example.com/news1',
     credit: 'VnExpress',
     tags: ['tag1', 'tag2'],
+    publishedDate: '20/10/2023',
   },
   {
     id: 2,
@@ -236,6 +237,7 @@ export const HOME_NEWS_ARTICLES = [
     link: 'https://example.com/news1',
     credit: 'Bao moi',
     tags: ['tag 3', 'tag 2'],
+    publishedDate: '20/10/2023',
   },
   {
     id: 3,
@@ -245,7 +247,8 @@ export const HOME_NEWS_ARTICLES = [
     image: '/images/news.png',
     link: 'https://example.com/news1',
     credit: 'Kenh 24',
-    tags: ['tag 4', 'tag 2'],
+    tags: ['tag 4', 'tag 2', 'tag 2', 'tag 2', 'tag 2', 'tag 2', 'tag 2'],
+    publishedDate: '20/10/2023',
   },
   {
     id: 4,
@@ -256,5 +259,26 @@ export const HOME_NEWS_ARTICLES = [
     link: 'https://example.com/news1',
     credit: 'Bao tuoi tre',
     tags: ['tag 3', 'tag 4'],
+    publishedDate: '20/10/2023',
   },
+  {
+    id: 5,
+    title:
+      'Tin tức số 4: Câu chuyện lựa chọn đối tác “đường dài” của các Startup Việt',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.',
+    image: '/images/news.png',
+    link: 'https://example.com/news1',
+    credit: 'Bao tuoi tre',
+    tags: ['tag 3', 'tag 4'],
+    publishedDate: '20/10/2023',
+  },
+];
+
+export const NEWS_CATEGORIES = [
+  { name: 'Tổng hợp', count: 1592 },
+  { name: 'Độc quyền iCongty', count: 42 },
+  { name: 'Nghệ thuật đàm phán', count: 36 },
+  { name: 'Bí quyết tìm đối tác', count: 156 },
+  { name: 'Thế giới công sở', count: 16 },
+  { name: 'Startup', count: 326 },
 ];
