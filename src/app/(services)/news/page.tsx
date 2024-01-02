@@ -38,7 +38,6 @@ const NewsPage = () => {
         params: { page: page, limit: pagination.limit },
       });
       setPostsData(res);
-      console.log(res);
     };
     fetchData();
   }, [page, pagination.limit]);
@@ -54,7 +53,7 @@ const NewsPage = () => {
   };
 
   return (
-    <div className='bg-neutral-1'>
+    <>
       <SubpageBreadcrumb items={items} />
       <div className='padding-container max-container mb-[120px]'>
         <div className='flexBetween flex-wrap lg:flex-nowrap mb-20'>
@@ -136,7 +135,7 @@ const NewsPage = () => {
           </div>
         </div>
       </div>
-      <div className='bg-neutral-3 rounded-t-[32px] w-full'>
+      <div className='bg-neutral-3 rounded-t-[32px] w-full pb-[120px]'>
         <div className='padding-container max-container relative pt-[120px]'>
           <div className='relative flex justify-between gap-10'>
             <div className='relative hidden lg:block w-[270px] shrink-0'>
@@ -176,13 +175,15 @@ const NewsPage = () => {
                 ))}
               </ul>
               <div className='relative w-full h-[542px] rounded-2xl overflow-hidden mt-16'>
-                <Image
-                  src='/images/ad-banner.jpg'
-                  fill
-                  alt='ad-banner'
-                  sizes='(max-width: 767px) 100vw'
-                  className='object-cover'
-                />
+                <Link href='/news' className='relative w-full h-full block'>
+                  <Image
+                    src='/images/ad-banner.jpg'
+                    fill
+                    alt='ad-banner'
+                    sizes='(max-width: 767px) 100vw'
+                    className='object-cover'
+                  />
+                </Link>
               </div>
             </div>
             <div className='w-full lg:max-w-[800px]'>
@@ -257,7 +258,7 @@ const NewsPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

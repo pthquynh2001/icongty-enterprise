@@ -57,8 +57,8 @@ const ResetPasswordPage = () => {
     }
   };
   return (
-    <div className='w-full h-full flex'>
-      <div className='flexCenter px-4  w-full  lg:w-1/2 my-[175px]'>
+    <div className='w-full h-screen flex'>
+      <div className='flex justify-center px-4  w-full  lg:w-1/2 mt-[175px] mb-10'>
         <div className='max-w-[450px] text-left w-full'>
           <p className='text-neutral-10 text-4xl font-semibold mb-2'>
             Khôi phục mật khẩu
@@ -153,7 +153,7 @@ const ResetPasswordPage = () => {
                 <Button type='primary' block onClick={(e) => handleSubmit(e)}>
                   <input
                     type='submit'
-                    value='Đăng nhập'
+                    value='Xác nhận'
                     className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'
                   />
                 </Button>

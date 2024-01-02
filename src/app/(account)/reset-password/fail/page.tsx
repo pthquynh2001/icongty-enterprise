@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { ConfigProvider, Button } from 'antd';
 const ResetPasswordFailPage = () => {
   return (
-    <div className='w-full h-full flex'>
-      <div className='flexCenter px-4 w-full  lg:w-1/2 my-[175px]'>
-        <div className='flexCenter flex-col max-w-[450px] text-center  w-full'>
+    <div className='w-full h-screen flex'>
+      <div className='flex justify-center px-4 w-full  lg:w-1/2 mt-[175px] mb-10'>
+        <div className='flex items-center  flex-col max-w-[450px] text-center  w-full'>
           <Image src='/icons/fail.svg' width={120} height={120} alt='fail' />
           <p className='text-neutral-10 text-4xl font-semibold mt-9 mb-6'>
             Xác nhận thất bại

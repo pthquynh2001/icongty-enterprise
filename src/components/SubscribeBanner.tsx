@@ -30,7 +30,7 @@ const SubscribeBanner = () => {
           </div>
           <div className='absolute w-[193px] h-[193px] bottom-0 -left-7 md:hidden'>
             <Image
-              src='/images/subscribe-ele.svg'
+              src='/images/circle.svg'
               alt='ele left img'
               fill
               sizes='max-width:100%; max-height:100%'
@@ -45,7 +45,7 @@ const SubscribeBanner = () => {
         <div className='rounded-2xl md:rounded-none lg:rounded-2xl bg-royalBlue w-full h-full shadow-banner overflow-hidden relative'>
           <div className='absolute -top-1/2 left-1/2 w-[316px] h-[316px] md:w-[250px] md:h-[250px] md:top-[233px] md:-translate-x-1/2'>
             <Image
-              src='/images/subscribe-ele.svg'
+              src='/images/circle.svg'
               alt='right ele'
               fill
               sizes='max-width:100%; max-height:100%'
@@ -54,7 +54,7 @@ const SubscribeBanner = () => {
           </div>
           <div className='hidden md:block absolute w-[525px] h-[515px] bottom-[46px] -left-[200px]'>
             <Image
-              src='/images/subscribe-ele.svg'
+              src='/images/circle.svg'
               alt='ele left img'
               fill
               sizes='max-width:100%; max-height:100%'

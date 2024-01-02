@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { ConfigProvider, Button } from 'antd';
 const RegisterPendingPage = () => {
   return (
-    <div className='w-full h-full flex'>
-      <div className='flexCenter px-4 w-full  lg:w-1/2 my-[175px]'>
+    <div className='w-full h-screen flex'>
+      <div className='flex justify-center px-4 w-full  lg:w-1/2 mt-[175px] mb-10'>
         <div className=' max-w-[450px]   w-full'>
           <p className='text-neutral-10 text-4xl font-semibold mt-9 mb-6'>
             Đã nhận được yêu cầu

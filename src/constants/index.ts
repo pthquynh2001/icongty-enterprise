@@ -282,3 +282,24 @@ export const NEWS_CATEGORIES = [
   { name: 'Thế giới công sở', count: 16 },
   { name: 'Startup', count: 326 },
 ];
+
+export const CONTACT_INFO = [
+  {
+    id: 'address',
+    name: 'Địa chỉ',
+    value: 'Tầng 21A, Tòa nhà Sông Đà - Mỹ Đình 1 - Nam Từ Liêm - Hà Nội',
+    icon: '/icons/location.svg',
+  },
+  {
+    id: 'phone',
+    name: 'Số điện thoại',
+    value: '0912 345 678',
+    icon: '/icons/phone.svg',
+  },
+  {
+    id: 'email',
+    name: 'Email',
+    value: 'support@icongty.vn',
+    icon: '/icons/email.svg',
+  },
+];
