@@ -6,7 +6,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className='bg-neutral-4'>
       {children}
       <Footer />
     </section>

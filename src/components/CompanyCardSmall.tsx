@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from 'antd';
-import Categories from '@/components/CategoryTags';
+import CategoryTags from '@/components/CategoryTags';
 
 const CompanyCardSmall = ({ card }: any) => {
   return (
@@ -39,7 +39,7 @@ const CompanyCardSmall = ({ card }: any) => {
             />
           </div>
           <div className='absolute bottom-0 left-0'>
-            <Categories data={card.categories} />
+            <CategoryTags data={card.categories} />
           </div>
         </div>
       </div>

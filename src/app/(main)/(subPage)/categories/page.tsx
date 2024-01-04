@@ -8,6 +8,8 @@ import Pagination from '@/components/Pagination';
 import Tag from '@/components/Tag/Tag';
 import CategoryCard from '@/components/CategoryCard';
 import { Select, ConfigProvider } from 'antd';
+import Header from '@/components/Header';
+
 // import { Metadata } from 'next';
 
 // export const metadata: Metadata = {
@@ -111,7 +113,10 @@ const CategoriesPage = () => {
 
   return (
     <>
-      <SubpageBreadcrumb items={items} />
+      <Header />
+      <div className='mt-20'>
+        <SubpageBreadcrumb items={items} />
+      </div>
       <SubpageBanner
         title='Danh mục ngành nghề'
         desc='Khám phá đối tác tiềm năng của bạn trong hơn 3,000+ doanh nghiệp trên iCongty'
@@ -164,7 +169,7 @@ const CategoriesPage = () => {
         </div>
         {alphabetCategories && (
           <>
-            <div className=''>
+            <>
               {alphabetCategories
                 .filter((item) => item.categories.length > 0)
                 .map(
@@ -191,7 +196,7 @@ const CategoriesPage = () => {
                       </div>
                     )
                 )}
-            </div>
+            </>
             <div className='flexEnd'>
               {pagination.totalItems / pagination.limit > 1 && (
                 <Pagination

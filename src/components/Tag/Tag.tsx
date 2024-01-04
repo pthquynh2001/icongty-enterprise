@@ -14,10 +14,10 @@ interface TagProps {
 const Tag: React.FC<TagProps> = ({ type, children, className }) => {
   return (
     <div
-      className={`inline-block cursor-pointer px-2 py-[1px] transition duration-300  mr-2 last:mr-0 flexCenter  ${
-        type === 'block'
-          ? 'text-center rounded min-w-[50px] text-royalBlue-80  bg-royalBlue/[0.1]  hover:bg-royalBlue hover:text-neutral-1'
-          : ''
+      className={`inline-block cursor-pointer px-2 py-[1px] transition duration-300  mr-2 last:mr-0 flexCenter rounded min-w-[50px]  text-center ${
+        type == 'block'
+          ? 'text-royalBlue-80  bg-royalBlue/[0.1]  hover:bg-royalBlue hover:text-neutral-1'
+          : 'border border-royalBlue-60 text-royalBlue-80'
       } ${className} `}
     >
       {children}

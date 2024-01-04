@@ -303,3 +303,60 @@ export const CONTACT_INFO = [
     icon: '/icons/email.svg',
   },
 ];
+
+export const COMPANY_TABS = [
+  {
+    name: 'Tổng quan',
+    id: 'overview',
+    icon: {
+      src: '/icons/document.svg',
+      id: 'overview-icon',
+      alt: 'overview icon',
+    },
+  },
+  {
+    name: 'Hồ sơ năng lực',
+    id: 'profile',
+    icon: {
+      src: '/icons/file.svg',
+      id: 'profile-icon',
+      alt: 'profile icon',
+    },
+  },
+  {
+    name: 'Sản phẩm',
+    id: 'products',
+    icon: {
+      src: '/icons/block.svg',
+      id: 'products-icon',
+      alt: 'products icon',
+    },
+  },
+  {
+    name: 'Dịch vụ',
+    id: 'services',
+    icon: {
+      src: '/icons/blockchain.svg',
+      id: 'services-icon',
+      alt: 'services icon',
+    },
+  },
+  {
+    name: 'Đội ngũ công ty',
+    id: 'team',
+    icon: {
+      src: '/icons/team.svg',
+      id: 'team-icon',
+      alt: 'team icon',
+    },
+  },
+  {
+    name: 'Bài đăng',
+    id: 'posts',
+    icon: {
+      src: '/icons/posts.svg',
+      id: 'posts-icon',
+      alt: 'posts icon',
+    },
+  },
+];

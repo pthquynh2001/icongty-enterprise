@@ -6,6 +6,7 @@ import SubpageBanner from '@/components/SubpageBanner';
 import SubpageSearch from '@/components/SubpageSearch';
 import CompanyCard from '@/components/CompanyCard';
 import Pagination from '@/components/Pagination';
+import Header from '@/components/Header';
 import Tag from '@/components/Tag/Tag';
 import { Select, ConfigProvider } from 'antd';
 // import { Metadata } from 'next';
@@ -40,8 +41,11 @@ const CompaniesPage = () => {
   }, [page, pagination.limit]);
 
   return (
-    <div className=''>
-      <SubpageBreadcrumb items={items} />
+    <>
+      <Header />
+      <div className='mt-20'>
+        <SubpageBreadcrumb items={items} />
+      </div>
       <SubpageBanner
         title='Danh mục công ty'
         desc='Khám phá đối tác tiềm năng của bạn trong hơn 3,000+ doanh nghiệp trên iCongty'
@@ -102,7 +106,7 @@ const CompaniesPage = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

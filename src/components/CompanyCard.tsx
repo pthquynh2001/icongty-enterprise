@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from 'antd';
-import Categories from '@/components/CategoryTags';
+import CategoryTags from '@/components/CategoryTags';
 
 const CompanyCard = ({ card }: any) => {
   return (
@@ -10,7 +10,7 @@ const CompanyCard = ({ card }: any) => {
       <div className='relative w-full p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
         <div className='w-full h-[92px] relative'>
           <Link
-            href={`/companies/${card._id}`}
+            href={`/companies/${card.slug}-${card._id}`}
             className='block w-full h-full absolute'
           >
             <Image
@@ -40,12 +40,12 @@ const CompanyCard = ({ card }: any) => {
           </p>
         </div>
         <div className='min-h-[78px]'>
-          <Link href={`/companies/${card._id}`}>
+          <Link href={`/companies/${card.slug}-${card._id}`}>
             <h5 className='text-base text-neutral-10 line-clamp-2 mt-6 mb-2 hover:text-royalBlue'>
               {card.name}
             </h5>
           </Link>
-          <Categories data={card.categories} />
+          <CategoryTags data={card.categories} />
         </div>
         <Divider className='mt-4 mb-2' />
         <div className='text-xs'>

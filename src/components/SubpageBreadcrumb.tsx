@@ -2,8 +2,8 @@ import React from 'react';
 import { Breadcrumb, ConfigProvider } from 'antd';
 import Link from 'next/link';
 
-interface BreadcrumbItem {
-  title: string;
+export interface BreadcrumbItem {
+  title?: string;
   href?: string;
 }
 
