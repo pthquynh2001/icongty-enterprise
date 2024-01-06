@@ -1,0 +1,55 @@
+// components/PdfViewer.tsx
+'use-client';
+import React from 'react';
+import { Document, Page, Thumbnail } from 'react-pdf';
+import { saveAs } from 'file-saver';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+import { pdfjs } from 'react-pdf';
+import Image from 'next/image';
+import classNames from 'classnames';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
+
+interface PdfViewerProps {
+  downloadUrl: string;
+  thumbnailUrl: string | null;
+  className?: string;
+}
+
+const PdfViewer: React.FC<PdfViewerProps> = (props) => {
+  return (
+    <div className={props.className}>
+      <Document
+        file={props.downloadUrl}
+        loading='Loading PDF...'
+        error='Error loading PDF.'
+        className='flex'
+      >
+        <div className='relative w-[95px] h-[132px] flexCenter bg-neutral-1 rounded border border-neutral-3 overflow-hidden'>
+          <div className='left-0 absolute w-[6px] h-full'></div>
+          {props.thumbnailUrl ? (
+            <Image
+              src={props.thumbnailUrl}
+              alt='thumbnail'
+              fill
+              sizes='(max-width: 640px) 100vw'
+              className='object-cover bg-royalBlue'
+            />
+          ) : (
+            <Thumbnail
+              pageNumber={1}
+              height={132}
+              canvasBackground='transparent'
+            />
+          )}
+        </div>
+      </Document>
+    </div>
+  );
+};
+
+export default PdfViewer;

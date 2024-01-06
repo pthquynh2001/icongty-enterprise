@@ -165,13 +165,15 @@ const HeaderSearch: React.FC = () => {
 
           <Link href='/register'>
             <Button type='primary' ghost className='flexStart gap-2'>
-              <Image
-                src='/icons/user-add-blue.svg'
-                width={14}
-                height={14}
-                alt='user-add'
-              />
-              Đăng ký
+              <div className='flexCenter gap-2'>
+                <Image
+                  src='/icons/user-add-blue.svg'
+                  width={14}
+                  height={14}
+                  alt='user-add'
+                />
+                <p>Đăng ký</p>
+              </div>
             </Button>
           </Link>
         </div>
@@ -212,13 +214,15 @@ const HeaderSearch: React.FC = () => {
                 </Link>
                 <Link href='/register'>
                   <Button type='primary' className='flexStart gap-2'>
-                    <Image
-                      src='/icons/user-add.svg'
-                      width={14}
-                      height={14}
-                      alt='user-add'
-                    />
-                    Đăng ký
+                    <div className='flexCenter gap-2'>
+                      <Image
+                        src='/icons/user-add.svg'
+                        width={14}
+                        height={14}
+                        alt='user-add'
+                      />
+                      <p>Đăng ký</p>
+                    </div>
                   </Button>
                 </Link>
               </div>

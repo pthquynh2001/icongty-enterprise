@@ -1,4 +1,4 @@
-.news {
+.home-news {
   .swiper-pagination {
     --swiper-pagination-color: var(--swiper-theme-color);
     --swiper-pagination-left: auto;
@@ -23,8 +23,9 @@
 
     .progress-bar {
       @apply bg-[#d9d9d9] h-[2.5px] w-full mx-2 rounded-sm overflow-hidden;
+
       .progress-bar-inner {
-        @apply bg-royalBlue h-full;
+        @apply bg-royalBlue h-full transition-all duration-300 ease-in-out;
       }
     }
     .swiper-pagination-current,

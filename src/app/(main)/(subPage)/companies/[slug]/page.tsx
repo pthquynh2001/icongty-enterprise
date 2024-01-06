@@ -6,12 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeaderSearch from '@/components/HeaderSearch';
 import Tag from '@/components/Tag/Tag';
-import Overview from '@/components/companyPage/Overview';
-import About from '@/components/companyPage/About';
-import { Select, ConfigProvider, Button } from 'antd';
+import OverviewSection from '@/components/companyPage/OverviewSection';
+import AboutSection from '@/components/companyPage/AboutSection';
+import { ConfigProvider, Button } from 'antd';
 import { COMPANY_TABS } from '@/constants';
 import { StarFilled } from '@ant-design/icons';
 import { COMPANY_ABOUT_CONTENT } from '@/constants';
+import PortfolioSection from '@/components/companyPage/PortfolioSection';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -231,8 +232,11 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
             <div className='flex gap-6'>
               {/* START: Left content */}
               <div className='w-full bg-pink-300 flex flex-col gap-6'>
-                <Overview company={company} />
-                <About content={COMPANY_ABOUT_CONTENT.content}></About>
+                <OverviewSection company={company} />
+                <AboutSection
+                  content={COMPANY_ABOUT_CONTENT.content}
+                ></AboutSection>
+                <PortfolioSection />
               </div>
               {/* END: Left content */}
               {/* START: Right content */}

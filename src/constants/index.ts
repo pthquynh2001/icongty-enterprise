@@ -316,11 +316,11 @@ export const COMPANY_TABS = [
   },
   {
     name: 'Hồ sơ năng lực',
-    id: 'profile',
+    id: 'portfolio',
     icon: {
       src: '/icons/file.svg',
-      id: 'profile-icon',
-      alt: 'profile icon',
+      id: 'portfolio-icon',
+      alt: 'portfolio icon',
     },
   },
   {

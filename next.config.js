@@ -9,10 +9,19 @@ const nextConfig = {
         port: '',
         pathname: '/icongty-upload/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'loremflickr.com',
+        port: '',
+      },
     ],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
+  },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    return config;
   },
 };
 

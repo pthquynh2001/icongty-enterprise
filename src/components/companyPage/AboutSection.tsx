@@ -1,12 +1,11 @@
 'use-client';
 import { useEffect, useState, useRef } from 'react';
-import Image from 'next/image';
 import Frame from '@/components/companyPage/Frame';
-import styles from './About.module.scss';
+import styles from './AboutSection.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-const About = ({ content }: { content: string }) => {
+const AboutSection = ({ content }: { content: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [previewContent, setPreviewContent] = useState<string>('');
 
@@ -56,4 +55,4 @@ const About = ({ content }: { content: string }) => {
   );
 };
 
-export default About;
+export default AboutSection;

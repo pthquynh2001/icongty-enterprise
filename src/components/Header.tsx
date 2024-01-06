@@ -130,14 +130,16 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
           </Button>
         </Link>
         <Link href='/register'>
-          <Button type='primary' className='flexStart gap-2'>
-            <Image
-              src='/icons/user-add.svg'
-              width={14}
-              height={14}
-              alt='user-add'
-            />
-            Đăng ký
+          <Button type='primary'>
+            <div className='flexCenter gap-2'>
+              <Image
+                src='/icons/user-add.svg'
+                width={14}
+                height={14}
+                alt='user-add'
+              />
+              <p>Đăng ký</p>
+            </div>
           </Button>
         </Link>
         <ConfigProvider
@@ -229,13 +231,15 @@ const Header: React.FC<HeaderProps> = ({ type }) => {
               </Link>
               <Link href='/register'>
                 <Button type='primary' className='flexStart gap-2'>
-                  <Image
-                    src='/icons/user-add.svg'
-                    width={14}
-                    height={14}
-                    alt='user-add'
-                  />
-                  Đăng ký
+                  <div className='flexCenter gap-2'>
+                    <Image
+                      src='/icons/user-add.svg'
+                      width={14}
+                      height={14}
+                      alt='user-add'
+                    />
+                    <p>Đăng ký</p>
+                  </div>
                 </Button>
               </Link>
             </div>

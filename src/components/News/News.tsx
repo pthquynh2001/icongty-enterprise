@@ -42,11 +42,15 @@ const News = () => {
           const progressPercentage = (current / total) * 100;
           const customPaginationHTML = `
             <div class="pagination-container">
-              <div class="swiper-pagination-current">${'0' + current}</div>
+              <div class="swiper-pagination-current">${
+                current < 10 ? '0' + current : current
+              }</div>
               <div class="progress-bar">
                 <div class="progress-bar-inner" style="width: ${progressPercentage}%"></div>
               </div>
-              <div class="swiper-pagination-total">${'0' + total}</div>
+              <div class="swiper-pagination-total">${
+                total < 10 ? '0' + total : total
+              }</div>
             </div>
           `;
 
@@ -68,7 +72,7 @@ const News = () => {
   }, []);
 
   return (
-    <div className='!hidden lg:!flex news max-container padding-container w-full h-[660px] flexBetween'>
+    <div className='!hidden lg:!flex home-news max-container padding-container w-full h-[660px] flexBetween'>
       <div className='w-[684px] h-full relative'>
         <div className='absolute w-full h-full overflow-hidden'>
           <div className='swiper news-swiper !w-[200%] h-full'>
