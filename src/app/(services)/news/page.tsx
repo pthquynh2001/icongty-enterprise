@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ConfigProvider, Select, Input } from 'antd';
@@ -52,6 +52,16 @@ const NewsPage = () => {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   };
 
+  //
+  useEffect(() => {
+    const activeBorder = document.querySelector(
+      '.active-border'
+    ) as HTMLElement;
+    const activeCat = document.querySelector('.active-cat') as HTMLElement;
+    if (activeBorder && activeCat) {
+      activeBorder.style.top = `${activeCat.offsetTop}px`;
+    }
+  }, [activeCat]);
   return (
     <>
       <SubpageBreadcrumb items={items} />
@@ -153,20 +163,22 @@ const NewsPage = () => {
                 />
               </ConfigProvider>
               <h4 className='mt-12 mb-6'>Danh mục</h4>
-              <ul className='cat'>
+              <ul className='cat relative'>
+                <div className='bg-royalBlue  absolute right-0 w-[3px] h-10 active-border transition-all duration-300'></div>
                 {NEWS_CATEGORIES.map((cat, index) => (
                   <li
                     key={index}
-                    className=' h-10 flexStart mb-2 last:mb-0'
+                    className={` h-10 flexStart mb-2 last:mb-0 ${
+                      activeCat === index && 'active-cat'
+                    }`}
                     onClick={() => {
                       setActiveCat(index);
                     }}
                   >
                     <p
-                      className={`block w-full h-full px-4 leading-10 cursor-pointer rounded-l font-semibold border-r-[3.2px] hover:text-royalBlue transition-all duration-300 ${
-                        index === activeCat
-                          ? 'bg-royalBlue/[0.1] border-royalBlue text-royalBlue'
-                          : 'border-transparent'
+                      className={`block w-full h-full px-4 leading-10 cursor-pointer rounded-l font-semibold hover:text-royalBlue transition-all duration-300 ${
+                        index === activeCat &&
+                        'bg-royalBlue/[0.1] text-royalBlue'
                       }`}
                     >
                       {cat.name} ({formatNumber(cat.count)})

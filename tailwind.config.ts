@@ -37,6 +37,7 @@ const config: Config = {
           13: '#000000',
         },
         sunsetOrange: {
+          1: '#FFF7E6',
           6: '#FA8C16',
         },
       },

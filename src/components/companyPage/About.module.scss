@@ -1,0 +1,15 @@
+.about-content {
+  @apply transition-all duration-500;
+  p {
+    @apply mb-4;
+  }
+  li {
+    @apply list-disc ml-4;
+    h5 {
+      @apply mb-1;
+    }
+    p {
+      @apply -ml-4;
+    }
+  }
+}
