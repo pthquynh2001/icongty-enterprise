@@ -9,17 +9,27 @@ interface PortfolioProps {
     name: string;
     excerpt: string;
     categories: { name: string }[];
+    fileType: 'pdf' | 'docx';
   };
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ props }) => {
   return (
     <div className='flex '>
-      <PdfViewer
-        className='min-h-[131px] min-w-[95px] shrink-0'
-        downloadUrl={props.downloadUrl}
-        thumbnailUrl={props.thumbnailUrl}
-      />
+      <div className='min-h-[131px] min-w-[95px] shrink-0'>
+        {props.fileType === 'pdf' && (
+          <div className='relative before:content-[""] before:absolute before:inset-[1px]  before:w-[6px] before:z-[1] before:bg-gradient-to-r before:from-black/10 before:from-20% before:via-black/30 before:to-black/10 before:to-80% before:rounded-l'>
+            <PdfViewer
+              downloadUrl={props.downloadUrl}
+              thumbnailUrl={props.thumbnailUrl}
+            />
+            <div className='absolute top-2 -left-[7px] px-2 h-5 bg-red-500 text-xs font-semibold flexCenter text-neutral-1 rounded-t rounded-br after:content-[""] after:absolute after:left-0 after:top-[100%] after:border-t-[6px] after:border-l-[0.5rem] after:border-t-rose-800 z-[2] '>
+              PDF
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className='ml-6'>
         <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
         <p className='text-xs mb-2 line-clamp-2'>{props.excerpt}</p>

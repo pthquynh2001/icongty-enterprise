@@ -20,17 +20,28 @@ interface PdfViewerProps {
   className?: string;
 }
 
+const Loading = () => (
+  <div className='flexCenter w-[95px] h-[132px] bg-neutral-1 rounded border border-neutral-3 overflow-hidden'>
+    <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-royalBlue'></div>
+  </div>
+);
+
+const ErrorLoading = () => (
+  <div className='flexCenter w-[95px] h-[132px] bg-neutral-1 rounded border border-neutral-3 overflow-hidden'>
+    <p>Error loading PDF.</p>
+  </div>
+);
+
 const PdfViewer: React.FC<PdfViewerProps> = (props) => {
   return (
-    <div className={props.className}>
+    <div className={`flexCenter ${props.className ? props.className : ''}`}>
       <Document
         file={props.downloadUrl}
-        loading='Loading PDF...'
-        error='Error loading PDF.'
+        loading={<Loading />}
+        error={<ErrorLoading />}
         className='flex'
       >
-        <div className='relative w-[95px] h-[132px] flexCenter bg-neutral-1 rounded border border-neutral-3 overflow-hidden'>
-          <div className='left-0 absolute w-[6px] h-full'></div>
+        <div className='relative w-[95px] h-[132px] flexCenter bg-neutral-1 rounded border border-neutral-3 overflow-hidden '>
           {props.thumbnailUrl ? (
             <Image
               src={props.thumbnailUrl}

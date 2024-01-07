@@ -330,7 +330,7 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
                         <svg width='32' height='32'>
                           <use
                             className='text-royalBlue'
-                            xlinkHref='/icons/linkedIn.svg#LinkedIn-icon'
+                            xlinkHref='/icons/linkedin.svg#LinkedIn-icon'
                           />
                         </svg>
                       </div>

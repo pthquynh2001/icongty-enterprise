@@ -12,7 +12,7 @@ interface PortfolioSectionProps {
   excerpt: string;
   thumbnailUrl: string | null;
   categories: { name: string }[];
-  fileType: string;
+  fileType: 'pdf' | 'docx';
 }
 
 const PortfolioSection: React.FC = () => {
