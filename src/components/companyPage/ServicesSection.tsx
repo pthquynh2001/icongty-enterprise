@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import * as productServices from '@/apiServices/productsServices';
+import * as ServicesServices from '@/apiServices/servicesServices';
 import Frame from '@/components/companyPage/Frame';
-import Product from './Product';
+import Service from '@/components/companyPage/Service';
 import ProgressPagination from '@/components/companyPage/ProgressPagination';
 
 const ServicesSection = () => {
@@ -14,7 +14,7 @@ const ServicesSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await productServices.getAll({
+      const res = await ServicesServices.getAll({
         params: { page: currentPage, limit: pagination.limit },
       });
       setData(res);
@@ -27,10 +27,10 @@ const ServicesSection = () => {
     data && (
       <div>
         <Frame title='Dịch vụ'>
-          {data.map((product, index) => (
+          {data.map((service, index) => (
             <div key={index} className='py-6 border-b border-neutral-4'>
-              <Product
-                props={product}
+              <Service
+                props={service}
                 order={pagination.limit * (currentPage - 1) + index + 1}
               />
             </div>

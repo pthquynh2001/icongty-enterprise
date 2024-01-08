@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import PdfViewer from '@/components/companyPage/PdfViewer';
 import Tag from '@/components/Tag/Tag';
 interface PortfolioProps {
+  size?: 'small';
   props: {
     downloadUrl: string;
     thumbnailUrl: string | null;
@@ -13,7 +14,7 @@ interface PortfolioProps {
   };
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ props }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ props, size }) => {
   return (
     <div className='flex '>
       <div className='min-h-[131px] min-w-[95px] shrink-0'>
@@ -31,8 +32,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ props }) => {
       </div>
 
       <div className='ml-6'>
-        <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
-        <p className='text-xs mb-2 line-clamp-2'>{props.excerpt}</p>
+        {size === 'small' ? (
+          <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
+        ) : (
+          <h5 className='text-neutral-10 mb-4'>{props.name}</h5>
+        )}
+
+        <p className={`mb-2 line-clamp-2 ${size === 'small' && 'text-xs'}`}>
+          {props.excerpt}
+        </p>
         <div className='flex max-h-[22px] flex-wrap overflow-hidden'>
           {props.categories.map((category, index) => (
             <Tag key={index} type='block' className='text-xs h-[22px]'>

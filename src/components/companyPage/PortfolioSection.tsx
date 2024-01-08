@@ -40,7 +40,7 @@ const PortfolioSection: React.FC = () => {
               className='py-5 border-b border-neutral-4 first:pt-0'
               key={index}
             >
-              <Portfolio props={portfolio} />
+              <Portfolio props={portfolio} size='small' />
             </div>
           ))}
           <div className='absolute top-[48px] right-[62px]'>

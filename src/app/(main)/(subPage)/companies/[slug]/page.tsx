@@ -11,6 +11,8 @@ import { COMPANY_TABS } from '@/constants';
 import { StarFilled } from '@ant-design/icons';
 import OverviewTab from '@/components/companyPage/tabs/OverviewTab';
 import PortfolioTab from '@/components/companyPage/tabs/PortfolioTab';
+import ProductsTab from '@/components/companyPage/tabs/ProductsTab';
+import ServicesTab from '@/components/companyPage/tabs/ServicesTab';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -25,6 +27,7 @@ interface items {
 }
 
 const CompanyPage = ({ params }: { params: { slug: string } }) => {
+  console.log(params);
   const productId = params.slug.split('-').slice(-1)[0];
   const [company, setCompany] = useState<any>({});
   const [relatedCompanies, setRelatedCompanies] = useState<any>([]);
@@ -234,6 +237,8 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
                 {activeTab === 'portfolio' && (
                   <PortfolioTab company={company} />
                 )}
+                {activeTab === 'products' && <ProductsTab />}
+                {activeTab === 'services' && <ServicesTab />}
               </div>
               {/* END: Left content */}
               {/* START: Right content */}

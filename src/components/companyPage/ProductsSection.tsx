@@ -30,6 +30,7 @@ const ProductsSection = () => {
           {data.map((product, index) => (
             <div key={index} className='py-6 border-b border-neutral-4'>
               <Product
+                size='small'
                 props={product}
                 order={pagination.limit * (currentPage - 1) + index + 1}
               />

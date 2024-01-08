@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface ProductProps {
+interface ServiceProps {
   size?: 'small';
   order?: number;
   props: {
@@ -35,7 +35,7 @@ interface ProductProps {
   };
 }
 
-const Product: React.FC<ProductProps> = ({ props, order, size }) => {
+const Service: React.FC<ServiceProps> = ({ props, order, size }) => {
   return (
     <div className='flex relative'>
       {order && (
@@ -45,7 +45,7 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
       )}
 
       <div className='ml-[60px] first:ml-0 grow'>
-        <Link href={'/products/' + props.slug + '-' + props.id}>
+        <Link href={'/services/' + props.slug + '-' + props.id}>
           {size === 'small' ? (
             <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
           ) : (
@@ -56,7 +56,7 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
           {props.excerpt}
         </p>
         <Link
-          href={'/products/' + props.slug + '-' + props.id}
+          href={'/services/' + props.slug + '-' + props.id}
           className={` text-royalBlue font-semibold ${
             size === 'small' && 'text-xs'
           }`}
@@ -66,7 +66,7 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
       </div>
       <div className='ml-6 w-[215px] h-[145px] border border-neutral-3 rounded overflow-hidden relative shrink-0'>
         <Link
-          href={'/products/' + props.slug + '-' + props.id}
+          href={'/services/' + props.slug + '-' + props.id}
           className='relative block w-full h-full'
         >
           <Image
@@ -82,4 +82,4 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
   );
 };
 
-export default Product;
+export default Service;

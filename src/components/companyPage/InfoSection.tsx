@@ -4,7 +4,6 @@ import Frame from '@/components/companyPage/Frame';
 
 const InfoSection = ({ company }: any) => {
   const date = new Date(company.foundationDate);
-  console.log(company);
   const handleCopyText = () => {
     const textarea = document.createElement('textarea');
     textarea.value = company.taxCode;
