@@ -14,6 +14,7 @@ import { StarFilled } from '@ant-design/icons';
 import { COMPANY_ABOUT_CONTENT } from '@/constants';
 import PortfolioSection from '@/components/companyPage/PortfolioSection';
 import ProductsSection from '@/components/companyPage/ProductsSection';
+import ServicesSection from '@/components/companyPage/ServicesSection';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -232,13 +233,14 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
             {/* END: TOP content */}
             <div className='flex gap-6'>
               {/* START: Left content */}
-              <div className='w-full bg-pink-300 flex flex-col gap-6'>
+              <div className='w-full  flex flex-col gap-6'>
                 <InfoSection company={company} />
                 <AboutSection
                   content={COMPANY_ABOUT_CONTENT.content}
                 ></AboutSection>
                 <PortfolioSection />
                 <ProductsSection />
+                <ServicesSection />
               </div>
               {/* END: Left content */}
               {/* START: Right content */}
