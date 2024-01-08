@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Frame from '@/components/companyPage/Frame';
 
-const OverviewSection = ({ company }: any) => {
+const InfoSection = ({ company }: any) => {
   const date = new Date(company.foundationDate);
   const handleCopyText = () => {
     const textarea = document.createElement('textarea');
@@ -78,4 +78,4 @@ const OverviewSection = ({ company }: any) => {
   );
 };
 
-export default OverviewSection;
+export default InfoSection;

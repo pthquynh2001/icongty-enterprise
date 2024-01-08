@@ -1,0 +1,54 @@
+import React from 'react';
+import { useState, useEffect } from 'react';
+import * as productServices from '@/apiServices/productsServices';
+import Frame from '@/components/companyPage/Frame';
+import Product from './Product';
+import ProgressPagination from '@/components/companyPage/ProgressPagination';
+
+const ProductsSection = () => {
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const pagination = { page: currentPage, limit: 3, totalItems: 11 };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const res = await productServices.getAll({
+        params: { page: currentPage, limit: pagination.limit },
+      });
+      setData(res);
+      setLoading(false);
+    };
+    fetchData();
+  }, [currentPage, pagination.limit]);
+
+  return (
+    data && (
+      <div>
+        <Frame title='Sản Phẩm'>
+          {data.map((product, index) => (
+            <div key={index} className='py-6 border-b border-neutral-4'>
+              <Product
+                props={product}
+                order={pagination.limit * (currentPage - 1) + index + 1}
+              />
+            </div>
+          ))}
+          {pagination.totalItems / pagination.limit > 1 && (
+            <div className='mt-8'>
+              <ProgressPagination
+                pagination={pagination}
+                onPageChange={(currentPage) => {
+                  setCurrentPage(currentPage);
+                }}
+              />
+            </div>
+          )}
+        </Frame>
+      </div>
+    )
+  );
+};
+
+export default ProductsSection;

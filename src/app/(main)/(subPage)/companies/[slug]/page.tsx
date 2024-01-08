@@ -6,13 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeaderSearch from '@/components/HeaderSearch';
 import Tag from '@/components/Tag/Tag';
-import OverviewSection from '@/components/companyPage/OverviewSection';
+import InfoSection from '@/components/companyPage/InfoSection';
 import AboutSection from '@/components/companyPage/AboutSection';
 import { ConfigProvider, Button } from 'antd';
 import { COMPANY_TABS } from '@/constants';
 import { StarFilled } from '@ant-design/icons';
 import { COMPANY_ABOUT_CONTENT } from '@/constants';
 import PortfolioSection from '@/components/companyPage/PortfolioSection';
+import ProductsSection from '@/components/companyPage/ProductsSection';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -232,15 +233,16 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
             <div className='flex gap-6'>
               {/* START: Left content */}
               <div className='w-full bg-pink-300 flex flex-col gap-6'>
-                <OverviewSection company={company} />
+                <InfoSection company={company} />
                 <AboutSection
                   content={COMPANY_ABOUT_CONTENT.content}
                 ></AboutSection>
                 <PortfolioSection />
+                <ProductsSection />
               </div>
               {/* END: Left content */}
               {/* START: Right content */}
-              <div className='w-[320px] shrink-0 flex flex-col'>
+              <div className='hidden lg:flex w-[320px] shrink-0  flex-col'>
                 <div className='w-full px-8 py-12  rounded-2xl  bg-neutral-1 shadow-banner mb-6'>
                   <h5>Thông tin liên hệ</h5>
                   <div className='flex flex-col gap-3 border-y border-neutral-5 pt-4 pb-8 mt-2 mb-4'>

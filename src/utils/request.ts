@@ -29,3 +29,13 @@ export const getPortfolio = async (path: string, params?: {}) => {
   const res = await requestPortfolio.get(path, params);
   return res.data;
 };
+
+// GET PRODUCTS
+export const requestProducts = axios.create({
+  baseURL: 'https://659976faa20d3dc41cefc716.mockapi.io/api/v1/',
+});
+
+export const getProducts = async (path: string, params?: {}) => {
+  const res = await requestProducts.get(path, params);
+  return res.data;
+};
