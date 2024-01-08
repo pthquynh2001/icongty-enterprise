@@ -1,20 +1,16 @@
 'use client';
 import { useState, useEffect, use } from 'react';
 import * as companyServices from '@/apiServices/companyServices';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
 import Image from 'next/image';
 import Link from 'next/link';
+import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
 import HeaderSearch from '@/components/HeaderSearch';
 import Tag from '@/components/Tag/Tag';
-import InfoSection from '@/components/companyPage/InfoSection';
-import AboutSection from '@/components/companyPage/AboutSection';
 import { ConfigProvider, Button } from 'antd';
 import { COMPANY_TABS } from '@/constants';
 import { StarFilled } from '@ant-design/icons';
-import { COMPANY_ABOUT_CONTENT } from '@/constants';
-import PortfolioSection from '@/components/companyPage/PortfolioSection';
-import ProductsSection from '@/components/companyPage/ProductsSection';
-import ServicesSection from '@/components/companyPage/ServicesSection';
+import OverviewTab from '@/components/companyPage/tabs/OverviewTab';
+import PortfolioTab from '@/components/companyPage/tabs/PortfolioTab';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -233,14 +229,11 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
             {/* END: TOP content */}
             <div className='flex gap-6'>
               {/* START: Left content */}
-              <div className='w-full  flex flex-col gap-6'>
-                <InfoSection company={company} />
-                <AboutSection
-                  content={COMPANY_ABOUT_CONTENT.content}
-                ></AboutSection>
-                <PortfolioSection />
-                <ProductsSection />
-                <ServicesSection />
+              <div className='w-full'>
+                {activeTab === 'overview' && <OverviewTab company={company} />}
+                {activeTab === 'portfolio' && (
+                  <PortfolioTab company={company} />
+                )}
               </div>
               {/* END: Left content */}
               {/* START: Right content */}
