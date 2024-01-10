@@ -19,6 +19,11 @@ const nextConfig = {
         hostname: 'cloudflare-ipfs.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'gw.alipayobjects.com',
+        port: '',
+      },
     ],
   },
   sassOptions: {

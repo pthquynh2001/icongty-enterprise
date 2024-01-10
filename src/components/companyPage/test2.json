@@ -16,86 +16,84 @@
     "technologies": [],
     "gallery": {
       "images": [
-        [
-          {
-            "name": "Masai Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "sequi-veniam-fuga",
-            "id": "1"
-          },
-          {
-            "name": "Asiatic Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "ducimus-cumque-beatae",
-            "id": "2"
-          },
-          {
-            "name": "Asiatic Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "error-iste-ex",
-            "id": "3"
-          },
-          {
-            "name": "Transvaal lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "veniam-corrupti-alias",
-            "id": "4"
-          },
-          {
-            "name": "Barbary Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "eveniet-temporibus-eaque",
-            "id": "5"
-          },
-          {
-            "name": "Asiatic Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "rem-tempora-amet",
-            "id": "6"
-          },
-          {
-            "name": "Barbary Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "animi-rem-fugiat",
-            "id": "7"
-          },
-          {
-            "name": "Northeast Congo Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "atque-error-enim",
-            "id": "8"
-          },
-          {
-            "name": "Masai Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "reprehenderit-quasi-sed",
-            "id": "9"
-          },
-          {
-            "name": "Cape lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "quae-dolore-ipsa",
-            "id": "10"
-          },
-          {
-            "name": "Asiatic Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "sint-quo-distinctio",
-            "id": "11"
-          },
-          {
-            "name": "Transvaal lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "cupiditate-inventore-dolore",
-            "id": "12"
-          },
-          {
-            "name": "Masai Lion",
-            "location": "https://loremflickr.com/640/480/people",
-            "alt": "distinctio-quas-rerum",
-            "id": "13"
-          }
-        ]
+        {
+          "name": "Masai Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "sequi-veniam-fuga",
+          "id": "1"
+        },
+        {
+          "name": "Asiatic Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "ducimus-cumque-beatae",
+          "id": "2"
+        },
+        {
+          "name": "Asiatic Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "error-iste-ex",
+          "id": "3"
+        },
+        {
+          "name": "Transvaal lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "veniam-corrupti-alias",
+          "id": "4"
+        },
+        {
+          "name": "Barbary Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "eveniet-temporibus-eaque",
+          "id": "5"
+        },
+        {
+          "name": "Asiatic Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "rem-tempora-amet",
+          "id": "6"
+        },
+        {
+          "name": "Barbary Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "animi-rem-fugiat",
+          "id": "7"
+        },
+        {
+          "name": "Northeast Congo Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "atque-error-enim",
+          "id": "8"
+        },
+        {
+          "name": "Masai Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "reprehenderit-quasi-sed",
+          "id": "9"
+        },
+        {
+          "name": "Cape lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "quae-dolore-ipsa",
+          "id": "10"
+        },
+        {
+          "name": "Asiatic Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "sint-quo-distinctio",
+          "id": "11"
+        },
+        {
+          "name": "Transvaal lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "cupiditate-inventore-dolore",
+          "id": "12"
+        },
+        {
+          "name": "Masai Lion",
+          "location": "https://loremflickr.com/640/480/people",
+          "alt": "distinctio-quas-rerum",
+          "id": "13"
+        }
       ],
       "video": []
     },

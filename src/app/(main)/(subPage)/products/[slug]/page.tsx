@@ -8,7 +8,9 @@ import * as productsServices from '@/apiServices/productsServices';
 import * as companyServices from '@/apiServices/companyServices';
 import { LeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import Image from 'next/image';
+import { Image as AntdImg } from 'antd';
 import Link from 'next/link';
+import ProgressPagination from '@/components/companyPage/ProgressPagination';
 
 const ProductCard = ({ product }: any) => {
   return (
@@ -50,12 +52,17 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   const [otherProducts, setOtherProducts] = useState<any>(null);
   const [relatedProducts, setRelatedProducts] = useState<any>(null);
   const [company, setCompany] = useState<any>(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState<any>([]);
   const companyId = params.slug.split('-').slice(-1)[0];
   const productId = params.slug.split('-').slice(-2)[0];
-  console.log(companyId, productId);
-  const pagination = { page: currentPage, limit: 10, totalItems: 11 };
+
+  // gallery
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const gallery = product?.gallery?.images || [];
+  const currentImages = gallery.slice(indexOfFirstItem, indexOfLastItem);
 
   // fetch API product
   useEffect(() => {
@@ -101,8 +108,9 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
     getRelatedProducts();
   }, []);
 
-  // set breadcrum item
   useEffect(() => {
+    // set breadcrumb items
+
     if (product && company) {
       const breadcrumbItems = [
         { title: 'Trang chủ', href: '/' },
@@ -211,16 +219,48 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                   </div>
                 </Frame>
                 <Frame title='Hình ảnh'>
-                  <div className='grid grid-cols-4 grid-rows-2 gap-6 w-full'>
-                    <div className='relative w-full pb-[100%] rounded-lg overflow-hidden'>
-                      <Image
-                        src={product.logo?.location}
-                        fill
-                        alt='image'
-                        sizes='(max-width 768px) 100vw, 33vw'
-                        className='object-cover'
-                      />
+                  <AntdImg.PreviewGroup
+                    preview={{
+                      onChange: (current, prev) =>
+                        console.log(
+                          `current index: ${current}, prev index: ${prev}`
+                        ),
+                      toolbarRender: () => <></>,
+                    }}
+                  >
+                    <div className='grid grid-cols-4 gap-6 w-full '>
+                      {currentImages.map((image: any, index: any) => (
+                        <div
+                          key={index}
+                          className='relative w-full rounded-lg overflow-hidden'
+                        >
+                          <AntdImg
+                            alt='photo'
+                            width={154}
+                            height={154}
+                            src={image.location}
+                            className='object-cover'
+                          />
+                        </div>
+                      ))}
                     </div>
+                  </AntdImg.PreviewGroup>
+                  <div className='mt-6'>
+                    <ProgressPagination
+                      pagination={{
+                        page: currentPage,
+                        limit: itemsPerPage,
+                        totalItems: gallery.length,
+                      }}
+                      onPageChange={(currentPage) =>
+                        setCurrentPage(currentPage)
+                      }
+                    />
+                  </div>
+                </Frame>
+                <Frame title='Video'>
+                  <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter'>
+                    video
                   </div>
                 </Frame>
               </div>
@@ -249,20 +289,22 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                   </div>
                 </div>
                 {/* Related products */}
-                <div className='bg-neutral-1 w-full px-8 py-12 rounded-2xl'>
-                  <h5 className='pb-2 border-b border-neutral-5'>
-                    Sản phẩm tương tự
-                  </h5>
-                  <div className='flex flex-col'>
-                    {relatedProducts.map(
-                      (product: any, index: number) =>
-                        product.id !== productId &&
-                        product.companyId !== companyId && (
-                          <ProductCard key={index} product={product} />
-                        )
-                    )}
+                {relatedProducts && (
+                  <div className='bg-neutral-1 w-full px-8 py-12 rounded-2xl'>
+                    <h5 className='pb-2 border-b border-neutral-5'>
+                      Sản phẩm tương tự
+                    </h5>
+                    <div className='flex flex-col'>
+                      {relatedProducts.map(
+                        (product: any, index: number) =>
+                          product.id !== productId &&
+                          product.companyId !== companyId && (
+                            <ProductCard key={index} product={product} />
+                          )
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
