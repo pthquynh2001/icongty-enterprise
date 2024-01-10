@@ -3,11 +3,9 @@
 import React from 'react';
 import { Document, Page, Thumbnail } from 'react-pdf';
 import { saveAs } from 'file-saver';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
+
 import { pdfjs } from 'react-pdf';
 import Image from 'next/image';
-import classNames from 'classnames';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -32,6 +30,10 @@ const ErrorLoading = () => (
   </div>
 );
 
+const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  e.preventDefault();
+};
+
 const PdfViewer: React.FC<PdfViewerProps> = (props) => {
   return (
     <div className={`flexCenter ${props.className ? props.className : ''}`}>
@@ -55,6 +57,7 @@ const PdfViewer: React.FC<PdfViewerProps> = (props) => {
               pageNumber={1}
               height={132}
               canvasBackground='transparent'
+              onClick={handleClick}
             />
           )}
         </div>

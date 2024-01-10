@@ -15,7 +15,7 @@ export default function NotFound() {
         </div>
       </Link>
 
-      <div className='max-w-[510px] absolute left-0 top-1/2 -translate-y-1/2'>
+      <div className='px-4 max-w-[510px] absolute left-0 top-1/2 -translate-y-1/2'>
         <p className='text-neutral-13 text-4xl font-semibold mb-2'>
           404 - Page not found
         </p>

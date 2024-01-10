@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ServiceProps {
+  companyId?: string;
   size?: 'small';
   order?: number;
   props: {
@@ -35,7 +36,7 @@ interface ServiceProps {
   };
 }
 
-const Service: React.FC<ServiceProps> = ({ props, order, size }) => {
+const Service: React.FC<ServiceProps> = ({ props, order, size, companyId }) => {
   return (
     <div className='flex relative'>
       {order && (
@@ -45,7 +46,9 @@ const Service: React.FC<ServiceProps> = ({ props, order, size }) => {
       )}
 
       <div className='ml-[60px] first:ml-0 grow'>
-        <Link href={'/services/' + props.slug + '-' + props.id}>
+        <Link
+          href={'/services/' + props.slug + '-' + props.id + '-' + companyId}
+        >
           {size === 'small' ? (
             <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
           ) : (
@@ -56,7 +59,7 @@ const Service: React.FC<ServiceProps> = ({ props, order, size }) => {
           {props.excerpt}
         </p>
         <Link
-          href={'/services/' + props.slug + '-' + props.id}
+          href={'/services/' + props.slug + '-' + props.id + '-' + companyId}
           className={` text-royalBlue font-semibold ${
             size === 'small' && 'text-xs'
           }`}
@@ -66,7 +69,7 @@ const Service: React.FC<ServiceProps> = ({ props, order, size }) => {
       </div>
       <div className='ml-6 w-[215px] h-[145px] border border-neutral-3 rounded overflow-hidden relative shrink-0'>
         <Link
-          href={'/services/' + props.slug + '-' + props.id}
+          href={'/services/' + props.slug + '-' + props.id + '-' + companyId}
           className='relative block w-full h-full'
         >
           <Image

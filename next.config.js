@@ -14,6 +14,11 @@ const nextConfig = {
         hostname: 'loremflickr.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'cloudflare-ipfs.com',
+        port: '',
+      },
     ],
   },
   sassOptions: {

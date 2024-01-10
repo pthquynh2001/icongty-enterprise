@@ -9,7 +9,7 @@ const CompanyCardSmall = ({ card }: any) => {
     card && (
       <div className='flex relative w-full h-[162px] p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
         <div className='mr-[18px]'>
-          <Link href={`/company/${card._id}`}>
+          <Link href={`/companies/${card.slug + '-' + card._id}`}>
             <Image
               src={
                 card.logo?.location ||
@@ -23,7 +23,7 @@ const CompanyCardSmall = ({ card }: any) => {
           </Link>
         </div>
         <div className='relative w-full'>
-          <Link href={`/company/${card._id}`}>
+          <Link href={`/companies/${card.slug + '-' + card._id}`}>
             <h5 className='text-base text-neutral-10 line-clamp-2 mb-2 hover:text-royalBlue'>
               {card.name}
             </h5>

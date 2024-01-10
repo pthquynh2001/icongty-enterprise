@@ -5,7 +5,7 @@ import Frame from '@/components/companyPage/Frame';
 import Service from '@/components/companyPage/Service';
 import ProgressPagination from '@/components/companyPage/ProgressPagination';
 
-const ServicesSection = () => {
+const ServicesSection = ({ companyId }: any) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -32,6 +32,7 @@ const ServicesSection = () => {
               <Service
                 props={service}
                 order={pagination.limit * (currentPage - 1) + index + 1}
+                companyId={companyId}
               />
             </div>
           ))}

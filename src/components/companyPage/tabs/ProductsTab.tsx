@@ -4,7 +4,7 @@ import Product from '@/components/companyPage/Product';
 import Pagination from '@/components/Pagination';
 import * as productsServices from '@/apiServices/productsServices';
 
-const ProductsTab = () => {
+const ProductsTab = ({ companyId }: any) => {
   const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pagination = { page: currentPage, limit: 10, totalItems: 11 };
@@ -18,10 +18,10 @@ const ProductsTab = () => {
     fetchData();
   }, [currentPage, pagination.limit]);
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       {data.map((product: any, index: number) => (
         <div className='py-8 px-[62px] rounded-2xl bg-neutral-1' key={index}>
-          <Product props={product} />
+          <Product props={product} companyId={companyId} />
         </div>
       ))}
       {pagination.totalItems / pagination.limit > 1 && (

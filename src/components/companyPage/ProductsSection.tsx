@@ -5,7 +5,7 @@ import Frame from '@/components/companyPage/Frame';
 import Product from './Product';
 import ProgressPagination from '@/components/companyPage/ProgressPagination';
 
-const ProductsSection = () => {
+const ProductsSection = ({ companyId }: any) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -33,6 +33,7 @@ const ProductsSection = () => {
                 size='small'
                 props={product}
                 order={pagination.limit * (currentPage - 1) + index + 1}
+                companyId={companyId}
               />
             </div>
           ))}

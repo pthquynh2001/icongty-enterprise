@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProductProps {
+  companyId?: string;
   size?: 'small';
   order?: number;
   props: {
@@ -35,7 +36,7 @@ interface ProductProps {
   };
 }
 
-const Product: React.FC<ProductProps> = ({ props, order, size }) => {
+const Product: React.FC<ProductProps> = ({ props, order, size, companyId }) => {
   return (
     <div className='flex relative'>
       {order && (
@@ -45,7 +46,9 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
       )}
 
       <div className='ml-[60px] first:ml-0 grow'>
-        <Link href={'/products/' + props.slug + '-' + props.id}>
+        <Link
+          href={'/products/' + props.slug + '-' + props.id + '-' + companyId}
+        >
           {size === 'small' ? (
             <p className='font-semibold text-neutral-10 mb-4'>{props.name}</p>
           ) : (
@@ -56,7 +59,7 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
           {props.excerpt}
         </p>
         <Link
-          href={'/products/' + props.slug + '-' + props.id}
+          href={'/products/' + props.slug + '-' + props.id + '-' + companyId}
           className={` text-royalBlue font-semibold ${
             size === 'small' && 'text-xs'
           }`}
@@ -66,7 +69,7 @@ const Product: React.FC<ProductProps> = ({ props, order, size }) => {
       </div>
       <div className='ml-6 w-[215px] h-[145px] border border-neutral-3 rounded overflow-hidden relative shrink-0'>
         <Link
-          href={'/products/' + props.slug + '-' + props.id}
+          href={'/products/' + props.slug + '-' + props.id + '-' + companyId}
           className='relative block w-full h-full'
         >
           <Image
