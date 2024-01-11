@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Portfolio from '@/components/companyPage/Portfolio';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/shared/pagination/Pagination';
 import * as portfolioServices from '@/apiServices/portfolioServices';
 
 const PortfolioTab = ({ company }: any) => {

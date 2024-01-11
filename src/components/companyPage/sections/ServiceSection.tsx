@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import * as ServicesServices from '@/apiServices/servicesServices';
-import Frame from '@/components/companyPage/Frame';
+import Frame from '@/components/subpage/ContentFrame';
 import Service from '@/components/companyPage/Service';
-import ProgressPagination from '@/components/companyPage/ProgressPagination';
+import ProgressPagination from '@/components/shared/pagination/ProgressPagination';
 
-const ServicesSection = ({ companyId }: any) => {
+const ServiceSection = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,6 @@ const ServicesSection = ({ companyId }: any) => {
               <Service
                 props={service}
                 order={pagination.limit * (currentPage - 1) + index + 1}
-                companyId={companyId}
               />
             </div>
           ))}
@@ -52,4 +51,4 @@ const ServicesSection = ({ companyId }: any) => {
   );
 };
 
-export default ServicesSection;
+export default ServiceSection;

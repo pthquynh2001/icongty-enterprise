@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as companyServices from '@/apiServices/companyServices';
 import Image from 'next/image';
 import Link from 'next/link';
-import Tag from '@/components/Tag/Tag';
+import Tag from '@/components/shared/tag/Tag';
 
 interface RightContentProps {
   company: {

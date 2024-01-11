@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import PdfViewer from '@/components/companyPage/PdfViewer';
-import Tag from '@/components/Tag/Tag';
+import Tag from '@/components/shared/tag/Tag';
 interface PortfolioProps {
   size?: 'small';
   props: {

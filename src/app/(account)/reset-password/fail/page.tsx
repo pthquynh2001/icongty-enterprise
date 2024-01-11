@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ConfigProvider, Button } from 'antd';
+
 const ResetPasswordFailPage = () => {
   return (
     <div className='w-full h-screen flex'>

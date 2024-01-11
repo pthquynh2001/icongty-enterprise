@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Service from '@/components/companyPage/Service';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/shared/pagination/Pagination';
 import * as servicesServices from '@/apiServices/servicesServices';
 
-const ServicesTab = ({ companyId }: any) => {
+const ServiceTab = () => {
   const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pagination = { page: currentPage, limit: 10, totalItems: 11 };
@@ -21,7 +21,7 @@ const ServicesTab = ({ companyId }: any) => {
     <div className='flex flex-col gap-6'>
       {data.map((service: any, index: number) => (
         <div className='py-8 px-[62px] rounded-2xl bg-neutral-1' key={index}>
-          <Service props={service} companyId={companyId} />
+          <Service props={service} />
         </div>
       ))}
       {pagination.totalItems / pagination.limit > 1 && (
@@ -38,4 +38,4 @@ const ServicesTab = ({ companyId }: any) => {
   );
 };
 
-export default ServicesTab;
+export default ServiceTab;

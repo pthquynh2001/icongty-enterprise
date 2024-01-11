@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import Frame from '@/components/companyPage/Frame';
+import Frame from '@/components/subpage/ContentFrame';
 import Portfolio from '@/components/companyPage/Portfolio';
 import Link from 'next/link';
-import ProgressPagination from '@/components/companyPage/ProgressPagination';
+import ProgressPagination from '@/components/shared/pagination/ProgressPagination';
 import * as portfolioServices from '@/apiServices/portfolioServices';
 
 interface PortfolioSectionProps {

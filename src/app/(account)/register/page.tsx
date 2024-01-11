@@ -1,8 +1,8 @@
 'use client';
-import { useState, ChangeEvent, MouseEvent, useEffect } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button, Form, ConfigProvider } from 'antd';
+import { Button, ConfigProvider } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const RegisterPage = () => {

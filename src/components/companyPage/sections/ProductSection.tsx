@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import * as productServices from '@/apiServices/productsServices';
-import Frame from '@/components/companyPage/Frame';
-import Product from './Product';
-import ProgressPagination from '@/components/companyPage/ProgressPagination';
+import Frame from '@/components/subpage/ContentFrame';
+import Product from '../Product';
+import ProgressPagination from '@/components/shared/pagination/ProgressPagination';
 
-const ProductsSection = ({ companyId }: any) => {
+const ProductSection = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,6 @@ const ProductsSection = ({ companyId }: any) => {
                 size='small'
                 props={product}
                 order={pagination.limit * (currentPage - 1) + index + 1}
-                companyId={companyId}
               />
             </div>
           ))}
@@ -53,4 +52,4 @@ const ProductsSection = ({ companyId }: any) => {
   );
 };
 
-export default ProductsSection;
+export default ProductSection;

@@ -1,11 +1,10 @@
 'use client';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ConfigProvider, Select, Input } from 'antd';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
-import Pagination from '@/components/Pagination';
-import Tag from '@/components/Tag/Tag';
+import { SubpageBreadcrumb } from '@/components/subpage';
+import { Pagination, Tag } from '@/components/shared';
 import { HOME_NEWS_ARTICLES, NEWS_CATEGORIES } from '@/constants';
 import * as postServices from '@/apiServices/postServices';
 import type { SearchProps } from 'antd/lib/input/Search';

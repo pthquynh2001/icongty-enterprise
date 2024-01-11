@@ -1,14 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import * as categoryServices from '@/apiServices/categoryServices';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
-import SubpageBanner from '@/components/SubpageBanner';
-import SubpageSearch from '@/components/SubpageSearch';
-import Pagination from '@/components/Pagination';
-import Tag from '@/components/Tag/Tag';
-import CategoryCard from '@/components/CategoryCard';
 import { Select, ConfigProvider } from 'antd';
-import Header from '@/components/Header';
+import * as categoryServices from '@/apiServices/categoryServices';
+import {
+  SubpageBreadcrumb,
+  SubpageBanner,
+  SubpageSearch,
+} from '@/components/subpage';
+import { CategoryCard, Pagination, Tag, Header } from '@/components/shared';
 
 // import { Metadata } from 'next';
 

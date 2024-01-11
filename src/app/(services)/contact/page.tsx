@@ -2,9 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
+import { SubpageBreadcrumb } from '@/components/subpage';
 import { CONTACT_INFO } from '@/constants';
 
 const items = [

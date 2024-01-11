@@ -1,19 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
-import * as companyServices from '@/apiServices/companyServices';
 import Image from 'next/image';
-import Link from 'next/link';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
-import HeaderSearch from '@/components/HeaderSearch';
-import Tag from '@/components/Tag/Tag';
-import { ConfigProvider, Button } from 'antd';
-import { COMPANY_TABS } from '@/constants';
 import { StarFilled } from '@ant-design/icons';
-import OverviewTab from '@/components/companyPage/tabs/OverviewTab';
-import PortfolioTab from '@/components/companyPage/tabs/PortfolioTab';
-import ProductsTab from '@/components/companyPage/tabs/ProductsTab';
-import ServicesTab from '@/components/companyPage/tabs/ServicesTab';
-import RightContent from '@/components/companyPage/RightContent';
+import { ConfigProvider, Button } from 'antd';
+import * as companyServices from '@/apiServices/companyServices';
+import { SubpageBreadcrumb } from '@/components/subpage';
+import { HeaderSearch, Tag } from '@/components/shared';
+import { RightContent } from '@/components/companyPage';
+import {
+  OverviewTab,
+  PortfolioTab,
+  ProductTab,
+  ServiceTab,
+} from '@/components/companyPage/tabs';
+import { COMPANY_TABS } from '@/constants';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {
@@ -244,16 +244,10 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
           <div className='flex gap-6'>
             {/* START: Left content */}
             <div className='w-full'>
-              {activeTab === 'overview' && (
-                <OverviewTab company={company} companyId={companyId} />
-              )}
+              {activeTab === 'overview' && <OverviewTab company={company} />}
               {activeTab === 'portfolio' && <PortfolioTab company={company} />}
-              {activeTab === 'products' && (
-                <ProductsTab companyId={companyId} />
-              )}
-              {activeTab === 'services' && (
-                <ServicesTab companyId={companyId} />
-              )}
+              {activeTab === 'products' && <ProductTab />}
+              {activeTab === 'services' && <ServiceTab />}
             </div>
             {/* END: Left content */}
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Divider } from 'antd';
-import CategoryTags from '@/components/CategoryTags';
+import CategoryTags from '@/components/shared/tag/CategoryTags';
 
 const CompanyCardSmall = ({ card }: any) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Frame from '@/components/companyPage/Frame';
+import Frame from '@/components/subpage/ContentFrame';
 
 const InfoSection = ({ company }: any) => {
   const date = new Date(company.foundationDate);

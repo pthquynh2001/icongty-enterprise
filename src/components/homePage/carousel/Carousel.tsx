@@ -10,7 +10,7 @@ import 'swiper/css/mousewheel';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import './Slider/Slider.scss';
+import './Carousel.scss';
 import { Button } from 'antd';
 import Link from 'next/link';
 

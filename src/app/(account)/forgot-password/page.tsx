@@ -1,9 +1,9 @@
 'use client';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
-import { useWatch } from 'antd/es/form/Form';
+
 const ResetPasswordPage = () => {
   const [countdown, setCountdown] = useState(13);
   const [emailInput, setEmailInput] = useState('');

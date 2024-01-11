@@ -2,15 +2,43 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { Image as AntdImg } from 'antd';
+import { LeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as productsServices from '@/apiServices/productsServices';
 import * as companyServices from '@/apiServices/companyServices';
-import { SubpageBreadcrumb, ContentFrame } from '@/components/subpage';
+import { SubpageBreadcrumb, ContentFrame } from '@/components/subpage/';
 import { ProgressPagination, Tag, HeaderSearch } from '@/components/shared';
-import { ProductCard } from '@/components/productPage';
 
-const ProductPage = ({ params }: { params: { slug: string } }) => {
+const ServiceCard = ({ product }: any) => {
+  return (
+    <div className='pt-4 pb-6 flex gap-4 border-b border-neutral-4'>
+      <div className='w-16 h-16  rounded overflow-hidden shadow-banner shrink-0'>
+        <Link
+          href={`/products/${product.slug + '-' + product.id}`}
+          className='block relative w-full h-full'
+        >
+          <Image
+            src={product.logo?.location}
+            alt='product logo'
+            fill
+            sizes='(max-width 768px) 100vw, 33vw'
+            className='object-cover'
+          />
+        </Link>
+      </div>
+      <div className='w-full'>
+        <Link href={`/products/${product.slug + '-' + product.id}`}>
+          <p className='text-neutral-10 font-semibold mb-2'>{product.name}</p>
+        </Link>
+        <div className='flex'>
+          <Tag type='line'>tag</Tag>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ServicePage = ({ params }: { params: { slug: string } }) => {
   const [product, setProduct] = useState<any>(null);
   const [otherProducts, setOtherProducts] = useState<any>(null);
   const [relatedProducts, setRelatedProducts] = useState<any>(null);
@@ -211,21 +239,18 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                       ))}
                     </div>
                   </AntdImg.PreviewGroup>
-                  {/* pagination */}
-                  {gallery.length / itemsPerPage > 1 && (
-                    <div className='mt-6'>
-                      <ProgressPagination
-                        pagination={{
-                          page: currentPage,
-                          limit: itemsPerPage,
-                          totalItems: gallery.length,
-                        }}
-                        onPageChange={(currentPage) =>
-                          setCurrentPage(currentPage)
-                        }
-                      />
-                    </div>
-                  )}
+                  <div className='mt-6'>
+                    <ProgressPagination
+                      pagination={{
+                        page: currentPage,
+                        limit: itemsPerPage,
+                        totalItems: gallery.length,
+                      }}
+                      onPageChange={(currentPage) =>
+                        setCurrentPage(currentPage)
+                      }
+                    />
+                  </div>
                 </ContentFrame>
                 <ContentFrame title='Video'>
                   <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter'>
@@ -252,7 +277,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                     {otherProducts?.map(
                       (product: any, index: number) =>
                         product.id !== productId && (
-                          <ProductCard key={index} product={product} />
+                          <ServiceCard key={index} product={product} />
                         )
                     )}
                   </div>
@@ -267,7 +292,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                       {relatedProducts.map(
                         (product: any, index: number) =>
                           product.id !== productId && (
-                            <ProductCard key={index} product={product} />
+                            <ServiceCard key={index} product={product} />
                           )
                       )}
                     </div>
@@ -282,4 +307,4 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default ProductPage;
+export default ServicePage;

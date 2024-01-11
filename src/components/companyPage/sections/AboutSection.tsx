@@ -1,6 +1,6 @@
 'use-client';
 import { useEffect, useState, useRef } from 'react';
-import Frame from '@/components/companyPage/Frame';
+import Frame from '@/components/subpage/ContentFrame';
 import styles from './AboutSection.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

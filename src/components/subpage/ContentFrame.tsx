@@ -6,7 +6,7 @@ interface FrameProps {
   className?: string;
 }
 
-const Frame: React.FC<FrameProps> = ({ title, children, className }) => {
+const ContentFrame: React.FC<FrameProps> = ({ title, children, className }) => {
   return (
     <div
       className={`w-full py-12 px-[62px] bg-neutral-1 rounded-2xl overflow-hidden ${className}`}
@@ -17,4 +17,4 @@ const Frame: React.FC<FrameProps> = ({ title, children, className }) => {
   );
 };
 
-export default Frame;
+export default ContentFrame;

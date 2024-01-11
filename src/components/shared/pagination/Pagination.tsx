@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 // Define the interface for pagination props

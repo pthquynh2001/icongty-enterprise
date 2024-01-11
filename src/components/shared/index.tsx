@@ -1,0 +1,9 @@
+export { default as Footer } from './Footer';
+export { default as Header } from './Header';
+export { default as HeaderSearch } from './HeaderSearch';
+export { default as Pagination } from './pagination/Pagination';
+export { default as ProgressPagination } from './pagination/ProgressPagination';
+export { default as Tag } from './tag/Tag';
+export { default as CategoryCard } from './card/CategoryCard';
+export { default as CompanyCard } from './card/CompanyCard';
+export { default as CompanyCardSmall } from './card/CompanyCardSmall';

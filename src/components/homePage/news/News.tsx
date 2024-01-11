@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import './News.scss';
 import { Pagination, Navigation, Autoplay, Parallax } from 'swiper/modules';
 import { SwiperOptions } from 'swiper/types';
-import Tag from '@/components/Tag/Tag';
+import Tag from '@/components/shared/tag/Tag';
 import { HOME_NEWS_SLIDES, HOME_NEWS_ARTICLES } from '@/constants/index';
 
 const News = () => {

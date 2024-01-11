@@ -1,13 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
 import * as companyServices from '@/apiServices/companyServices';
-import SubpageBreadcrumb from '@/components/SubpageBreadcrumb';
-import SubpageBanner from '@/components/SubpageBanner';
-import SubpageSearch from '@/components/SubpageSearch';
-import CompanyCard from '@/components/CompanyCard';
-import Pagination from '@/components/Pagination';
-import Header from '@/components/Header';
-import Tag from '@/components/Tag/Tag';
+import {
+  SubpageBreadcrumb,
+  SubpageBanner,
+  SubpageSearch,
+} from '@/components/subpage';
+import { CompanyCard, Pagination, Header, Tag } from '@/components/shared';
 import { Select, ConfigProvider } from 'antd';
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {

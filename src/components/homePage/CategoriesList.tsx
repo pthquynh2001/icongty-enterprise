@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Button, ConfigProvider } from 'antd';
 import Link from 'next/link';
 import * as categoryServices from '@/apiServices/categoryServices';
-import CategoryCard from '@/components/CategoryCard';
-import Pagination from './Pagination';
+import CategoryCard from '@/components/shared/card/CategoryCard';
+import Pagination from '../shared/pagination/Pagination';
 const CategoriesList = () => {
   const [data, setData] = useState<any[]>([]);
   const [page, setPage] = useState(1);
