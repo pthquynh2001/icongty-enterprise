@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import * as productServices from '@/apiServices/productsServices';
-import Frame from '@/components/subpage/ContentFrame';
+import { ContentFrame } from '@/components/subpage';
 import Product from '../Product';
-import ProgressPagination from '@/components/shared/pagination/ProgressPagination';
+import { ProgressPagination } from '@/components/shared';
+import { Skeleton } from 'antd';
 
 const ProductSection = () => {
   const [data, setData] = useState([]);
@@ -24,10 +25,19 @@ const ProductSection = () => {
   }, [currentPage, pagination.limit]);
 
   return (
-    data && (
-      <div>
-        <Frame title='Sản Phẩm'>
-          {data.map((product, index) => (
+    <ContentFrame title='Sản Phẩm'>
+      {loading
+        ? [...Array(3)].map((_, index) => (
+            <div
+              key={index}
+              className='flex gap-10 py-6 border-b border-neutral-4 min-h-[195px]'
+            >
+              <Skeleton active paragraph={{ rows: 3 }} />
+              <Skeleton.Image />
+            </div>
+          ))
+        : data &&
+          data.map((product, index) => (
             <div key={index} className='py-6 border-b border-neutral-4'>
               <Product
                 size='small'
@@ -36,19 +46,17 @@ const ProductSection = () => {
               />
             </div>
           ))}
-          {pagination.totalItems / pagination.limit > 1 && (
-            <div className='mt-8'>
-              <ProgressPagination
-                pagination={pagination}
-                onPageChange={(currentPage) => {
-                  setCurrentPage(currentPage);
-                }}
-              />
-            </div>
-          )}
-        </Frame>
-      </div>
-    )
+      {pagination.totalItems / pagination.limit > 1 && (
+        <div className='mt-8'>
+          <ProgressPagination
+            pagination={pagination}
+            onPageChange={(currentPage) => {
+              setCurrentPage(currentPage);
+            }}
+          />
+        </div>
+      )}
+    </ContentFrame>
   );
 };
 

@@ -1,39 +1,47 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { Image as AntdImg } from 'antd';
+import { Image as AntdImg, Skeleton } from 'antd';
 import * as productsServices from '@/apiServices/productsServices';
 import * as companyServices from '@/apiServices/companyServices';
 import { SubpageBreadcrumb, ContentFrame } from '@/components/subpage';
 import { ProgressPagination, Tag, HeaderSearch } from '@/components/shared';
 import { ProductCard } from '@/components/productPage';
 
+import { Company } from '@/types';
+import Gallery from '@/components/productPage/Gallery';
+
 const ProductPage = ({ params }: { params: { slug: string } }) => {
-  const [product, setProduct] = useState<any>(null);
-  const [otherProducts, setOtherProducts] = useState<any>(null);
-  const [relatedProducts, setRelatedProducts] = useState<any>(null);
-  const [company, setCompany] = useState<any>(null);
+  const [product, setProduct] = useState<any>({});
+  const [otherProducts, setOtherProducts] = useState<any>([]);
+  const [relatedProducts, setRelatedProducts] = useState<any>([]);
+  const [company, setCompany] = useState<Company>({} as Company);
+  const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState<any>([]);
   const productId = params.slug.split('-').slice(-1)[0];
   const companyId = product?.companyId || '';
 
   // gallery
+  const [gallery, setGallery] = useState([]);
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const gallery = product?.gallery?.images || [];
+  // const gallery = product?.gallery?.images || [];
   const currentImages = gallery.slice(indexOfFirstItem, indexOfLastItem);
 
   // fetch API product
   useEffect(() => {
     const getProduct = async () => {
+      setIsLoading(true);
       const res = await productsServices.getAll({
         params: { page: 1, limit: 1, id: productId },
       });
       setProduct(res[0]);
+      setGallery(res[0].gallery?.images || []);
+      setIsLoading(false);
     };
     getProduct();
   }, [productId]);
@@ -76,7 +84,6 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     // set breadcrumb items
-
     if (product && company) {
       const breadcrumbItems = [
         { title: 'Trang chủ', href: '/' },
@@ -89,68 +96,97 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
       setItems(breadcrumbItems);
     }
   }, [product, company]);
+
   return (
     <div>
       <HeaderSearch />
       {product && company && (
         <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
           {/* TOP */}
-          <SubpageBreadcrumb items={items} />
+
           <div className='max-container padding-container'>
+            {isLoading ? (
+              <Skeleton
+                active
+                paragraph={false}
+                title={{ width: 300 }}
+                className='pt-8 pb-[22px] h-[22px]'
+              />
+            ) : (
+              <SubpageBreadcrumb items={items} />
+            )}
             <div className='flexStart gap-2 mb-6'>
               <LeftOutlined className='text-base' />
               <h4>Danh mục sản phẩm</h4>
             </div>
-            <div className='w-full relative h-[248px] rounded-2xl bg-blue-400 overflow-hidden'>
-              <Image
-                src={product.coverPhoto?.location}
-                alt='cover photo'
-                priority
-                quality={100}
-                fill
-                className='object-cover'
-                sizes='(max-width: 640px) 100vw, 640px'
-              />
-              <div className='w-full h-full flexStart gap-6 py-12 px-[62px] relative'>
+            <div className='w-full relative h-[248px] rounded-2xl  overflow-hidden bg-neutral-5'>
+              {!isLoading && (
                 <Image
-                  src={product.logo?.location}
-                  alt='logo'
-                  width={152}
-                  height={152}
-                  className='object-cover  rounded-lg '
+                  src={product.coverPhoto.location}
+                  alt='cover photo'
+                  quality={100}
+                  fill
+                  className='object-cover'
+                  sizes='(max-width: 640px) 100vw, 640px'
                 />
-                <div className='flex flex-col'>
-                  <div className='flex'>
-                    <Tag type='line' className='h-5 mb-2 inline-block'>
-                      abc
-                    </Tag>
+              )}
+
+              <div className='w-full h-full flexStart gap-6 py-12 px-[62px] relative'>
+                {isLoading ? (
+                  <div className='w-[152px] h-[152px]'>
+                    <Skeleton.Image active />
                   </div>
-                  <div className='mb-4'>
-                    <a
-                      target='_blank'
-                      href='https://example.com/'
-                      className='flex gap-2  '
-                    >
-                      <h2 className='text-neutral-1 '>{product.name}</h2>
-                      <ArrowRightOutlined
-                        style={{ color: 'white' }}
-                        className='text-[17px] self-start pt-2'
-                        rotate={-45}
-                      />
-                    </a>
-                  </div>
-                  <div className='flex gap-2'>
-                    <Image
-                      src={company.logo?.location}
-                      alt='company logo'
-                      width={24}
-                      height={24}
-                      className='object-cover rounded-[50%]'
-                    />
-                    <p className='text-neutral-1 opacity-80 font-semibold'>
-                      {company.name}
-                    </p>
-                  </div>
+                ) : (
+                  <Image
+                    src={product.logo?.location}
+                    alt='logo'
+                    width={152}
+                    height={152}
+                    className='object-cover  rounded-lg '
+                  />
+                )}
+
+                <div className='flex flex-col w-full'>
+                  {isLoading ? (
+                    <Skeleton active paragraph={{ rows: 2 }} />
+                  ) : (
+                    <>
+                      <div className='flex'>
+                        <Tag type='line' className='h-5 mb-2 inline-block'>
+                          abc
+                        </Tag>
+                      </div>
+                      <div className='mb-4'>
+                        <a
+                          target='_blank'
+                          href='https://example.com/'
+                          className='flex gap-2  '
+                        >
+                          <h2 className='text-neutral-1 '>{product.name}</h2>
+                          <ArrowRightOutlined
+                            style={{ color: 'white' }}
+                            className='text-[17px] self-start pt-2'
+                            rotate={-45}
+                          />
+                        </a>
+                      </div>
+                      <Link
+                        href={`/companies/${company.slug}-${company._id}`}
+                        className='flex gap-2'
+                      >
+                        <Image
+                          src={company.logo?.location}
+                          alt='company logo'
+                          width={24}
+                          height={24}
+                          className='object-cover rounded-[50%]'
+                        />
+                        <p className='text-neutral-1 opacity-80 font-semibold'>
+                          {company.name}
+                        </p>
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -165,7 +201,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                       khách hàng đã mua hoặc đã xem. Việc đề xuất sản phẩm giúp
                       cho khách hàng dễ dàng tìm được sản phẩm mà họ muốn mua.
                     </p>
-                    <div className=''>
+                    <div>
                       <h5 className='mb-3'>Công nghệ</h5>
                       <div className='flex flex-wrap'>
                         <Tag type='block' className='h-5 text-xs'>
@@ -184,51 +220,10 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                     </div>
                   </div>
                 </ContentFrame>
-                <ContentFrame title='Hình ảnh'>
-                  <AntdImg.PreviewGroup
-                    preview={{
-                      onChange: (current, prev) =>
-                        console.log(
-                          `current index: ${current}, prev index: ${prev}`
-                        ),
-                      toolbarRender: () => <></>,
-                    }}
-                  >
-                    <div className='grid grid-cols-4 gap-6 w-full '>
-                      {currentImages.map((image: any, index: any) => (
-                        <div
-                          key={index}
-                          className='relative w-full rounded-lg overflow-hidden'
-                        >
-                          <AntdImg
-                            alt='photo'
-                            width={154}
-                            height={154}
-                            src={image.location}
-                            className='object-cover'
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </AntdImg.PreviewGroup>
-                  {/* pagination */}
-                  {gallery.length / itemsPerPage > 1 && (
-                    <div className='mt-6'>
-                      <ProgressPagination
-                        pagination={{
-                          page: currentPage,
-                          limit: itemsPerPage,
-                          totalItems: gallery.length,
-                        }}
-                        onPageChange={(currentPage) =>
-                          setCurrentPage(currentPage)
-                        }
-                      />
-                    </div>
-                  )}
-                </ContentFrame>
+                {/* Gallery */}
+                <Gallery gallery={gallery} isLoading={isLoading} />
                 <ContentFrame title='Video'>
-                  <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter'>
+                  <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter rounded-2xl'>
                     video
                   </div>
                 </ContentFrame>
