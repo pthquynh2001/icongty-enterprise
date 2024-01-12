@@ -25,7 +25,7 @@ const ProductTab = () => {
     <div className='flex flex-col gap-10'>
       {[...Array(5)].map((_, index) => (
         <div
-          className='flex gap-10 py-6 px-[62px] rounded-2xl bg-neutral-1'
+          className='flex gap-10 py-8 px-[62px] rounded-2xl bg-neutral-1 h-[218px]'
           key={index}
         >
           <Skeleton active paragraph={{ rows: 3 }} />

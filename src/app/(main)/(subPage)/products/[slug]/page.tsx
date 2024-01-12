@@ -12,13 +12,16 @@ import { ProductCard } from '@/components/productPage';
 
 import { Company } from '@/types';
 import Gallery from '@/components/productPage/Gallery';
+import About from '@/components/productPage/About';
+import RelatedProducts from '@/components/productPage/RelatedProducts';
+import OtherProducts from '@/components/productPage/OtherProducts';
 
 const ProductPage = ({ params }: { params: { slug: string } }) => {
   const [product, setProduct] = useState<any>({});
   const [otherProducts, setOtherProducts] = useState<any>([]);
   const [relatedProducts, setRelatedProducts] = useState<any>([]);
   const [company, setCompany] = useState<Company>({} as Company);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<any>([]);
   const productId = params.slug.split('-').slice(-1)[0];
   const companyId = product?.companyId || '';
@@ -35,13 +38,13 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   // fetch API product
   useEffect(() => {
     const getProduct = async () => {
-      setIsLoading(true);
+      setLoading(true);
       const res = await productsServices.getAll({
         params: { page: 1, limit: 1, id: productId },
       });
       setProduct(res[0]);
       setGallery(res[0].gallery?.images || []);
-      setIsLoading(false);
+      setLoading(false);
     };
     getProduct();
   }, [productId]);
@@ -100,60 +103,64 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   return (
     <div>
       <HeaderSearch />
-      {product && company && (
-        <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
-          {/* TOP */}
+      <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
+        {/* TOP */}
 
-          <div className='max-container padding-container'>
-            {isLoading ? (
-              <Skeleton
-                active
-                paragraph={false}
-                title={{ width: 300 }}
-                className='pt-8 pb-[22px] h-[22px]'
-              />
-            ) : (
-              <SubpageBreadcrumb items={items} />
-            )}
+        <div className='max-container padding-container'>
+          {loading ? (
+            <Skeleton
+              active
+              paragraph={false}
+              title={{ width: 300 }}
+              className='pt-8 pb-[22px] h-[22px]'
+            />
+          ) : (
+            <SubpageBreadcrumb items={items} />
+          )}
+          <Link href={`/companies/${company.slug}-${companyId}`}>
             <div className='flexStart gap-2 mb-6'>
               <LeftOutlined className='text-base' />
               <h4>Danh mục sản phẩm</h4>
             </div>
-            <div className='w-full relative h-[248px] rounded-2xl  overflow-hidden bg-neutral-5'>
-              {!isLoading && (
+          </Link>
+          <div className='w-full relative h-[248px] rounded-2xl  overflow-hidden bg-neutral-5'>
+            {!loading && (
+              <Image
+                src={product.coverPhoto.location}
+                alt='cover photo'
+                quality={100}
+                fill
+                className='object-cover'
+                sizes='(max-width: 640px) 100vw, 640px'
+              />
+            )}
+
+            <div className='w-full h-full flexStart gap-6 py-12 px-[62px] relative'>
+              {loading ? (
+                <div className='px-10 w-[152px]'>
+                  <Skeleton.Image active />
+                </div>
+              ) : (
                 <Image
-                  src={product.coverPhoto.location}
-                  alt='cover photo'
-                  quality={100}
-                  fill
-                  className='object-cover'
-                  sizes='(max-width: 640px) 100vw, 640px'
+                  src={product.logo?.location}
+                  alt='logo'
+                  width={152}
+                  height={152}
+                  className='object-cover  rounded-lg '
                 />
               )}
 
-              <div className='w-full h-full flexStart gap-6 py-12 px-[62px] relative'>
-                {isLoading ? (
-                  <div className='w-[152px] h-[152px]'>
-                    <Skeleton.Image active />
+              <div className='flex flex-col w-full'>
+                {loading ? (
+                  <div className='w-[400px]'>
+                    <Skeleton active paragraph={{ rows: 2 }} />
                   </div>
                 ) : (
-                  <Image
-                    src={product.logo?.location}
-                    alt='logo'
-                    width={152}
-                    height={152}
-                    className='object-cover  rounded-lg '
-                  />
-                )}
-
-                <div className='flex flex-col w-full'>
-                  {isLoading ? (
-                    <Skeleton active paragraph={{ rows: 2 }} />
-                  ) : (
+                  company && (
                     <>
                       <div className='flex'>
-                        <Tag type='line' className='h-5 mb-2 inline-block'>
-                          abc
+                        <Tag type='line' grey className='h-5 mb-2  opacity-80'>
+                          Customer Data Platform
                         </Tag>
                       </div>
                       <div className='mb-4'>
@@ -186,93 +193,36 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                         </p>
                       </Link>
                     </>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className='flex gap-6 mt-14'>
-              {/* Left */}
-              <div className='w-full flex flex-col gap-6'>
-                <ContentFrame title={`Giới thiệu về ${product.name}`}>
-                  <div className='flex flex-col gap-8'>
-                    <p>
-                      Với thế mạnh về data, {product.name} sẽ gợi ý các sản phẩm
-                      mà khách hàng có thể hứng thú dựa vào những sản phẩm mà
-                      khách hàng đã mua hoặc đã xem. Việc đề xuất sản phẩm giúp
-                      cho khách hàng dễ dàng tìm được sản phẩm mà họ muốn mua.
-                    </p>
-                    <div>
-                      <h5 className='mb-3'>Công nghệ</h5>
-                      <div className='flex flex-wrap'>
-                        <Tag type='block' className='h-5 text-xs'>
-                          tag 1
-                        </Tag>
-                        <Tag type='block' className='h-5 text-xs'>
-                          tag 2
-                        </Tag>
-                        <Tag type='block' className='h-5 text-xs'>
-                          tag 3
-                        </Tag>
-                        <Tag type='block' className='h-5 text-xs'>
-                          tag 4
-                        </Tag>
-                      </div>
-                    </div>
-                  </div>
-                </ContentFrame>
-                {/* Gallery */}
-                <Gallery gallery={gallery} isLoading={isLoading} />
-                <ContentFrame title='Video'>
-                  <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter rounded-2xl'>
-                    video
-                  </div>
-                </ContentFrame>
-              </div>
-              {/* Right */}
-              <div className='hidden lg:flex w-[320px] shrink-0  flex-col gap-6'>
-                {/* Company's other products */}
-                <div className='bg-neutral-1 w-full px-8 py-12 rounded-2xl'>
-                  <div className='text-base pb-2 border-b border-neutral-5'>
-                    <p className='text-neutral-11'>
-                      Sản phẩm khác của{' '}
-                      <Link
-                        href={`/companies/${company.slug + '-' + company._id}`}
-                        className='text-royalBlue font-semibold'
-                      >
-                        {company.name}
-                      </Link>
-                    </p>
-                  </div>
-                  <div className='flex flex-col'>
-                    {otherProducts?.map(
-                      (product: any, index: number) =>
-                        product.id !== productId && (
-                          <ProductCard key={index} product={product} />
-                        )
-                    )}
-                  </div>
-                </div>
-                {/* Related products */}
-                {relatedProducts && (
-                  <div className='bg-neutral-1 w-full px-8 py-12 rounded-2xl'>
-                    <h5 className='pb-2 border-b border-neutral-5'>
-                      Sản phẩm tương tự
-                    </h5>
-                    <div className='flex flex-col'>
-                      {relatedProducts.map(
-                        (product: any, index: number) =>
-                          product.id !== productId && (
-                            <ProductCard key={index} product={product} />
-                          )
-                      )}
-                    </div>
-                  </div>
+                  )
                 )}
               </div>
             </div>
           </div>
+          <div className='flex gap-6 mt-14'>
+            {/* Left */}
+            <div className='w-full flex flex-col gap-6'>
+              <About product={product} loading={loading} />
+              {/* Gallery */}
+              <Gallery gallery={gallery} loading={loading} />
+              <ContentFrame title='Video'>
+                <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter rounded-2xl'>
+                  video
+                </div>
+              </ContentFrame>
+            </div>
+            {/* Right */}
+            <div className='hidden lg:flex w-[320px] shrink-0  flex-col gap-6'>
+              {/* Company's other products */}
+              <OtherProducts
+                mainItemId={productId}
+                companyName={product.companyName}
+              />
+              {/* Related products */}
+              <RelatedProducts mainItemId={productId} />
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

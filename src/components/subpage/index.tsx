@@ -1,4 +1,13 @@
-export { default as ContentFrame } from './ContentFrame';
-export { default as SubpageBreadcrumb } from './SubpageBreadcrumb';
-export { default as SubpageBanner } from './SubpageBanner';
-export { default as SubpageSearch } from './SubpageSearch';
+import ContentFrame from './ContentFrame';
+import SubpageBreadcrumb from './SubpageBreadcrumb';
+import SubpageBanner from './SubpageBanner';
+import SubpageSearch from './SubpageSearch';
+import RelatedItems from './RelatedItems';
+
+export {
+  ContentFrame,
+  SubpageBreadcrumb,
+  SubpageBanner,
+  SubpageSearch,
+  RelatedItems,
+};

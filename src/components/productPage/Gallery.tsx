@@ -10,9 +10,9 @@ interface GalleryProps {
     alt: string;
     id: string;
   }[];
-  isLoading: boolean;
+  loading: boolean;
 }
-const Gallery = ({ gallery, isLoading }: GalleryProps) => {
+const Gallery = ({ gallery, loading }: GalleryProps) => {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -22,7 +22,7 @@ const Gallery = ({ gallery, isLoading }: GalleryProps) => {
 
   return (
     <ContentFrame title='Hình ảnh'>
-      {isLoading ? (
+      {loading ? (
         <div className='grid grid-cols-4 gap-6 w-full '>
           {[...Array(8)].map((_, index) => (
             <div
