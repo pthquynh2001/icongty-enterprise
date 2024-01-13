@@ -23,17 +23,15 @@ const SubpageBreadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   });
 
   return (
-    <div className='pt-8 pb-[22px] max-container padding-container'>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorBgTextHover: 'transparent',
-          },
-        }}
-      >
-        <Breadcrumb items={items} />
-      </ConfigProvider>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorBgTextHover: 'transparent',
+        },
+      }}
+    >
+      <Breadcrumb items={items} />
+    </ConfigProvider>
   );
 };
 

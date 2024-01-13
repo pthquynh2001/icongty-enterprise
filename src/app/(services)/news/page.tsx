@@ -63,8 +63,11 @@ const NewsPage = () => {
   }, [activeCat]);
   return (
     <>
-      <SubpageBreadcrumb items={items} />
       <div className='padding-container max-container mb-[120px]'>
+        <div className='mt-8 mb-14'>
+          <SubpageBreadcrumb items={items} />
+        </div>
+
         <div className='flexBetween flex-wrap lg:flex-nowrap mb-20'>
           <div className=' relative w-full h-[300px] lg:h-[416px] rounded-2xl overflow-hidden lg:mr-[84px]'>
             <Link href={`/post/1`} className='relative w-full h-full block'>

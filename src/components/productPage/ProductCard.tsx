@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Tag } from '@/components/shared';
 
-const ProductCard = ({ product }: any) => {
+const ItemCard = ({ product }: any) => {
   return (
     <div className='pt-4 pb-6 flex gap-4 border-b border-neutral-4'>
       <div className='w-16 h-16  rounded overflow-hidden shadow-banner shrink-0'>
@@ -20,7 +20,7 @@ const ProductCard = ({ product }: any) => {
         </Link>
       </div>
       <div className='w-full'>
-        <Link href={`/products/${product.slug + '-' + product.id}`}>
+        <Link href={`/products/${product.slug}-${product.id}`}>
           <p className='text-neutral-10 font-semibold mb-2'>{product.name}</p>
         </Link>
         <div className='flex'>
@@ -31,4 +31,4 @@ const ProductCard = ({ product }: any) => {
   );
 };
 
-export default ProductCard;
+export default ItemCard;

@@ -40,9 +40,9 @@ const CompaniesPage = () => {
   }, [page, pagination.limit]);
 
   return (
-    <>
+    <div className='pt-20'>
       <Header />
-      <div className='mt-20'>
+      <div className='max-container padding-container mt-8 mb-[22px]'>
         <SubpageBreadcrumb items={items} />
       </div>
       <SubpageBanner
@@ -105,7 +105,7 @@ const CompaniesPage = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

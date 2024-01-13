@@ -111,9 +111,9 @@ const CategoriesPage = () => {
   };
 
   return (
-    <>
+    <div className='pt-[80px]'>
       <Header />
-      <div className='mt-20'>
+      <div className='mt-8 mb-[22px] padding-container max-container'>
         <SubpageBreadcrumb items={items} />
       </div>
       <SubpageBanner
@@ -209,7 +209,7 @@ const CategoriesPage = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

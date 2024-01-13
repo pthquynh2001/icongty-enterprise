@@ -41,8 +41,10 @@ const ContactPage = () => {
           />
         </div>
 
-        <SubpageBreadcrumb items={items} />
         <div className='max-container padding-container'>
+          <div className='my-8'>
+            <SubpageBreadcrumb items={items} />
+          </div>
           <div className='mb-10'>
             <div className='lg:hidden flexCenter flex-col '>
               <h3>Chúng tôi có thể</h3>
