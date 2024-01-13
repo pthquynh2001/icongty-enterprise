@@ -2,16 +2,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Tag } from '@/components/shared';
 
-const ItemCard = ({ product }: any) => {
+const ItemCard = ({
+  item,
+  type,
+}: {
+  item: any;
+  type: 'product' | 'service';
+}) => {
+  const itemParams = `/${type === 'product' ? 'products' : 'services'}/${
+    item.slug
+  }-${item.id}`;
   return (
     <div className='pt-4 pb-6 flex gap-4 border-b border-neutral-4'>
       <div className='w-16 h-16  rounded overflow-hidden shadow-banner shrink-0'>
-        <Link
-          href={`/products/${product.slug + '-' + product.id}`}
-          className='block relative w-full h-full'
-        >
+        <Link href={itemParams} className='block relative w-full h-full'>
           <Image
-            src={product.logo?.location}
+            src={item.logo?.location}
             alt='product logo'
             fill
             sizes='(max-width 768px) 100vw, 33vw'
@@ -20,8 +26,8 @@ const ItemCard = ({ product }: any) => {
         </Link>
       </div>
       <div className='w-full'>
-        <Link href={`/products/${product.slug}-${product.id}`}>
-          <p className='text-neutral-10 font-semibold mb-2'>{product.name}</p>
+        <Link href={itemParams}>
+          <p className='text-neutral-10 font-semibold mb-2'>{item.name}</p>
         </Link>
         <div className='flex'>
           <Tag type='line'>tag</Tag>

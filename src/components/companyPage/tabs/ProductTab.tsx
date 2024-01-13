@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Product from '@/components/companyPage/Product';
 import { Pagination } from '@/components/shared';
-import * as productsServices from '@/apiServices/productsServices';
+import * as productsServices from '@/apiServices/productServices';
 import { Skeleton } from 'antd';
 
 const ProductTab = () => {

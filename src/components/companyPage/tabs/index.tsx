@@ -1,4 +1,7 @@
-export { default as OverviewTab } from './OverviewTab';
-export { default as ProductTab } from './ProductTab';
-export { default as ServiceTab } from './ServiceTab';
-export { default as PortfolioTab } from './PortfolioTab';
+import OverviewTab from './OverviewTab';
+import ProductTab from './ProductTab';
+import ServiceTab from './ServiceTab';
+import PortfolioTab from './PortfolioTab';
+import TabBar from './TabBar';
+
+export { OverviewTab, ProductTab, ServiceTab, PortfolioTab, TabBar };

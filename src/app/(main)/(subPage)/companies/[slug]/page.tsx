@@ -1,25 +1,22 @@
 'use client';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import { StarFilled } from '@ant-design/icons';
 import { ConfigProvider, Button, Skeleton } from 'antd';
+import Image from 'next/image';
 import * as companyServices from '@/apiServices/companyServices';
+import { COMPANY_TABS } from '@/constants';
+import { Company } from '@/types';
 import { SubpageBreadcrumb } from '@/components/subpage';
-import { HeaderSearch, Tag } from '@/components/shared';
+import { HeaderSearch, Tag, Advertising } from '@/components/shared';
 import {
   OverviewTab,
   PortfolioTab,
   ProductTab,
   ServiceTab,
+  TabBar,
 } from '@/components/companyPage/tabs';
-import { COMPANY_TABS } from '@/constants';
-import { Company } from '@/types';
-import ContactInfo from '@/components/companyPage/ContactInfo';
-import Advertising from '@/components/companyPage/Advertising';
-import RelatedCompany from '@/components/companyPage/RelatedCompany';
-import Link from 'next/link';
-import TabBar from '@/components/companyPage/tabs/TabBar';
+import { ContactInfo, RelatedCompany } from '@/components/companyPage';
 
 // import { Metadata } from 'next';
 // export const metadata: Metadata = {

@@ -1,5 +1,16 @@
-export { default as PdfViewer } from './PdfViewer';
-export { default as Portfolio } from './Portfolio';
-export { default as Product } from './Product';
-export { default as Service } from './Service';
-export { default as RightContent } from './RelatedCompany';
+import PdfViewer from './PdfViewer';
+import Portfolio from './Portfolio';
+import Product from './Product';
+import Service from './Service';
+import ContactInfo from './ContactInfo';
+import RelatedCompany from './RelatedCompany';
+import { TabBar } from './tabs';
+export {
+  PdfViewer,
+  Portfolio,
+  Product,
+  Service,
+  ContactInfo,
+  RelatedCompany,
+  TabBar,
+};

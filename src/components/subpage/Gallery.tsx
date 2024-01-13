@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { ContentFrame } from '@/components/subpage';
 import { Image as AntdImg, Skeleton } from 'antd';
 import { ProgressPagination } from '@/components/shared';
@@ -17,7 +17,6 @@ const Gallery = ({ gallery, loading }: GalleryProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const gallery = product?.gallery?.images || [];
   const currentImages = gallery.slice(indexOfFirstItem, indexOfLastItem);
 
   return (

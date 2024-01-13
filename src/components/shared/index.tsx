@@ -1,9 +1,22 @@
-export { default as Footer } from './Footer';
-export { default as Header } from './Header';
-export { default as HeaderSearch } from './HeaderSearch';
-export { default as Pagination } from './pagination/Pagination';
-export { default as ProgressPagination } from './pagination/ProgressPagination';
-export { default as Tag } from './tag/Tag';
-export { default as CategoryCard } from './card/CategoryCard';
-export { default as CompanyCard } from './card/CompanyCard';
-export { default as CompanyCardSmall } from './card/CompanyCardSmall';
+import Footer from './Footer';
+import Header from './Header';
+import HeaderSearch from './HeaderSearch';
+import Pagination from './pagination/Pagination';
+import ProgressPagination from './pagination/ProgressPagination';
+import Tag from './tag/Tag';
+import CategoryCard from './card/CategoryCard';
+import CompanyCard from './card/CompanyCard';
+import CompanyCardSmall from './card/CompanyCardSmall';
+import Advertising from './Advertising';
+export {
+  Footer,
+  Header,
+  HeaderSearch,
+  Pagination,
+  ProgressPagination,
+  Tag,
+  CategoryCard,
+  CompanyCard,
+  CompanyCardSmall,
+  Advertising,
+};

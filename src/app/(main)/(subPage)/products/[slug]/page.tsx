@@ -4,39 +4,34 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { Skeleton } from 'antd';
-import * as productsServices from '@/apiServices/productsServices';
+import * as productServices from '@/apiServices/productServices';
 import * as companyServices from '@/apiServices/companyServices';
-import { SubpageBreadcrumb, ContentFrame } from '@/components/subpage';
-
-import { Company } from '@/types';
-import Gallery from '@/components/productPage/Gallery';
-import About from '@/components/productPage/About';
-import RelatedProducts from '@/components/productPage/RelatedProducts';
-import OtherProducts from '@/components/productPage/OtherProducts';
+import { SubpageBreadcrumb, ContentFrame, Gallery } from '@/components/subpage';
 import { HeaderSearch, Tag } from '@/components/shared';
+import { Company } from '@/types';
+import {
+  RelatedProducts,
+  OtherProducts,
+  AboutProduct,
+} from '@/components/productPage';
 
 const ProductPage = ({ params }: { params: { slug: string } }) => {
   const [product, setProduct] = useState<any>({});
   const [company, setCompany] = useState<Company>({} as Company);
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<any>([]);
+  const [gallery, setGallery] = useState([]);
   const productId = params.slug.split('-').slice(-1)[0];
   const companyId = product?.companyId || '';
-
-  // gallery
-  const [gallery, setGallery] = useState([]);
-  const itemsPerPage = 8;
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const gallery = product?.gallery?.images || [];
-  const currentImages = gallery.slice(indexOfFirstItem, indexOfLastItem);
+  const companyParams = company
+    ? `/companies/${company?.slug}-${company?._id}`
+    : '';
 
   // fetch API product
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const res = await productsServices.getAll({
+      const res = await productServices.getAll({
         params: { page: 1, limit: 1, id: productId },
       });
       setProduct(res[0]);
@@ -59,18 +54,18 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     // set breadcrumb items
-    if (product && company) {
+    if (product && companyParams) {
       const breadcrumbItems = [
         { title: 'Trang chủ', href: '/' },
         {
           title: product.companyName,
-          href: `/companies/${company.slug}-${product.companyId}`,
+          href: companyParams,
         },
         { title: product.name },
       ];
       setItems(breadcrumbItems);
     }
-  }, [product, company]);
+  }, [product, companyParams]);
 
   return (
     <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
@@ -90,7 +85,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
           )}
         </div>
 
-        <Link href={`/companies/${company.slug}-${companyId}`}>
+        <Link href={`${companyParams}?tab=products`}>
           <div className='flexStart gap-2 mb-6'>
             <LeftOutlined className='text-base' />
             <h4>Danh mục sản phẩm</h4>
@@ -150,10 +145,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                         />
                       </a>
                     </div>
-                    <Link
-                      href={`/companies/${company.slug}-${company._id}`}
-                      className='flex gap-2'
-                    >
+                    <Link href={companyParams} className='flex gap-2'>
                       <Image
                         src={company.logo?.location}
                         alt='company logo'
@@ -174,8 +166,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
         <div className='flex gap-6 mt-14'>
           {/* Left */}
           <div className='w-full flex flex-col gap-6'>
-            <About product={product} loading={loading} />
-            {/* Gallery */}
+            <AboutProduct product={product} loading={loading} />
             <Gallery gallery={gallery} loading={loading} />
             <ContentFrame title='Video'>
               <div className='bg-royalBlue w-full h-64 text-neutral-1 flexCenter rounded-2xl'>
@@ -187,6 +178,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
           <div className='hidden lg:flex w-[320px] shrink-0  flex-col gap-6'>
             {/* Company's other products */}
             <OtherProducts
+              companyParams={companyParams}
               mainItemId={productId}
               companyName={product.companyName}
             />

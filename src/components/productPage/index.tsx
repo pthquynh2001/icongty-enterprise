@@ -1,3 +1,5 @@
-import ProductCard from './ProductCard';
+import AboutProduct from './AboutProduct';
+import OtherProducts from './OtherProducts';
+import RelatedProducts from './RelatedProducts';
 
-export { ProductCard };
+export { AboutProduct, OtherProducts, RelatedProducts };

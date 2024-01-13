@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductCard } from '@/components/productPage';
+import { ItemCard } from '@/components/subpage';
 import { Skeleton } from 'antd';
 
 const RelatedItems = ({
@@ -7,10 +7,12 @@ const RelatedItems = ({
   title,
   loading,
   mainItemId,
+  type,
 }: {
   items: any;
   title: string;
   loading: boolean;
+  type: 'product' | 'service';
   mainItemId: string;
 }) => {
   return (
@@ -44,7 +46,7 @@ const RelatedItems = ({
             items.map(
               (item: any, index: number) =>
                 item.id !== mainItemId && (
-                  <ProductCard key={index} product={item} />
+                  <ItemCard type={type} key={index} item={item} />
                 )
             )}
       </div>

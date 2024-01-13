@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import * as serviceServices from '@/apiServices/servicesServices';
+import * as serviceServices from '@/apiServices/serviceServices';
 import { ContentFrame } from '@/components/subpage';
 import Service from '../Service';
 import { ProgressPagination } from '@/components/shared';

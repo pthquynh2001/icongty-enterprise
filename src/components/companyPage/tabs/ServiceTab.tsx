@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Service from '@/components/companyPage/Service';
 import { Pagination } from '@/components/shared';
-import * as servicesServices from '@/apiServices/servicesServices';
+import * as servicesServices from '@/apiServices/serviceServices';
 import { Skeleton } from 'antd';
 
 const ServiceTab = () => {

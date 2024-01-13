@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import * as productServices from '@/apiServices/productServices';
+import * as serviceServices from '@/apiServices/serviceServices';
 import RelatedItems from '@/components/subpage/RelatedItems';
 
-const OtherProducts = ({
+const OtherServices = ({
   mainItemId,
   companyName,
   companyParams,
@@ -11,30 +11,30 @@ const OtherProducts = ({
   companyName: string;
   companyParams?: string;
 }) => {
-  const [otherProducts, setOtherProducts] = useState<any>([]);
+  const [otherServices, setOtherServices] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  // fetch other products
+  // fetch other services
   useEffect(() => {
     setLoading(true);
-    const getRelatedProducts = async () => {
-      const res = await productServices.getAll({
+    const getRelatedServices = async () => {
+      const res = await serviceServices.getAll({
         params: { limit: 5, page: 1, companyName: companyName },
       });
-      setOtherProducts(res);
+      setOtherServices(res);
       setLoading(false);
     };
-    getRelatedProducts();
+    getRelatedServices();
   }, [companyName]);
 
   return (
     <RelatedItems
-      type='product'
-      items={otherProducts}
-      title={`Sản phẩm khác của <a href=${companyParams} style='color:#2f61e6'>${companyName}<span>`}
+      type='service'
+      items={otherServices}
+      title={`Dịch vụ khác của <a href=${companyParams} style='color:#2f61e6'>${companyName}<span>`}
       loading={loading}
       mainItemId={mainItemId}
     />
   );
 };
 
-export default OtherProducts;
+export default OtherServices;
