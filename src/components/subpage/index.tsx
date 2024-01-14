@@ -6,6 +6,7 @@ import RelatedItems from './RelatedItems';
 import AboutItem from './AboutItem';
 import Gallery from './Gallery';
 import ItemCard from './ItemCard';
+import Item from './Item';
 
 export {
   ContentFrame,
@@ -16,4 +17,5 @@ export {
   AboutItem,
   Gallery,
   ItemCard,
+  Item,
 };

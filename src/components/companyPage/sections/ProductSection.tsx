@@ -2,27 +2,36 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import * as productServices from '@/apiServices/productServices';
 import { ContentFrame } from '@/components/subpage';
-import Product from '../Product';
+import { Item } from '@/components/subpage';
 import { ProgressPagination } from '@/components/shared';
 import { Skeleton } from 'antd';
 
-const ProductSection = () => {
+const ProductSection = ({ companyId }: { companyId: string }) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const pagination = { page: currentPage, limit: 3, totalItems: 11 };
+
+  const itemsPerPage = 3;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = data?.slice(indexOfFirstItem, indexOfLastItem);
+  const pagination = {
+    page: currentPage,
+    limit: itemsPerPage,
+    totalItems: data.length,
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const res = await productServices.getAll({
-        params: { page: currentPage, limit: pagination.limit },
+        params: { companyId: companyId },
       });
       setData(res);
       setLoading(false);
     };
     fetchData();
-  }, [currentPage, pagination.limit]);
+  }, [companyId]);
 
   return (
     <ContentFrame title='Sản Phẩm'>
@@ -36,10 +45,11 @@ const ProductSection = () => {
               <Skeleton.Image />
             </div>
           ))
-        : data &&
-          data.map((product, index) => (
+        : currentProducts &&
+          currentProducts.map((product, index) => (
             <div key={index} className='py-6 border-b border-neutral-4'>
-              <Product
+              <Item
+                type='product'
                 size='small'
                 props={product}
                 order={pagination.limit * (currentPage - 1) + index + 1}

@@ -1,31 +1,39 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import * as serviceServices from '@/apiServices/serviceServices';
-import { ContentFrame } from '@/components/subpage';
-import Service from '../Service';
+import { Item, ContentFrame } from '@/components/subpage';
 import { ProgressPagination } from '@/components/shared';
 import { Skeleton } from 'antd';
 
-const ServiceSection = () => {
+const ServiceSection = ({ companyId }: { companyId: string }) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const pagination = { page: currentPage, limit: 3, totalItems: 11 };
+
+  const itemsPerPage = 3;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentServices = data?.slice(indexOfFirstItem, indexOfLastItem);
+  const pagination = {
+    page: currentPage,
+    limit: itemsPerPage,
+    totalItems: data.length,
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const res = await serviceServices.getAll({
-        params: { page: currentPage, limit: pagination.limit },
+        params: { companyId: companyId },
       });
       setData(res);
       setLoading(false);
     };
     fetchData();
-  }, [currentPage, pagination.limit]);
+  }, [companyId]);
 
   return (
-    <ContentFrame title='Sản Phẩm'>
+    <ContentFrame title='Dịch Vụ'>
       {loading
         ? [...Array(3)].map((_, index) => (
             <div
@@ -36,10 +44,11 @@ const ServiceSection = () => {
               <Skeleton.Image />
             </div>
           ))
-        : data &&
-          data.map((service, index) => (
+        : currentServices &&
+          currentServices.map((service, index) => (
             <div key={index} className='py-6 border-b border-neutral-4'>
-              <Service
+              <Item
+                type='service'
                 size='small'
                 props={service}
                 order={pagination.limit * (currentPage - 1) + index + 1}

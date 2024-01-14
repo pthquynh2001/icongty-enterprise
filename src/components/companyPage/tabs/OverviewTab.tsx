@@ -11,17 +11,19 @@ import {
 const OverviewTab = ({
   company,
   loading,
+  companyId,
 }: {
   company: any;
   loading: boolean;
+  companyId: string;
 }) => {
   return (
     <div className='w-full  flex flex-col gap-6'>
       <InfoSection company={company} loading={loading} />
       <AboutSection content={COMPANY_ABOUT_CONTENT.content} loading={loading} />
       <PortfolioSection loading={loading} />
-      <ProductSection />
-      <ServiceSection />
+      <ProductSection companyId={companyId} />
+      <ServiceSection companyId={companyId} />
     </div>
   );
 };

@@ -211,11 +211,15 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
           {/* START: Left content */}
           <div className='w-full'>
             {activeTab === 'overview' && (
-              <OverviewTab company={company} loading={loading} />
+              <OverviewTab
+                company={company}
+                loading={loading}
+                companyId={companyId}
+              />
             )}
             {activeTab === 'portfolio' && <PortfolioTab />}
-            {activeTab === 'products' && <ProductTab />}
-            {activeTab === 'services' && <ServiceTab />}
+            {activeTab === 'products' && <ProductTab companyId={companyId} />}
+            {activeTab === 'services' && <ServiceTab companyId={companyId} />}
           </div>
           {/* END: Left content */}
 

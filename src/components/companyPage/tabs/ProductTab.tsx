@@ -1,25 +1,35 @@
 import { useState, useEffect } from 'react';
-import Product from '@/components/companyPage/Product';
 import { Pagination } from '@/components/shared';
+import { Item } from '@/components/subpage';
 import * as productsServices from '@/apiServices/productServices';
 import { Skeleton } from 'antd';
 
-const ProductTab = () => {
+const ProductTab = ({ companyId }: { companyId: string }) => {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const pagination = { page: currentPage, limit: 10, totalItems: 11 };
+
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = data?.slice(indexOfFirstItem, indexOfLastItem);
+  const pagination = {
+    page: currentPage,
+    limit: itemsPerPage,
+    totalItems: data.length,
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const res = await productsServices.getAll({
-        params: { page: currentPage, limit: pagination.limit },
+        params: { companyId: companyId },
       });
       setData(res);
       setLoading(false);
     };
     fetchData();
-  }, [currentPage, pagination.limit]);
+  }, [companyId]);
 
   return loading ? (
     <div className='flex flex-col gap-10'>
@@ -34,11 +44,11 @@ const ProductTab = () => {
       ))}
     </div>
   ) : (
-    data && (
+    currentProducts && (
       <div className='flex flex-col gap-10'>
-        {data.map((product: any, index: number) => (
+        {currentProducts.map((product: any, index: number) => (
           <div className='py-8 px-[62px] rounded-2xl bg-neutral-1' key={index}>
-            <Product props={product} />
+            <Item props={product} type='product' />
           </div>
         ))}
         {pagination.totalItems / pagination.limit > 1 && (
