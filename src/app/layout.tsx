@@ -1,5 +1,5 @@
 // 'use client';
-import StyledComponentsRegistry from '../../lib/AntdRegistry';
+import StyledComponentsRegistry from '../lib/AntdRegistry';
 import { ConfigProvider } from 'antd';
 import theme from '@theme/themeConfig';
 

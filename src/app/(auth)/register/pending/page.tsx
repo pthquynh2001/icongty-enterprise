@@ -21,10 +21,10 @@ const RegisterPendingPage = () => {
               },
             }}
           >
-            <Link href='/register' className='w-full mb-4 block'>
+            <Link href='/login' className='w-full mb-4 block'>
               <Button type='primary' block>
                 <p className='font-semibold text-base text-neutral-1'>
-                  Đăng ký
+                  Đăng nhập
                 </p>
               </Button>
             </Link>

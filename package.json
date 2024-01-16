@@ -12,8 +12,11 @@
     "@ant-design/cssinjs": "^1.18.0-alpha.5",
     "antd": "^5.11.4",
     "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
     "file-saver": "^2.0.5",
+    "mongoose": "^8.0.4",
     "next": "14.0.3",
+    "next-auth": "^4.24.5",
     "normalize.css": "^8.0.1",
     "react": "^18",
     "react-dom": "^18",
@@ -21,6 +24,7 @@
     "sass": "^1.69.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
