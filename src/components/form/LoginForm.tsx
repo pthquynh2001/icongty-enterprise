@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
@@ -8,21 +8,36 @@ import {
   EyeOutlined,
   EyeInvisibleOutlined,
 } from '@ant-design/icons';
-
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [isShowed, setIsShowed] = useState(false);
   const [errMessage, setErrMessage] = useState('');
+  const router = useRouter();
 
-  const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
       setErrMessage('Vui lòng nhập đầy đủ thông tin');
       return;
     } else {
-      setErrMessage('');
+      try {
+        const res = await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        });
+        if (res?.error) {
+          setErrMessage('Email hoặc mật khẩu không đúng');
+          return;
+        }
+        router.replace('dashboard');
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
@@ -34,7 +49,7 @@ const LoginForm = () => {
         </p>
 
         {/* START: Login form*/}
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor='email' className='mb-4 w-full block'>
             <p className='w-full block font-semibold text-base text-neutral-10 mb-2'>
               Email
@@ -138,7 +153,6 @@ const LoginForm = () => {
                 type='submit'
                 value='Đăng nhập'
                 className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'
-                onClick={(e: React.MouseEvent) => handleSubmit(e)}
               />
             </Button>
           </ConfigProvider>

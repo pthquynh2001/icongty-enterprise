@@ -1,9 +1,9 @@
-// 'use client';
 import StyledComponentsRegistry from '../lib/AntdRegistry';
 import { ConfigProvider } from 'antd';
 import theme from '@theme/themeConfig';
 
 import './styles/global.scss';
+import AuthProvider from '../context/Provider';
 
 export const metadata = {
   title: 'iCongty',
@@ -19,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <StyledComponentsRegistry>
-          <ConfigProvider theme={theme}>{children}</ConfigProvider>
-        </StyledComponentsRegistry>
+        <AuthProvider>
+          <StyledComponentsRegistry>
+            <ConfigProvider theme={theme}>{children}</ConfigProvider>
+          </StyledComponentsRegistry>
+        </AuthProvider>
       </body>
     </html>
   );
