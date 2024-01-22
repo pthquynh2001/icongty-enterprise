@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth';
 import { LoginForm } from '@/components/form';
 
 const LoginPage = async () => {
