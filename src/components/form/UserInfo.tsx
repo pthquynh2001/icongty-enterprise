@@ -19,10 +19,7 @@ const UserInfo = () => {
       <div>
         email:<span>{session?.user?.email}</span>
       </div>
-      <button
-        onClick={() => signOut({ callbackUrl: '/login' })}
-        className='border p-4 cursor-pointer'
-      >
+      <button onClick={() => signOut()} className='border p-4 cursor-pointer'>
         log out
       </button>
     </div>

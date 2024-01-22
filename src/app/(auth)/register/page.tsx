@@ -1,7 +1,12 @@
-import { RegisterForm } from '@/components/form';
 import Image from 'next/image';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { RegisterForm } from '@/components/form';
 
-const RegisterPage = () => {
+const RegisterPage = async () => {
+  const session = await getServerSession(authOptions);
+  if (session) redirect('/');
   return (
     <div className='w-full h-full flex'>
       <RegisterForm />

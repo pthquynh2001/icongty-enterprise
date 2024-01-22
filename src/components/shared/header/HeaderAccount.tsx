@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, ConfigProvider } from 'antd';
+
 const HeaderAccount = ({
   home,
   isTransparent,
@@ -16,8 +17,21 @@ const HeaderAccount = ({
   search?: boolean;
 }) => {
   const { data: session } = useSession();
-
-  return (
+  const user = session?.user;
+  return user ? (
+    <div className='mr-4'>
+      <Link href={'/dashboard'} className='flexCenter gap-4 cursor-pointer'>
+        <p className='block whitespace-nowrap font-semibold text-neutral-10'>{`Hi, ${user.firstName} ${user.lastName}`}</p>
+        <Image
+          src='/images/banner.png'
+          width={48}
+          height={48}
+          alt='avatar'
+          className='rounded-full object-cover'
+        />
+      </Link>
+    </div>
+  ) : (
     <div className='flex gap-4'>
       <ConfigProvider
         theme={{

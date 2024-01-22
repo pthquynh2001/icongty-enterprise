@@ -165,7 +165,7 @@ const Header: React.FC<HeaderProps> = ({ home, search }) => {
             </ul>
           )}
         </div>
-        <div className={`right hidden lg:flex gap-4`}>
+        <div className={`right hidden lg:flex gap-4 flexCenter`}>
           <HeaderAccount
             home={home}
             isTransparent={isTransparent}

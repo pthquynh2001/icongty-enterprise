@@ -1,8 +1,12 @@
 import Image from 'next/image';
-
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { LoginForm } from '@/components/form';
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const session = await getServerSession(authOptions);
+  if (session) redirect('/');
   return (
     <div className='w-full h-full flex'>
       <LoginForm />

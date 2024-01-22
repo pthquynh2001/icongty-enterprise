@@ -41,7 +41,7 @@ const HeaderLanguages = () => {
                 alt='flag US'
                 className='inline-block'
               />
-              <p className='font-semibold text-neutral-8'>US</p>
+              <p className='font-semibold text-neutral-8'>EN</p>
             </div>
           </Option>
           <Option value='vi'>
