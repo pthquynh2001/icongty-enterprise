@@ -3,7 +3,7 @@ import { ConfigProvider } from 'antd';
 import theme from '@theme/themeConfig';
 
 import './styles/global.scss';
-import AuthProvider from '../context/Provider';
+import AuthProvider from '@/context/Provider';
 
 export const metadata = {
   title: 'iCongty',

@@ -7,7 +7,7 @@ import { Skeleton } from 'antd';
 import * as productServices from '@/apiServices/productServices';
 import * as companyServices from '@/apiServices/companyServices';
 import { SubpageBreadcrumb, ContentFrame, Gallery } from '@/components/subpage';
-import { HeaderSearch, Tag } from '@/components/shared';
+import { Header, Tag } from '@/components/shared';
 import { Company } from '@/types';
 import {
   RelatedProducts,
@@ -69,7 +69,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
-      <HeaderSearch />
+      <Header search />
       {/* TOP */}
       <div className='max-container padding-container '>
         <div className='mt-8 mb-[22px]'>

@@ -14,7 +14,7 @@ import {
 const HomePage = () => {
   return (
     <>
-      <Header type='home' />
+      <Header home={true} />
       <main className='flexStart flex-col relative'>
         <Banner />
         <HomeSearch />

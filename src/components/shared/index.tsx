@@ -1,6 +1,5 @@
 import Footer from './Footer';
-import Header from './Header';
-import HeaderSearch from './HeaderSearch';
+import Header from './header/Header';
 import Pagination from './pagination/Pagination';
 import ProgressPagination from './pagination/ProgressPagination';
 import Tag from './tag/Tag';
@@ -11,7 +10,6 @@ import Advertising from './Advertising';
 export {
   Footer,
   Header,
-  HeaderSearch,
   Pagination,
   ProgressPagination,
   Tag,

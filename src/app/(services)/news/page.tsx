@@ -108,12 +108,12 @@ const NewsPage = () => {
             </div>
           </div>
         </div>
-        <div className='-mx-10'>
+        <div className='md:-mx-10'>
           <div className='grid  lg:grid-cols-3 '>
             {topNews.slice(1, 4).map((article, index) => (
               <div
                 key={index}
-                className='gap-8 px-10 py-10 flex even:border-y even:border-neutral-5 lg:py-0  lg:even:border-y-0 lg:even:border-x  lg:flex-col'
+                className='gap-8 md:px-10 py-10 flex even:border-y even:border-neutral-5 lg:py-0  lg:even:border-y-0 lg:even:border-x  lg:flex-col'
               >
                 <div className='relative rounded-2xl h-[120px] w-[120px] md:w-[220px] md:h-[220px] overflow-hidden shrink-0 lg:h-[220px] lg:w-full'>
                   <Link

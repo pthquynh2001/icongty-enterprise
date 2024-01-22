@@ -8,7 +8,7 @@ import * as companyServices from '@/apiServices/companyServices';
 import { COMPANY_TABS } from '@/constants';
 import { Company } from '@/types';
 import { SubpageBreadcrumb } from '@/components/subpage';
-import { HeaderSearch, Tag, Advertising } from '@/components/shared';
+import { Header, Tag, Advertising } from '@/components/shared';
 import {
   OverviewTab,
   PortfolioTab,
@@ -82,7 +82,7 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className='pt-[104px] lg:pt-[120px] pb-[120px]'>
-      <HeaderSearch />
+      <Header search />
       <div className='max-container padding-container'>
         <div className='my-8'>
           {loading ? (
