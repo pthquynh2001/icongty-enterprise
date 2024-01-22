@@ -365,3 +365,54 @@ export const COMPANY_ABOUT_CONTENT = {
   content:
     '<p> Sau hơn 3 thập kỷ nỗ lực hoàn thành mục tiêu phổ cập dịch vụ viễn thông, đưa viễn thông và công nghệ thông tin vào mọi lĩnh vực của cuộc sống ở Việt Nam, Tập đoàn Công nghiệp - Viễn thông Quân đội (Viettel) đặt ra khát vọng trở thành Tập đoàn công nghiệp và công nghệ vươn tầm thế giới. Ở bất cứ giai đoạn nào trên hành trình ấy, lời hứa “sáng tạo vì con người” vẫn còn mãi. </p> <p> Với chủ trương lấy con người làm trọng tâm phát triển, Viettel mang trong mình một trái tim biết quan tâm và lòng trắc ẩn biết thấu hiểu, từ đó tôn vinh bản sắc mỗi cá nhân và thúc đẩy sự gắn kết giữa người với người qua việc lắng nghe từng nhu cầu, mong muốn khác biệt, khích lệ thể hiện bản thân theo cách của riêng mình. </p> <p> Sự sáng tạo có đích đến cụ thể là con người nhằm góp phần kiến tạo một cuộc sống tốt đẹp hơn. Con người là động lực giúp Viettel không ngừng dịch chuyển để tiên phong đón những thay đổi của thời cuộc và sẵn sàng khai phá tiềm năng trong thực tại mới. Tại Viettel, sự sáng tạo đã vượt xa những sản phẩm, dịch vụ hữu hình để trở thành dòng chảy cảm hứng bất tận cho những ý tưởng mới lạ và tư duy đột phá. </p> <p> Ngọn lửa Viettel được thổi bùng từ khao khát – hướng tới kiến tạo một tương lai vươn tầm. Khát khao cống hiến đã và đang tiếp thêm nguồn năng lượng dồi dào, đưa Viettel bứt phá giới hạn, vượt qua thách thức và chinh phục đỉnh cao. Khát khao đối với mỗi người Viettel còn là động lực để nghĩ lớn và là mục tiêu để vươn xa, biến khát khao thành hành động, giúp thực hiện trọng trách quốc gia và đổi mới theo tư duy toàn cầu. </p> <ul> <li> <h5>Tầm nhìn:</h5> <p>Sáng tạo vì con người</p> </li> <li> <h5>Sứ mệnh:</h5> <p>Tiên phong chủ lực kiến tạo xã hội số</p> </li> <li> <h5>Triết lý thương hiệu</h5> <p>Cộng hưởng để tạo sự khác biệt</p> </li> <li> <h5>Cam kết về trách nhiệm xã hội</h5> <p> Viettel cam kết tái đầu tư lại cho xã hội thông qua việc gắn kết các hoạt động sản xuất kinh doanh với các hoạt động xã hội, hoạt động nhân đạo. Trong kỷ nguyên 4.0, trách nhiệm xã hội của Viettel là sử dụng công nghệ để giải quyết các thách thức của xã hội kiến tạo một cuộc sống tốt đẹp hơn, một tương lai vươn tầm. </p> </li> </ul>',
 };
+
+export const DASHBOARD_MENU = [
+  {
+    id: 1,
+    name: 'My space',
+    subMenu: [
+      {
+        id: 'profile',
+        name: 'My profile',
+        icon: {
+          src: '/icons/user-edit.svg',
+          id: 'profile-icon',
+        },
+        link: '/dashboard/profile',
+      },
+      {
+        id: 'companies',
+        name: 'My companies',
+        icon: {
+          src: '/icons/building.svg',
+          id: 'companies-icon',
+        },
+        link: '/dashboard/companies',
+      },
+      {
+        id: 'favorites',
+        name: 'My favorite companies',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'System',
+    subMenu: [
+      {
+        id: 'notification',
+        name: 'Notification',
+        icon: {
+          src: '/icons/bell.svg',
+          id: 'notification-icon',
+        },
+        link: '/dashboard/notification',
+      },
+    ],
+  },
+];

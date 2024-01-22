@@ -40,6 +40,10 @@ const config: Config = {
           1: '#FFF7E6',
           6: '#FA8C16',
         },
+        polarGreen: {
+          2: '#D9F7BE',
+          7: '#389E0D',
+        },
       },
       transitionProperty: {},
       boxShadow: {

@@ -21,7 +21,11 @@ const HeaderAccount = ({
   return user ? (
     <div className='mr-4'>
       <Link href={'/dashboard'} className='flexCenter gap-4 cursor-pointer'>
-        <p className='block whitespace-nowrap font-semibold text-neutral-10'>{`Hi, ${user.firstName} ${user.lastName}`}</p>
+        <p
+          className={`block whitespace-nowrap font-semibold transition-all duration-300 ${
+            isTransparent ? 'text-neutral-1' : ' text-neutral-10'
+          }`}
+        >{`Hi, ${user.firstName} ${user.lastName}`}</p>
         <Image
           src='/images/banner.png'
           width={48}
