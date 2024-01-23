@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Pagination } from '@/components/shared';
 import { Item } from '@/components/subpage';
-import * as servicesServices from '@/apiServices/serviceServices';
+import * as productsServices from '@/apiServices/productServices';
 import { Skeleton } from 'antd';
 
-const ServiceTab = ({ companyId }: { companyId: string }) => {
+const ProductsTab = ({ companyId }: { companyId: string }) => {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +12,7 @@ const ServiceTab = ({ companyId }: { companyId: string }) => {
   const itemsPerPage = 10;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentServices = data?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentProducts = data?.slice(indexOfFirstItem, indexOfLastItem);
   const pagination = {
     page: currentPage,
     limit: itemsPerPage,
@@ -22,7 +22,7 @@ const ServiceTab = ({ companyId }: { companyId: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await servicesServices.getAll({
+      const res = await productsServices.getAll({
         params: { companyId: companyId },
       });
       setData(res);
@@ -44,11 +44,11 @@ const ServiceTab = ({ companyId }: { companyId: string }) => {
       ))}
     </div>
   ) : (
-    currentServices && (
+    currentProducts && (
       <div className='flex flex-col gap-10'>
-        {currentServices.map((service: any, index: number) => (
+        {currentProducts.map((product: any, index: number) => (
           <div className='py-8 px-[62px] rounded-2xl bg-neutral-1' key={index}>
-            <Item props={service} type='service' />
+            <Item props={product} type='product' />
           </div>
         ))}
         {pagination.totalItems / pagination.limit > 1 && (
@@ -66,4 +66,4 @@ const ServiceTab = ({ companyId }: { companyId: string }) => {
   );
 };
 
-export default ServiceTab;
+export default ProductsTab;

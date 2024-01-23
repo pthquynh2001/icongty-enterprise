@@ -6,7 +6,7 @@ import {
   PortfolioSection,
   ProductSection,
   ServiceSection,
-} from '@/components/companyPage/sections';
+} from '@/components/companyPage/tabs/sections';
 
 const OverviewTab = ({
   company,

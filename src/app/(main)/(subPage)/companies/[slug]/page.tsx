@@ -12,8 +12,8 @@ import { Header, Tag, Advertising } from '@/components/shared';
 import {
   OverviewTab,
   PortfolioTab,
-  ProductTab,
-  ServiceTab,
+  ProductsTab,
+  ServicesTab,
   TabBar,
 } from '@/components/companyPage/tabs';
 import { ContactInfo, RelatedCompany } from '@/components/companyPage';
@@ -35,8 +35,8 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
   const [company, setCompany] = useState<Company>({} as Company);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('');
-  const [currentTagName, setCurrentTagName] = useState('Tổng quan');
-  const search = useSearchParams().get('tab');
+  const [activeTagName, setActiveTagName] = useState('');
+  const searchedTab = useSearchParams().get('tab');
   const tabs = COMPANY_TABS;
 
   // breadcrumb
@@ -47,7 +47,7 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
       title: company.name,
       href: activeTab === 'overview' ? undefined : `/companies/${params.slug}`,
     },
-    activeTab !== 'overview' && { title: currentTagName },
+    activeTab !== 'overview' && { title: activeTagName },
   ].filter(Boolean) as IItems[];
 
   //   START: fetch data
@@ -66,17 +66,20 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
 
   //set active tab
   useEffect(() => {
-    if (search) {
-      setActiveTab(search);
+    if (searchedTab) {
+      setActiveTab(searchedTab);
     } else {
       setActiveTab(tabs[0].id);
     }
-  }, [search, tabs]);
+  }, [searchedTab, tabs]);
 
+  //set active tab name
   useEffect(() => {
     const currentTab = tabs.find((tab) => tab.id === activeTab);
     if (currentTab) {
-      setCurrentTagName(currentTab.name);
+      setActiveTagName(currentTab.name);
+    } else {
+      setActiveTagName(tabs[0].name);
     }
   }, [activeTab, tabs]);
 
@@ -218,8 +221,8 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
               />
             )}
             {activeTab === 'portfolio' && <PortfolioTab />}
-            {activeTab === 'products' && <ProductTab companyId={companyId} />}
-            {activeTab === 'services' && <ServiceTab companyId={companyId} />}
+            {activeTab === 'products' && <ProductsTab companyId={companyId} />}
+            {activeTab === 'services' && <ServicesTab companyId={companyId} />}
           </div>
           {/* END: Left content */}
 

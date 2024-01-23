@@ -13,18 +13,18 @@ interface ITab {
 }
 const TabBar = ({ tabs }: { tabs: ITab[] }) => {
   const [activeTab, setActiveTab] = useState('');
-  const tabSearch = useSearchParams().get('tab');
+  const searchedTab = useSearchParams().get('tab');
   const path = usePathname();
   const router = useRouter();
 
   // START: set active tab
   useEffect(() => {
-    if (tabSearch) {
-      setActiveTab(tabSearch);
+    if (searchedTab) {
+      setActiveTab(searchedTab);
     } else {
       setActiveTab(tabs[0].id);
     }
-  }, [tabSearch, tabs]);
+  }, [searchedTab, tabs]);
   // END: set active tab
 
   // START: width & left of active tab border

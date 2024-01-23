@@ -1,7 +1,7 @@
 import OverviewTab from './OverviewTab';
-import ProductTab from './ProductTab';
-import ServiceTab from './ServiceTab';
+import ProductsTab from './ProductsTab';
+import ServicesTab from './ServicesTab';
 import PortfolioTab from './PortfolioTab';
 import TabBar from './TabBar';
 
-export { OverviewTab, ProductTab, ServiceTab, PortfolioTab, TabBar };
+export { OverviewTab, ProductsTab, ServicesTab, PortfolioTab, TabBar };
