@@ -1,8 +1,9 @@
 import { connectMongoDB } from '@/lib/mongodb';
 import User from '@/models/user';
-import { AuthOptions } from 'next-auth';
+import { AuthOptions, Session, User as TUser } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
+import { JWT } from 'next-auth/jwt';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -32,7 +33,22 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
+    async jwt({
+      token,
+      user,
+      session,
+      trigger,
+    }: {
+      token: JWT;
+      user: TUser;
+      session?: any;
+      trigger?: 'signIn' | 'signUp' | 'update';
+    }) {
+      if (trigger === 'update') {
+        if (session?.email) {
+          token.email = session.email;
+        }
+      }
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -46,6 +62,7 @@ export const authOptions: AuthOptions = {
       return {
         ...session,
         user: {
+          ...session.user,
           id: token.id,
           email: token.email,
           firstName: token.firstName,

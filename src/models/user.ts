@@ -15,6 +15,7 @@ const userSchema = new Schema(
       unique: true,
     },
     password: { type: String, required: true },
+    phone: { type: Number, required: false },
   },
   {
     timestamps: true,

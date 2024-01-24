@@ -1,24 +1,46 @@
+'use client';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from 'antd';
 import { ContentFrame } from '@/components/subpage';
 import { CloudUploadOutlined } from '@ant-design/icons';
+import { ChangePasswordModal, ChangeEmailModal } from '@/components/modals';
+import { User } from 'next-auth';
 
-interface ProfileItemProps {
-  user: {
-    firstName: string;
-    lastName: string;
-    username: string;
-    email: string;
+const ProfileItem = ({ user }: { user: User }) => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [username, setUsername] = useState(user.username);
+  const [phone, setPhone] = useState(user.phone || '');
+  const [editing, setEditing] = useState(false);
+
+  const handleUpdateInfo = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setUsername(user.username);
+    setPhone(user.phone || '');
+    setEditing(false);
   };
-}
-
-const ProfileItem = ({ user }: ProfileItemProps) => {
+  const handleCancel = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setUsername(user.username);
+    setPhone(user.phone || '');
+    setEditing(false);
+  };
   return (
-    <div className='w-full flex flex-col gap-6'>
+    <div className='w-full flex flex-col gap-6 relative'>
       <ContentFrame title='Basic Information' className='w-full relative'>
         <div className='grid grid-cols-3 gap-6'>
-          <form className='col-span-2'>
+          <form className='col-span-2' ref={formRef}>
             <div className='grid grid-rows-3 grid-cols-2 gap-6'>
               <label className='block w-full'>
                 <h5 className='mb-2'>First Name</h5>
@@ -26,8 +48,9 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
                   type='text'
                   name='firstName'
                   className='border border-neutral-6 rounded p-3 w-full outline-none focus:border-royalBlue text-neutral-8 leading-[22px] '
-                  value={user.firstName}
-                  readOnly
+                  value={editing ? firstName : user.firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  readOnly={!editing}
                 />
               </label>
               <label className='block w-full'>
@@ -36,8 +59,9 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
                   type='text'
                   name='lastName'
                   className='border border-neutral-6 rounded p-3 w-full outline-none focus:border-royalBlue text-neutral-8 leading-[22px]'
-                  value={user.lastName}
-                  readOnly
+                  value={editing ? lastName : user.lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  readOnly={!editing}
                 />
               </label>
               <label className='block w-full '>
@@ -47,8 +71,9 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
                     type='text'
                     name='username'
                     className='border border-neutral-6 rounded py-3 pr-3 pl-10 w-full outline-none focus:border-royalBlue text-neutral-8 leading-[22px]'
-                    value={user.username}
-                    readOnly
+                    value={editing ? username : user.username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    readOnly={!editing}
                   />
                   <Image
                     src='/icons/user.svg'
@@ -60,14 +85,15 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
                 </div>
               </label>
               <label className='block w-full'>
-                <h5 className='mb-2'>Email</h5>
+                <h5 className='mb-2'>Phone</h5>
                 <div className='w-full relative'>
                   <input
                     type='text'
                     name='email'
                     className='border border-neutral-6 rounded py-3 pr-3 pl-10 w-full outline-none focus:border-royalBlue text-neutral-8 leading-[22px]'
-                    value={user.email}
-                    readOnly
+                    value={editing ? phone : user.phone || ''}
+                    onChange={(e) => setPhone(e.target.value)}
+                    readOnly={!editing}
                   />
                   <svg
                     width='16'
@@ -78,14 +104,37 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
                   </svg>
                 </div>
               </label>
-              <div className='flexBetween gap-4'>
-                <Button type='primary' block size='large'>
-                  <p className='font-semibold'>Save</p>
-                </Button>
-                <Button type='primary' block ghost size='large'>
-                  <p className='font-semibold'>Cancel</p>
-                </Button>
-              </div>
+              {editing ? (
+                <div className='flexBetween gap-4'>
+                  <Button
+                    type='primary'
+                    block
+                    size='large'
+                    onClick={handleUpdateInfo}
+                  >
+                    <p className='font-semibold'>Save</p>
+                  </Button>
+                  <Button
+                    type='primary'
+                    block
+                    ghost
+                    size='large'
+                    onClick={handleCancel}
+                  >
+                    <p className='font-semibold'>Cancel</p>
+                  </Button>
+                </div>
+              ) : (
+                <div className='flexStart'>
+                  <Button
+                    type='primary'
+                    size='large'
+                    onClick={() => setEditing(true)}
+                  >
+                    <p className='font-semibold'>Edit information</p>
+                  </Button>
+                </div>
+              )}
               <div className='relative flexEnd gap-1'>
                 <Image
                   src='/icons/verified.svg'
@@ -143,9 +192,7 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
           </div>
         </div>
         <div className='shrink-0'>
-          <Button type='primary' size='large'>
-            <p>Change Email</p>
-          </Button>
+          <ChangeEmailModal user={user} />
         </div>
       </div>
       <div className='w-full px-12 py-10 bg-neutral-1 rounded-2xl flex justify-between'>
@@ -166,9 +213,7 @@ const ProfileItem = ({ user }: ProfileItemProps) => {
           </div>
         </div>
         <div className='shrink-0'>
-          <Button type='primary' size='large'>
-            <p>Change Password</p>
-          </Button>
+          <ChangePasswordModal />
         </div>
       </div>
     </div>
