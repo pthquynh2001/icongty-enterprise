@@ -12,7 +12,7 @@ declare module 'next-auth' {
       lastName: string;
       username: string;
       email: string;
-      phone: number;
+      phone: string;
       password: string;
     } & DefaultSession['user'];
   }
@@ -24,6 +24,6 @@ declare module 'next-auth' {
     username: string;
     email: string;
     password: string;
-    phone: number;
+    phone: string;
   }
 }

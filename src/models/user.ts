@@ -24,7 +24,7 @@ const userSchema = new Schema<UserDocument>(
       unique: true,
     },
     password: { type: String, required: true },
-    phone: { type: Number, required: false },
+    phone: { type: String, required: false },
   },
   {
     timestamps: true,

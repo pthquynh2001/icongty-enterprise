@@ -22,8 +22,8 @@ export function validatePassword(password: string): ValidationResult {
 export function validateUsername(username: string): ValidationResult {
   const errors: string[] = [];
   // Kiểm tra độ dài username
-  if (username.length < 6 || username.length > 20) {
-    errors.push('Username phải có từ 6 đến 20 ký tự.');
+  if (username.length < 3 || username.length > 15) {
+    errors.push('Username phải có từ 3 đến 15 ký tự.');
   }
   // Kiểm tra sự hiện diện của các ký tự không hợp lệ
   if (!/^[a-zA-Z0-9_]+$/.test(username)) {
@@ -43,6 +43,19 @@ export function validateEmail(email: string): ValidationResult {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     errors.push('Email không hợp lệ.');
+  }
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+export function validatePhone(phone: string): ValidationResult {
+  const errors: string[] = [];
+  const phoneRegex = /^0[0-9]{9}$/;
+
+  if (!phoneRegex.test(phone.toString())) {
+    errors.push('Số điện thoại không hợp lệ.');
   }
   return {
     isValid: errors.length === 0,
