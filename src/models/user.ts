@@ -1,6 +1,15 @@
 import mongoose, { Schema, models } from 'mongoose';
 
-const userSchema = new Schema(
+export interface UserDocument extends Document {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  phone?: number;
+}
+
+const userSchema = new Schema<UserDocument>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },

@@ -1,4 +1,4 @@
-import { User } from '@/types';
+import { User } from 'next-auth';
 
 interface FavoritesItemProps {
   user: User;

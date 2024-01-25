@@ -11,7 +11,7 @@ import {
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [isShowed, setIsShowed] = useState(false);
@@ -20,13 +20,13 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!account || !password) {
       setErrMessage('Vui lòng nhập đầy đủ thông tin');
       return;
     } else {
       try {
         const res = await signIn('credentials', {
-          email,
+          account,
           password,
           redirect: false,
         });
@@ -52,15 +52,14 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           <label htmlFor='email' className='mb-4 w-full block'>
             <p className='w-full block font-semibold text-base text-neutral-10 mb-2'>
-              Email
+              Email hoặc Tên người dùng
             </p>
             <input
-              placeholder='Nhập email của bạn'
+              placeholder='Nhập email hoặc tên người dùng của bạn'
               id='email'
-              type='email'
-              value={email}
+              value={account}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setAccount(e.target.value);
               }}
               required
               className='w-full h-12 border rounded border-[#BFBFBF] p-3  placeholder:text-neutral-6 bg-transparent'

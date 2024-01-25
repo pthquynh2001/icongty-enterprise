@@ -146,7 +146,7 @@ const RegisterForm = () => {
           Tạo tài khoản để tìm cơ hội mới cho doanh nghiệp.
         </p>
         {/* START: Register form*/}
-        <form action='/register/pending' onSubmit={handleSubmit} ref={formRef}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <div className='grid grid-cols-2 gap-6'>
             <label htmlFor='fName' className='mb-4 w-full block'>
               <p className='w-full block font-semibold text-base text-neutral-10 mb-2'>

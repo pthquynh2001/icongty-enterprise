@@ -13,6 +13,7 @@ declare module 'next-auth' {
       username: string;
       email: string;
       phone: number;
+      password: string;
     } & DefaultSession['user'];
   }
   //  extends `TokenSet`, which is different tokens returned by OAuth Providers.
@@ -22,6 +23,7 @@ declare module 'next-auth' {
     lastName: string;
     username: string;
     email: string;
+    password: string;
     phone: number;
   }
 }

@@ -1,4 +1,4 @@
-import { User } from '@/types';
+import { User } from 'next-auth';
 
 interface NotificationItemProps {
   user: User;

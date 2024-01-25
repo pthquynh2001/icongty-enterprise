@@ -4,7 +4,9 @@ import { Button, Modal } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import { set } from 'mongoose';
+import axios from 'axios';
+import Image from 'next/image';
+import { validateEmail } from '@/utils/validationUtils';
 
 const ChangeEmailModal = ({ user }: { user: User }) => {
   const { update } = useSession();
@@ -12,9 +14,10 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
   const [loading, setLoading] = useState(false);
   const [newEmail, setNewEmail] = useState('');
   const [errMessage, setErrMessage] = useState('');
+  const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
-
-  const userId = user.id; // modal styles
+  const userId = user.id;
+  // modal styles
   const modalStyles = {
     header: {
       paddingBottom: 24,
@@ -31,49 +34,48 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
     },
   };
 
-  //  check if email is valid
-  const isEmailValid = (email: string): boolean => {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    return emailRegex.test(email);
-  };
-
   // check if email existed
   const handleSubmit = async () => {
+    if (!newEmail) {
+      setErrMessage('Vui lòng nhập đầy đủ thông tin');
+      setLoading(false);
+      return;
+    }
+    if (newEmail === user.email) {
+      setLoading(false);
+      setErrMessage('Email mới không được trùng với email cũ');
+      return;
+    }
+    const { isValid, errors } = validateEmail(newEmail);
+    if (!isValid) {
+      setErrMessage(errors[0]);
+      setLoading(false);
+      return;
+    }
     try {
-      const resUserExists = await fetch('/api/userExists', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: newEmail,
-        }),
+      const resUserExists = await axios.post('/api/userExists', {
+        email: newEmail,
       });
-      const { user } = await resUserExists.json();
+      const { user } = await resUserExists.data;
       if (user) {
-        setErrMessage('Email existed');
+        setErrMessage('Email đã được đăng ký');
+        setLoading(false);
         return;
       }
+      // update email in database
       update({ email: newEmail });
-      const res = await fetch('/api/update', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: userId,
-          email: newEmail,
-        }),
+      const res = await axios.put('/api/update', {
+        id: userId,
+        email: newEmail,
       });
 
-      if (res.ok) {
+      if (res.status === 200) {
         console.log('Update email thanh cong');
       } else {
         console.log('Update email that bai');
       }
       setLoading(false);
-      setIsModalOpen(false);
-      setErrMessage('');
+      setSuccess(true);
     } catch (error) {
       console.error('Error during updating email', error);
     }
@@ -82,24 +84,15 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
   // handle clicking on confirm/ok button
   const handleOk = () => {
     setLoading(true);
-    if (newEmail === user.email) {
-      setTimeout(() => {
-        setLoading(false);
-        setErrMessage('Email is not changed');
-      }, 2000);
-      return;
-    }
-    if (isEmailValid(newEmail)) {
-      handleSubmit();
-    } else {
-      setLoading(false);
-      setErrMessage('Email is not valid');
-    }
+    handleSubmit();
   };
   // reset form after modal is closed
   useEffect(() => {
     if (!isModalOpen && formRef.current) {
       formRef.current?.reset();
+    }
+    if (!isModalOpen) {
+      setSuccess(false);
       setNewEmail('');
       setErrMessage('');
     }
@@ -132,34 +125,55 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
           className='absolute top-8 right-12 text-[20px] text-neutral-7 cursor-pointer'
           onClick={() => setIsModalOpen(false)}
         />
-        <form ref={formRef}>
-          <p className='text-base mb-4'>
-            You are currently registered with:{' '}
-            <span className='font-semibold text-royalBlue'>{user.email}</span>
-          </p>
-          <input
-            required
-            type='email'
-            className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
-              errMessage && 'border-rose-600'
-            }`}
-            placeholder='Your New Email'
-            value={newEmail}
-            onChange={(e) => onChangeEmail(e)}
-          />
-          <p className='my-2 h-5 text-red-600'>{errMessage}</p>
-          <div className='flexCenter'>
+        {success ? (
+          <div className='flexCenter flex-col'>
+            <Image
+              src='/icons/success.svg'
+              width={85}
+              height={85}
+              alt='success'
+            />
+            <p className='text-base my-8 font-semibold'>
+              Cập nhật email thành công
+            </p>
             <Button
-              key='submit'
               type='primary'
-              loading={loading}
               size='large'
-              onClick={() => handleOk()}
+              onClick={() => setIsModalOpen(false)}
             >
-              Save Changes
+              Đồng ý
             </Button>
           </div>
-        </form>
+        ) : (
+          <form ref={formRef}>
+            <p className='text-base mb-4'>
+              You are currently registered with:{' '}
+              <span className='font-semibold text-royalBlue'>{user.email}</span>
+            </p>
+            <input
+              required
+              type='email'
+              className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
+                errMessage && 'border-rose-600'
+              }`}
+              placeholder='Your New Email'
+              value={newEmail}
+              onChange={(e) => onChangeEmail(e)}
+            />
+            <p className='my-4 h-5 text-red-600'>{errMessage}</p>
+            <div className='flexCenter'>
+              <Button
+                key='submit'
+                type='primary'
+                loading={loading}
+                size='large'
+                onClick={() => handleOk()}
+              >
+                Save Changes
+              </Button>
+            </div>
+          </form>
+        )}
       </Modal>
     </>
   );

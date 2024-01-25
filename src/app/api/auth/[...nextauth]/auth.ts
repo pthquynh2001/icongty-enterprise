@@ -11,13 +11,15 @@ export const authOptions: AuthOptions = {
       name: 'credentials',
       credentials: {},
       async authorize(credentials) {
-        const { email, password } = credentials as {
-          email: string;
+        const { account, password } = credentials as {
+          account: string;
           password: string;
         };
         try {
           await connectMongoDB();
-          const user = await User.findOne({ email });
+          const user = await User.findOne({
+            $or: [{ email: account }, { username: account }],
+          });
           if (!user) {
             return null;
           }
@@ -45,9 +47,11 @@ export const authOptions: AuthOptions = {
       trigger?: 'signIn' | 'signUp' | 'update';
     }) {
       if (trigger === 'update') {
-        if (session?.email) {
-          token.email = session.email;
-        }
+        if (session?.email) token.email = session.email;
+        if (session?.firstName) token.firstName = session.firstName;
+        if (session?.lastName) token.lastName = session.lastName;
+        if (session?.username) token.username = session.username;
+        if (session?.phone) token.phone = session.phone;
       }
       if (user) {
         token.id = user.id;
@@ -55,6 +59,7 @@ export const authOptions: AuthOptions = {
         token.firstName = user.firstName;
         token.lastName = user.lastName;
         token.username = user.username;
+        token.phone = user.phone;
       }
       return token;
     },
@@ -68,6 +73,7 @@ export const authOptions: AuthOptions = {
           firstName: token.firstName,
           lastName: token.lastName,
           username: token.username,
+          phone: token.phone,
         },
       };
     },

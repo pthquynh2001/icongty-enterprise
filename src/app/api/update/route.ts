@@ -1,12 +1,38 @@
 import { connectMongoDB } from '@/lib/mongodb';
-import User from '@/models/user';
+import User, { UserDocument } from '@/models/user';
+import bcrypt from 'bcryptjs';
 
 export async function PUT(req: Request) {
   try {
-    const { id, email } = await req.json();
+    const { id, email, username, password, firstName, lastName, phone } =
+      await req.json();
     await connectMongoDB();
-    await User.findByIdAndUpdate({ _id: id }, { email });
-    return Response.json({ message: 'Update successfully' }, { status: 201 });
+
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : undefined;
+
+    const updateData: Partial<UserDocument> = {
+      email: email,
+      username: username,
+      password: hashedPassword,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+    };
+
+    if (Object.keys(updateData).length > 0) {
+      await User.findByIdAndUpdate({ _id: id }, updateData);
+      return Response.json(
+        { statusText: 'Update successfully' },
+        { status: 200 }
+      );
+    } else {
+      return Response.json(
+        { statusText: 'No data to update' },
+        { status: 400 }
+      );
+    }
   } catch (error) {
     return Response.json({ message: 'Error' }, { status: 500 });
   }
