@@ -3,8 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Button, Modal } from 'antd';
 import {
-  EyeOutlined,
-  EyeInvisibleOutlined,
+  EyeFilled,
+  EyeInvisibleFilled,
   CloseOutlined,
 } from '@ant-design/icons';
 import axios from 'axios';
@@ -183,14 +183,14 @@ const ChangePasswordModal = ({ user }: { user: User }) => {
                 }}
               />
               {isShowed1 ? (
-                <EyeInvisibleOutlined
+                <EyeInvisibleFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
                   onClick={() => setIsShowed1(!isShowed1)}
                 />
               ) : (
-                <EyeOutlined
+                <EyeFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
@@ -212,14 +212,14 @@ const ChangePasswordModal = ({ user }: { user: User }) => {
                 }}
               />
               {isShowed2 ? (
-                <EyeInvisibleOutlined
+                <EyeInvisibleFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
                   onClick={() => setIsShowed2(!isShowed2)}
                 />
               ) : (
-                <EyeOutlined
+                <EyeFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
@@ -241,14 +241,14 @@ const ChangePasswordModal = ({ user }: { user: User }) => {
                 }}
               />
               {isShowed3 ? (
-                <EyeInvisibleOutlined
+                <EyeInvisibleFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
                   onClick={() => setIsShowed3(!isShowed3)}
                 />
               ) : (
-                <EyeOutlined
+                <EyeFilled
                   width={16}
                   height={16}
                   className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'

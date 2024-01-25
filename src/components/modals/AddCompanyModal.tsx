@@ -7,8 +7,9 @@ import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import Image from 'next/image';
 import { validateEmail } from '@/utils/validationUtils';
+import { PlusOutlined } from '@ant-design/icons';
 
-const ChangeEmailModal = ({ user }: { user: User }) => {
+const AddCompanyModal = ({ user }: { user: User }) => {
   const { update } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,11 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const userId = user.id;
+  //
+  const [corpName, setCorpName] = useState('');
+  const [taxCode, setTaxCode] = useState('');
+  const [lang, setLang] = useState('');
+  //
   // modal styles
   const modalStyles = {
     header: {
@@ -90,6 +96,9 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
   useEffect(() => {
     if (!isModalOpen && formRef.current) {
       formRef.current?.reset();
+      setTaxCode('');
+      setCorpName('');
+      setLang('');
     }
     if (!isModalOpen) {
       setSuccess(false);
@@ -98,18 +107,23 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
     }
   }, [isModalOpen]);
 
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewEmail(e.target.value);
-    setErrMessage('');
-  };
-
   return (
     <>
+      <PlusOutlined
+        className=' text-[22px] p-1 cursor-pointer'
+        style={{ color: '#2f61e6' }}
+        onClick={() => setIsModalOpen(true)}
+      />
+      <p className='text-base text-neutral-8 mt-2 mb-4'>Add a new Company</p>
       <Button type='primary' size='large' onClick={() => setIsModalOpen(true)}>
-        Change Email
+        <p className='font-semibold px-4'>Add Company</p>
       </Button>
       <Modal
-        title={<h3>Change Email</h3>}
+        title={
+          <h3>
+            <PlusOutlined style={{ color: '#2f61e6' }} /> New Company
+          </h3>
+        }
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
@@ -134,7 +148,7 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
               alt='success'
             />
             <p className='text-base my-8 font-semibold'>
-              Cập nhật email thành công
+              Tao cong ty thanh cong
             </p>
             <Button
               type='primary'
@@ -146,31 +160,87 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
           </div>
         ) : (
           <form ref={formRef}>
-            <p className='text-base mb-4'>
-              You are currently registered with:{' '}
-              <span className='font-semibold text-royalBlue'>{user.email}</span>
-            </p>
-            <input
-              required
-              type='email'
-              className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
-                errMessage && 'border-rose-600'
-              }`}
-              placeholder='Your New Email'
-              value={newEmail}
-              onChange={(e) => onChangeEmail(e)}
-            />
-            <p className='my-4 h-5 text-red-600'>{errMessage}</p>
-            <div className='flexCenter'>
-              <Button
-                key='submit'
-                type='primary'
-                loading={loading}
-                size='large'
-                onClick={handleOk}
+            <div className='mb-6'>
+              <label
+                htmlFor='corpName'
+                className='text-base font-semibold text-neutral-10 mb-2 block'
               >
-                Save Changes
-              </Button>
+                Corporate Name
+              </label>
+              <input
+                required
+                id='corpName'
+                className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
+                  errMessage && 'border-rose-600'
+                }`}
+                placeholder='Fill Your Corporate Name'
+                value={corpName}
+                onChange={(e) => setCorpName(e.target.value)}
+              />
+            </div>
+            <div className='mb-6'>
+              <label
+                htmlFor='taxCode'
+                className='text-base font-semibold text-neutral-10 mb-2 block'
+              >
+                Tax Code
+              </label>
+              <input
+                required
+                id='taxCode'
+                className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
+                  errMessage && 'border-rose-600'
+                }`}
+                placeholder='Fill Your Tax Code'
+                value={taxCode}
+                onChange={(e) => setTaxCode(e.target.value)}
+              />
+            </div>
+            <div className='mb-4'>
+              <label
+                htmlFor='lang'
+                className='text-base font-semibold text-neutral-10 mb-2 block'
+              >
+                Languages
+              </label>
+              <input
+                required
+                id='lang'
+                className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
+                  errMessage && 'border-rose-600'
+                }`}
+                placeholder='select languages'
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+              />
+            </div>
+            <p className='mb-4 min-h-5 text-red-600'>
+              {errMessage}err mess abc dce {errMessage}err mess abc dce{' '}
+            </p>
+            <div className='flexCenter'>
+              <div className='flex gap-6 w-full'>
+                <Button
+                  key='submit'
+                  type='primary'
+                  loading={loading}
+                  ghost
+                  size='large'
+                  onClick={() => setIsModalOpen(false)}
+                  block
+                >
+                  Cancel
+                </Button>
+                <Button
+                  key='submit'
+                  type='primary'
+                  loading={loading}
+                  size='large'
+                  onClick={handleOk}
+                  block
+                >
+                  Create
+                </Button>
+              </div>
             </div>
           </form>
         )}
@@ -179,4 +249,4 @@ const ChangeEmailModal = ({ user }: { user: User }) => {
   );
 };
 
-export default ChangeEmailModal;
+export default AddCompanyModal;
