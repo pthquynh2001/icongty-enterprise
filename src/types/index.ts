@@ -15,7 +15,7 @@ export interface Company {
   slug: string;
   internationalName: string;
   internationalNameSort: string;
-  taxCode: string | null;
+  taxCode: string;
   keyword: string | null;
   address: string | null;
   representative: null;

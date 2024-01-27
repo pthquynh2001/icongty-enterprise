@@ -6,7 +6,9 @@ import Image from 'next/image';
 import { Tag } from '@/components/shared';
 import { Pagination } from '@/components/shared';
 import { AddCompanyModal } from '@/components/modals';
-
+import Link from 'next/link';
+import * as companyServices from '@/apiServices/companyServices';
+import { Company } from '@/types';
 interface CompaniesItemProps {
   user: User;
 }
@@ -30,15 +32,20 @@ const tabs = [
 ];
 const CompaniesItem = ({ user }: CompaniesItemProps) => {
   const [activeTab, setActiveTab] = useState(tabs[0].id || 'published');
-  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const pagination = { limit: 8, totalItems: 10, page: currentPage };
+  const pagination = { limit: 5, totalItems: 10, page: currentPage };
 
-  const testArray = [...Array(10)];
+  const [data, setData] = useState<Company[]>([]);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentArray = testArray.slice(indexOfFirstItem, indexOfLastItem);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await companyServices.getAll({
+        params: { page: currentPage, limit: pagination.limit },
+      });
+      setData(res);
+    };
+    fetchData();
+  }, [currentPage, pagination.limit]);
 
   return (
     <>
@@ -54,8 +61,8 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
           <div className='bg-neutral-3 rounded-lg flexBetween p-1 relative '>
             {tabs.map((tab, index) => (
               <div
-                className={`group flexCenter gap-[6px] py-2 px-3 cursor-pointer z-10 grow transition-all duration-300 shadow-sm ${
-                  activeTab === tab.id && 'bg-neutral-1 rounded-md'
+                className={`group rounded-md flexCenter gap-[6px] py-2 px-3 cursor-pointer z-10 grow transition-all duration-300  ${
+                  activeTab === tab.id && 'bg-neutral-1 shadow-sm'
                 }`}
                 key={index}
                 onClick={() => setActiveTab(tab.id)}
@@ -106,7 +113,7 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
           <div className='rounded-lg shadow-card h-[300px] flexCenter flex-col'>
             <AddCompanyModal user={user} />
           </div>
-          {currentArray.map((_, index) => (
+          {data.map((company, index) => (
             <div
               key={index}
               className='rounded-lg shadow-card h-[300px] flexCenter flex-col'
@@ -114,27 +121,31 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
               <div className='p-4 w-full h-full'>
                 <div className='w-full h-20 relative'>
                   <Image
-                    src='/images/banner.png'
+                    src={company.coverPhoto?.location || '/images/banner.png'}
                     fill
                     alt='banner'
                     sizes='(max-width: 640px) 100vw, 640px'
                     className='object-cover rounded-lg'
                   />
                   <Image
-                    src='/images/ad-banner.jpg'
-                    alt='banner'
+                    src={company.logo?.location || '/images/banner.png'}
+                    alt='logo'
                     width={72}
                     height={72}
-                    className='absolute top-1/2 left-1/2 -translate-x-1/2 rounded-lg shadow-banner'
+                    className='absolute top-1/2 left-1/2 -translate-x-1/2 rounded-lg shadow-banner bg-neutral-1'
                   />
                 </div>
                 <h5 className='mt-12 mb-3 text-center h-12 line-clamp-2'>
-                  Tập đoàn Công nghiệp - Viễn thông Quân đội Viettel
+                  {company.name}
                 </h5>
                 <div className='flexCenter  max-h-[22px] flex-wrap overflow-hidden'>
-                  {[...Array(5)].map((_, index) => (
-                    <Tag type='line' className='text-xs  h-[22px]' key={index}>
-                      tag {index}
+                  {company.categories.map((cat, index) => (
+                    <Tag
+                      type='line'
+                      className='text-xs  h-[22px] leading-[22px]'
+                      key={index}
+                    >
+                      {cat.name}
                     </Tag>
                   ))}
                 </div>
@@ -147,29 +158,54 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
                     },
                   }}
                 >
-                  <Button type='primary' block>
-                    <p className='flexCenter gap-2 font-semibold'>
-                      <Image
-                        src='/icons/edit.svg'
-                        width={14}
-                        height={14}
-                        alt='icon'
-                      />
-                      Edit
-                    </p>
-                  </Button>
-                  <Button type='primary' block>
-                    <p className='flexCenter gap-2 font-semibold'>
-                      <EyeFilled />
-                      View
-                    </p>
-                  </Button>
+                  <Link
+                    href={`/dashboard/companies/${company._id}`}
+                    className='w-full'
+                  >
+                    <Button type='primary' block>
+                      <p className='flexCenter gap-2 font-semibold'>
+                        <Image
+                          src='/icons/edit.svg'
+                          width={14}
+                          height={14}
+                          alt='icon'
+                        />
+                        Edit
+                      </p>
+                    </Button>
+                  </Link>
+                  {activeTab === 'published' && (
+                    <Button type='primary' block>
+                      <p className='flexCenter gap-2 font-semibold'>
+                        <EyeFilled />
+                        View
+                      </p>
+                    </Button>
+                  )}
+                  {activeTab === 'pending' && (
+                    <Button type='primary' block>
+                      <p className='flexCenter gap-2 font-semibold'>
+                        <EyeFilled />
+                        Preview
+                      </p>
+                    </Button>
+                  )}
+                  {activeTab === 'draft' && (
+                    <Button type='primary' block>
+                      <p className='flexCenter gap-2 font-semibold'>
+                        <svg width='14' height='14' className='text-neutral-1'>
+                          <use xlinkHref='/icons/paper-plane.svg#published' />
+                        </svg>
+                        Publish
+                      </p>
+                    </Button>
+                  )}
                 </ConfigProvider>
               </div>
             </div>
           ))}
         </div>
-        {testArray.length / itemsPerPage > 1 && (
+        {pagination.totalItems / pagination.limit > 1 && (
           <div className='mt-10 flexEnd'>
             <Pagination
               pagination={pagination}

@@ -63,16 +63,18 @@ const Header: React.FC<HeaderProps> = ({ home, search }) => {
   // An hien header khi scroll
   useEffect(() => {
     const handleBodyScroll = () => {
-      if (document.body.getBoundingClientRect().top > scrollPos) {
-        if (headerRef.current) {
-          headerRef.current.style.transform = 'translateY(0)';
+      if (window.scrollY > 100) {
+        if (document.body.getBoundingClientRect().top > scrollPos) {
+          if (headerRef.current) {
+            headerRef.current.style.transform = 'translateY(0)';
+          }
+        } else {
+          if (headerRef.current) {
+            headerRef.current.style.transform = 'translateY(-100%)';
+          }
         }
-      } else {
-        if (headerRef.current) {
-          headerRef.current.style.transform = 'translateY(-100%)';
-        }
+        scrollPos = document.body.getBoundingClientRect().top;
       }
-      scrollPos = document.body.getBoundingClientRect().top;
     };
     let scrollPos = 0;
     window.addEventListener('scroll', handleBodyScroll);

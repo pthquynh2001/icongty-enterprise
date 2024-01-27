@@ -1,9 +1,10 @@
 interface CategoryTags {
-  data: [
-    {
-      name: string;
-    }
-  ];
+  data: {
+    _id: string;
+    lang: 'en' | 'vi';
+    translation: { en: { name: string }; vi: { name: string } };
+    name: string;
+  }[];
   className?: string;
 }
 

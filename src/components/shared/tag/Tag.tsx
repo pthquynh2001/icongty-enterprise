@@ -19,7 +19,7 @@ const blockGreyType = 'text-neutral-8 bg-neutral-4 hover:bg-neutral-5';
 const Tag: React.FC<TagProps> = ({ type, grey, children, className }) => {
   return (
     <div
-      className={`flexCenter cursor-pointer px-2 py-[1px] transition duration-300  mr-2 last:mr-0  rounded min-w-[50px]  text-center ${
+      className={`flexCenter cursor-pointer px-2 py-[1px] transition duration-300  mr-2 last:mr-0  rounded min-w-[50px] flex-wrap overflow-hidden line-clamp-1 text-ellipsis text-center ${
         grey
           ? type === 'block'
             ? blockGreyType

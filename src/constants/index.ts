@@ -391,7 +391,139 @@ export const DASHBOARD_MENU = [
       },
       {
         id: 'favorites',
-        name: 'My favorites',
+        name: 'My favorite companies',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'System',
+    subMenu: [
+      {
+        id: 'notification',
+        name: 'Notification',
+        icon: {
+          src: '/icons/bell.svg',
+          id: 'notification-icon',
+        },
+        link: '/dashboard/notification',
+      },
+    ],
+  },
+];
+
+export const MY_COMPANY_MENU = [
+  {
+    id: 1,
+    name: 'My space',
+    subMenu: [
+      {
+        id: 'preview',
+        name: 'Preview',
+        icon: {
+          src: '/icons/user-edit.svg',
+          id: 'profile-icon',
+        },
+        link: '/dashboard/profile',
+      },
+      {
+        id: 'summary',
+        name: 'Summary',
+        icon: {
+          src: '/icons/building.svg',
+          id: 'companies-icon',
+        },
+        link: '/dashboard/companies',
+      },
+      {
+        id: 'product',
+        name: 'Product',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'media',
+        name: 'Media',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'job',
+        name: 'Job',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'event',
+        name: 'Event',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'portfolio',
+        name: 'Portfolio',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'service',
+        name: 'Service',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'editor',
+        name: 'Editor',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'member-company',
+        name: 'Member Company',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'member',
+        name: 'Member',
+        icon: {
+          src: '/icons/star.svg',
+          id: 'favorites-icon',
+        },
+        link: '/dashboard/favorites',
+      },
+      {
+        id: 'partner',
+        name: 'Partner',
         icon: {
           src: '/icons/star.svg',
           id: 'favorites-icon',
