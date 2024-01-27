@@ -8,9 +8,12 @@ import {
   EyeOutlined,
   EyeInvisibleOutlined,
 } from '@ant-design/icons';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 const LoginForm = () => {
+  const { data: session } = useSession();
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
@@ -18,10 +21,12 @@ const LoginForm = () => {
   const [errMessage, setErrMessage] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    setLoading(true);
     if (!account || !password) {
       setErrMessage('Vui lòng nhập đầy đủ thông tin');
+      setLoading(false);
       return;
     } else {
       try {
@@ -32,8 +37,14 @@ const LoginForm = () => {
         });
         if (res?.error) {
           setErrMessage('Email hoặc mật khẩu không đúng');
+          setLoading(false);
           return;
         }
+        if (rememberMe) {
+          // set remember password
+        }
+        setLoading(false);
+
         router.replace('dashboard');
       } catch (error) {
         console.log(error);
@@ -49,7 +60,7 @@ const LoginForm = () => {
         </p>
 
         {/* START: Login form*/}
-        <form onSubmit={handleSubmit}>
+        <form>
           <label htmlFor='email' className='mb-4 w-full block'>
             <p className='w-full block font-semibold text-base text-neutral-10 mb-2'>
               Email hoặc Tên người dùng
@@ -147,12 +158,15 @@ const LoginForm = () => {
               },
             }}
           >
-            <Button type='primary' block>
-              <input
-                type='submit'
-                value='Đăng nhập'
-                className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'
-              />
+            <Button
+              type='primary'
+              block
+              onClick={(e) => handleSubmit(e)}
+              loading={loading}
+            >
+              <span className='font-semibold text-base text-neutral-1 h-full cursor-pointer'>
+                Đăng nhập
+              </span>
             </Button>
           </ConfigProvider>
         </form>

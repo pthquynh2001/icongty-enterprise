@@ -89,11 +89,9 @@ const ResetPasswordPage = () => {
                   block
                   onClick={(e) => handleEmailSend(e)}
                 >
-                  <input
-                    type='submit'
-                    value='Gửi'
-                    className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'
-                  />
+                  <p className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'>
+                    Gửi
+                  </p>
                 </Button>
               </ConfigProvider>
             </form>

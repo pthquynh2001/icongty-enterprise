@@ -41,7 +41,7 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
   const currentArray = testArray.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div>
+    <>
       <div className='mb-8'>
         <h3 className='mt-4 mb-2'>My Companies</h3>
         <p className='text-base '>
@@ -180,7 +180,7 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

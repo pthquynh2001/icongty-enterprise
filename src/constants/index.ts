@@ -391,7 +391,7 @@ export const DASHBOARD_MENU = [
       },
       {
         id: 'favorites',
-        name: 'My favorite companies',
+        name: 'My favorites',
         icon: {
           src: '/icons/star.svg',
           id: 'favorites-icon',

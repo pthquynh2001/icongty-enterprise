@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef, useEffect, ChangeEvent } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, ConfigProvider, Modal, Select, Space, Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
@@ -8,12 +8,51 @@ import axios from 'axios';
 import Image from 'next/image';
 import { validateEmail } from '@/utils/validationUtils';
 import { PlusOutlined } from '@ant-design/icons';
+import type { SelectProps } from 'antd';
+
+type TagRender = SelectProps['tagRender'];
+
+const options: SelectProps['options'] = [
+  { value: 'en', label: 'English', icon: '/icons/flag-en.svg' },
+  { value: 'vi', label: 'Vietnamese', icon: '/icons/flag-vi.svg' },
+];
+
+const tagRender: TagRender = (props) => {
+  const { label, value, closable, onClose } = props;
+  const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  return (
+    <Tag
+      color={'rgba(47, 97, 230, 0.10)'}
+      onMouseDown={onPreventMouseDown}
+      closable={closable}
+      onClose={onClose}
+      closeIcon={<CloseOutlined style={{ color: '#2f61e6' }} />}
+      style={{
+        marginLeft: 4,
+        color: '#2f61e6',
+        display: 'flex',
+        gap: 4,
+        alignItems: 'center',
+      }}
+    >
+      <Image
+        src={`/icons/flag-${value}.svg`}
+        alt='icon'
+        width={20}
+        height={20}
+      />
+      {label}
+    </Tag>
+  );
+};
 
 const AddCompanyModal = ({ user }: { user: User }) => {
   const { update } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [newEmail, setNewEmail] = useState('');
   const [errMessage, setErrMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -22,7 +61,9 @@ const AddCompanyModal = ({ user }: { user: User }) => {
   const [corpName, setCorpName] = useState('');
   const [taxCode, setTaxCode] = useState('');
   const [lang, setLang] = useState('');
-  //
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+  const [errInput, setErrInput] = useState(0);
+
   // modal styles
   const modalStyles = {
     header: {
@@ -40,51 +81,23 @@ const AddCompanyModal = ({ user }: { user: User }) => {
     },
   };
 
+  const handleLangSelect = (value: string[]) => {
+    setSelectedLangs(value);
+    if (value.length > 0) {
+      setErrMessage('');
+    }
+    console.log(`selected ${selectedLangs}`);
+  };
+
   // check if email existed
   const handleSubmit = async () => {
-    if (!newEmail) {
-      setErrMessage('Vui lòng nhập đầy đủ thông tin');
+    if (!corpName || !taxCode || selectedLangs.length === 0) {
+      setErrMessage('Please fill in all the fields');
+      setErrInput(1);
       setLoading(false);
       return;
     }
-    if (newEmail === user.email) {
-      setLoading(false);
-      setErrMessage('Email mới không được trùng với email cũ');
-      return;
-    }
-    const { isValid, errors } = validateEmail(newEmail);
-    if (!isValid) {
-      setErrMessage(errors[0]);
-      setLoading(false);
-      return;
-    }
-    try {
-      const resUserExists = await axios.post('/api/userExists', {
-        email: newEmail,
-      });
-      const { user } = await resUserExists.data;
-      if (user) {
-        setErrMessage('Email đã được đăng ký');
-        setLoading(false);
-        return;
-      }
-      // update email in database
-      update({ email: newEmail });
-      const res = await axios.put('/api/update', {
-        id: userId,
-        email: newEmail,
-      });
-
-      if (res.status === 200) {
-        console.log('Update email thanh cong');
-      } else {
-        console.log('Update email that bai');
-      }
-      setLoading(false);
-      setSuccess(true);
-    } catch (error) {
-      console.error('Error during updating email', error);
-    }
+    setSuccess(true);
   };
 
   // handle clicking on confirm/ok button
@@ -94,15 +107,12 @@ const AddCompanyModal = ({ user }: { user: User }) => {
   };
   // reset form after modal is closed
   useEffect(() => {
-    if (!isModalOpen && formRef.current) {
-      formRef.current?.reset();
+    if (!isModalOpen) {
       setTaxCode('');
       setCorpName('');
-      setLang('');
-    }
-    if (!isModalOpen) {
       setSuccess(false);
-      setNewEmail('');
+      setLoading(false);
+      setErrInput(0);
       setErrMessage('');
     }
   }, [isModalOpen]);
@@ -171,11 +181,14 @@ const AddCompanyModal = ({ user }: { user: User }) => {
                 required
                 id='corpName'
                 className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
-                  errMessage && 'border-rose-600'
+                  errInput === 1 && 'placeholder-shown:border-rose-600'
                 }`}
                 placeholder='Fill Your Corporate Name'
                 value={corpName}
-                onChange={(e) => setCorpName(e.target.value)}
+                onChange={(e) => {
+                  setCorpName(e.target.value);
+                  setErrMessage('');
+                }}
               />
             </div>
             <div className='mb-6'>
@@ -189,40 +202,72 @@ const AddCompanyModal = ({ user }: { user: User }) => {
                 required
                 id='taxCode'
                 className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
-                  errMessage && 'border-rose-600'
+                  errInput === 1 && 'placeholder-shown:border-rose-600'
                 }`}
                 placeholder='Fill Your Tax Code'
                 value={taxCode}
-                onChange={(e) => setTaxCode(e.target.value)}
+                onChange={(e) => {
+                  setTaxCode(e.target.value);
+                  setErrMessage('');
+                }}
               />
             </div>
             <div className='mb-4'>
-              <label
-                htmlFor='lang'
-                className='text-base font-semibold text-neutral-10 mb-2 block'
-              >
+              <label className='text-base font-semibold text-neutral-10 mb-2 block'>
                 Languages
               </label>
-              <input
-                required
-                id='lang'
-                className={`w-full h-12 py-3 pl-3 pr-9 outline-none border border-neutral-6  rounded-[4px] placeholder:text-neutral-6 ${
-                  errMessage && 'border-rose-600'
-                }`}
-                placeholder='select languages'
-                value={lang}
-                onChange={(e) => setLang(e.target.value)}
-              />
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Select: {
+                      multipleItemHeight: 42,
+                    },
+                  },
+                  token: {
+                    colorBorder:
+                      errInput === 1 && selectedLangs.length === 0
+                        ? '#e5395f'
+                        : '#bfbfbf',
+                  },
+                }}
+              >
+                <Select
+                  mode='multiple'
+                  style={{ width: '100%' }}
+                  allowClear
+                  placeholder={
+                    <p className='text-[#cbcbcb]'>Select languages</p>
+                  }
+                  onChange={handleLangSelect}
+                  options={options}
+                  tagRender={tagRender}
+                  optionRender={(option) => {
+                    return (
+                      <div className='flexStart gap-2'>
+                        <Image
+                          src={option.data.icon}
+                          alt={option.data.label}
+                          width={20}
+                          height={20}
+                        />
+                        {option.data.label}
+                      </div>
+                    );
+                  }}
+                />
+              </ConfigProvider>
             </div>
-            <p className='mb-4 min-h-5 text-red-600'>
-              {errMessage}err mess abc dce {errMessage}err mess abc dce{' '}
+            <p
+              className={`mb-4 text-red-600 leading-5 ${
+                errMessage ? 'min-h-5' : 'h-5'
+              }`}
+            >
+              {errMessage}
             </p>
             <div className='flexCenter'>
               <div className='flex gap-6 w-full'>
                 <Button
-                  key='submit'
                   type='primary'
-                  loading={loading}
                   ghost
                   size='large'
                   onClick={() => setIsModalOpen(false)}

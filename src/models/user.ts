@@ -6,7 +6,7 @@ export interface UserDocument extends Document {
   username: string;
   email: string;
   password: string;
-  phone?: number;
+  phone?: string;
 }
 
 const userSchema = new Schema<UserDocument>(

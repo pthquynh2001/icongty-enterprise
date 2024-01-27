@@ -257,7 +257,7 @@ const InfoSection = ({ user }: { user: User }) => {
                     onClick={handleUpdateInfo}
                     loading={loading}
                   >
-                    <p className='font-semibold'>{!loading && 'Save'}</p>
+                    <span className='font-semibold'>Save</span>
                   </Button>
                   <Button
                     type='primary'
