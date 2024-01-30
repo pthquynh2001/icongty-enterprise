@@ -2,8 +2,23 @@ import { Company } from '@/types';
 import React from 'react';
 import ItemTitle from './ItemTitle';
 import { CompanyCard } from '@/components/shared';
+import * as companyServices from '@/apiServices/companyServices';
+import { useState, useEffect } from 'react';
 
-const PreviewItem = ({ company }: { company: Company }) => {
+const PreviewItem = ({ companyId }: { companyId: string }) => {
+  const [company, setCompany] = useState<Company>({} as Company);
+  //   START: fetch data
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await companyServices.getAll({
+        params: { _id: companyId },
+      });
+      setCompany(res[0]);
+    };
+    fetchData();
+  }, [companyId]);
+  //   END: fetch data
+
   return (
     <div>
       <ItemTitle

@@ -16,6 +16,7 @@ import { Button } from 'antd';
 import { Company } from '@/types';
 import PreviewItem from '@/components/myCompanyPage/PreviewItem';
 import SummaryItem from '@/components/myCompanyPage/summaryItem/SummaryItem';
+import MyProductItem from '@/components/myCompanyPage/MyProductItem';
 
 const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
   const companyId = params.slug;
@@ -98,8 +99,9 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
           <UserInfo />
         </div>
         <div className='right border-l border-neutral-5 w-full pl-[60px] pr-[84px] py-6 my-6'>
-          {activeItem === 'preview' && <PreviewItem company={company} />}
-          {activeItem === 'summary' && <SummaryItem company={company} />}
+          {activeItem === 'preview' && <PreviewItem companyId={companyId} />}
+          {activeItem === 'summary' && <SummaryItem />}
+          {activeItem === 'product' && <MyProductItem companyId={companyId} />}
         </div>
       </div>
     </div>

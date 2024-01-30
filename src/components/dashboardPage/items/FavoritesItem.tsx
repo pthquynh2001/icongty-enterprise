@@ -1,6 +1,6 @@
 import { User } from 'next-auth';
 import { useEffect, useState } from 'react';
-import { Button, ConfigProvider, Select } from 'antd';
+import {  ConfigProvider, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import CompanyCard from '@/components/shared/card/CompanyCard';
 import * as companyServices from '@/apiServices/companyServices';
