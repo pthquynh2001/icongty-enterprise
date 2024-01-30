@@ -4,9 +4,7 @@ import { Button, ConfigProvider, Modal, Select, Space, Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import axios from 'axios';
 import Image from 'next/image';
-import { validateEmail } from '@/utils/validationUtils';
 import { PlusOutlined } from '@ant-design/icons';
 import type { SelectProps } from 'antd';
 

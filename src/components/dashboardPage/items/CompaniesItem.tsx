@@ -113,97 +113,102 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
           <div className='rounded-lg shadow-card h-[300px] flexCenter flex-col'>
             <AddCompanyModal user={user} />
           </div>
-          {data.map((company, index) => (
-            <div
-              key={index}
-              className='rounded-lg shadow-card h-[300px] flexCenter flex-col'
-            >
-              <div className='p-4 w-full h-full'>
-                <div className='w-full h-20 relative'>
-                  <Image
-                    src={company.coverPhoto?.location || '/images/banner.png'}
-                    fill
-                    alt='banner'
-                    sizes='(max-width: 640px) 100vw, 640px'
-                    className='object-cover rounded-lg'
-                  />
-                  <Image
-                    src={company.logo?.location || '/images/banner.png'}
-                    alt='logo'
-                    width={72}
-                    height={72}
-                    className='absolute top-1/2 left-1/2 -translate-x-1/2 rounded-lg shadow-banner bg-neutral-1'
-                  />
+          {data &&
+            data.map((company, index) => (
+              <div
+                key={index}
+                className='rounded-lg shadow-card h-[300px] flexCenter flex-col'
+              >
+                <div className='p-4 w-full h-full'>
+                  <div className='w-full h-20 relative'>
+                    <Image
+                      src={company.coverPhoto?.location || '/images/banner.png'}
+                      fill
+                      alt='banner'
+                      sizes='(max-width: 640px) 100vw, 640px'
+                      className='object-cover rounded-lg'
+                    />
+                    <Image
+                      src={company.logo?.location || '/images/banner.png'}
+                      alt='logo'
+                      width={72}
+                      height={72}
+                      className='absolute top-1/2 left-1/2 -translate-x-1/2 rounded-lg shadow-banner bg-neutral-1'
+                    />
+                  </div>
+                  <h5 className='mt-12 mb-3 text-center h-12 line-clamp-2'>
+                    {company.name}
+                  </h5>
+                  <div className='flexCenter  max-h-[22px] flex-wrap overflow-hidden'>
+                    {company.categories.map((cat, index) => (
+                      <Tag
+                        type='line'
+                        className='text-xs  h-[22px] leading-[22px]'
+                        key={index}
+                      >
+                        {cat.name}
+                      </Tag>
+                    ))}
+                  </div>
                 </div>
-                <h5 className='mt-12 mb-3 text-center h-12 line-clamp-2'>
-                  {company.name}
-                </h5>
-                <div className='flexCenter  max-h-[22px] flex-wrap overflow-hidden'>
-                  {company.categories.map((cat, index) => (
-                    <Tag
-                      type='line'
-                      className='text-xs  h-[22px] leading-[22px]'
-                      key={index}
-                    >
-                      {cat.name}
-                    </Tag>
-                  ))}
-                </div>
-              </div>
-              <div className='w-full flex gap-2 h-[58px] shrink-0 pt-3 pb-4 px-4 border-t border-neutral-3'>
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      controlHeight: 30,
-                    },
-                  }}
-                >
-                  <Link
-                    href={`/dashboard/companies/${company._id}`}
-                    className='w-full'
+                <div className='w-full flex gap-2 h-[58px] shrink-0 pt-3 pb-4 px-4 border-t border-neutral-3'>
+                  <ConfigProvider
+                    theme={{
+                      token: {
+                        controlHeight: 30,
+                      },
+                    }}
                   >
-                    <Button type='primary' block>
-                      <p className='flexCenter gap-2 font-semibold'>
-                        <Image
-                          src='/icons/edit.svg'
-                          width={14}
-                          height={14}
-                          alt='icon'
-                        />
-                        Edit
-                      </p>
-                    </Button>
-                  </Link>
-                  {activeTab === 'published' && (
-                    <Button type='primary' block>
-                      <p className='flexCenter gap-2 font-semibold'>
-                        <EyeFilled />
-                        View
-                      </p>
-                    </Button>
-                  )}
-                  {activeTab === 'pending' && (
-                    <Button type='primary' block>
-                      <p className='flexCenter gap-2 font-semibold'>
-                        <EyeFilled />
-                        Preview
-                      </p>
-                    </Button>
-                  )}
-                  {activeTab === 'draft' && (
-                    <Button type='primary' block>
-                      <p className='flexCenter gap-2 font-semibold'>
-                        <svg width='14' height='14' className='text-neutral-1'>
-                          <use xlinkHref='/icons/paper-plane.svg#published' />
-                        </svg>
-                        Publish
-                      </p>
-                    </Button>
-                  )}
-                </ConfigProvider>
+                    <Link
+                      href={`/dashboard/companies/${company._id}`}
+                      className='w-full'
+                    >
+                      <Button type='primary' block>
+                        <p className='flexCenter gap-2 font-semibold'>
+                          <Image
+                            src='/icons/edit.svg'
+                            width={14}
+                            height={14}
+                            alt='icon'
+                          />
+                          Edit
+                        </p>
+                      </Button>
+                    </Link>
+                    {activeTab === 'published' && (
+                      <Button type='primary' block>
+                        <p className='flexCenter gap-2 font-semibold'>
+                          <EyeFilled />
+                          View
+                        </p>
+                      </Button>
+                    )}
+                    {activeTab === 'pending' && (
+                      <Button type='primary' block>
+                        <p className='flexCenter gap-2 font-semibold'>
+                          <EyeFilled />
+                          Preview
+                        </p>
+                      </Button>
+                    )}
+                    {activeTab === 'draft' && (
+                      <Button type='primary' block>
+                        <p className='flexCenter gap-2 font-semibold'>
+                          <svg
+                            width='14'
+                            height='14'
+                            className='text-neutral-1'
+                          >
+                            <use xlinkHref='/icons/paper-plane.svg#published' />
+                          </svg>
+                          Publish
+                        </p>
+                      </Button>
+                    )}
+                  </ConfigProvider>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         {pagination.totalItems / pagination.limit > 1 && (
           <div className='mt-10 flexEnd'>

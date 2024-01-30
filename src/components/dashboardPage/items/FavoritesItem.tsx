@@ -103,9 +103,10 @@ const FavoritesItem = ({ user }: FavoritesItemProps) => {
         </div>
       </div>
       <div className='grid grid-cols-3  gap-6'>
-        {data.map((card, index) => {
-          return <CompanyCard card={card} key={index} favorite />;
-        })}
+        {data &&
+          data.map((card, index) => {
+            return <CompanyCard card={card} key={index} favorite />;
+          })}
       </div>
       {pagination.totalItems > pagination.limit && (
         <div className='flexEnd mt-10'>
