@@ -16,7 +16,9 @@ const ContentFrame: React.FC<FrameProps> = ({
 }) => {
   return (
     <div
-      className={`w-full py-12 px-[62px] bg-neutral-1 rounded-2xl overflow-hidden ${className}`}
+      className={`w-full py-12 px-[62px] bg-neutral-1 rounded-2xl overflow-hidden ${
+        className ? className : ''
+      }`}
     >
       {loading ? (
         <Skeleton

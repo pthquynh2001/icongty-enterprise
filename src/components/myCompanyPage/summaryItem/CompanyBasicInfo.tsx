@@ -85,7 +85,7 @@ const langTagRender: TagRender = (props) => {
   );
 };
 
-const IdentitySection = () => {
+const CompanyBasicInfo = () => {
   return (
     <ContentFrame title='Basic Information'>
       <form className=''>
@@ -549,4 +549,4 @@ const IdentitySection = () => {
   );
 };
 
-export default IdentitySection;
+export default CompanyBasicInfo;

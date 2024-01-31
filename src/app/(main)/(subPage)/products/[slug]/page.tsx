@@ -127,7 +127,11 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
                 company && (
                   <>
                     <div className='flex'>
-                      <Tag type='line' grey className='h-5 mb-2  opacity-80'>
+                      <Tag
+                        type='line'
+                        grey
+                        className='h-5 mb-2 leading-5 opacity-80 text-xs'
+                      >
                         Customer Data Platform
                       </Tag>
                     </div>
