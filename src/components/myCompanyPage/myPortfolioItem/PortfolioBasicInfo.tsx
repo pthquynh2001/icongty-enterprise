@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { CloseOutlined } from '@ant-design/icons';
+import {
+  CloseOutlined,
+  PictureOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 import { ContentFrame } from '@/components/subpage';
 import {
   Button,
@@ -85,13 +89,16 @@ const langTagRender: TagRender = (props) => {
   );
 };
 
-const ProductBasicInfo = ({ productId }: { productId: string }) => {
+const PortfolioBasicInfo = ({ portfolioId }: { portfolioId: string }) => {
+  const [attachmentValue, setAttachmentValue] = useState(1);
   const [statusValue, setStatusValue] = useState(1);
 
-  const onChange = (e: RadioChangeEvent) => {
+  const onAttachmentChange = (e: RadioChangeEvent) => {
+    setAttachmentValue(e.target.value);
+  };
+  const onStatusChange = (e: RadioChangeEvent) => {
     setStatusValue(e.target.value);
   };
-
   return (
     <div>
       <ContentFrame title='Basic Information'>
@@ -100,87 +107,22 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
             <p className='text-neutral-6 font-semibold uppercase mb-4'>
               PRODUCT Info
             </p>
-            <div className='grid grid-cols-2 gap-6'>
+            <div className='flex flex-col gap-6'>
               <div className='flex flex-col gap-2'>
                 <label
-                  htmlFor='productName'
+                  htmlFor='portfolioName'
                   className='text-neutral-10 text-base font-semibold'
                 >
-                  Product Name
+                  Portfolio Name
                 </label>
                 <input
                   type='text'
-                  id='productName'
-                  placeholder='Fill Your Product Name'
+                  id='portfolioName'
+                  placeholder='Fill Your Portfolio Name'
                   className='h-12 p-3 border border-neutral-6 outline-none placeholder:text-neutral-6 rounded hover:border-royalBlue'
                 />
               </div>
 
-              <div className='flex flex-col gap-2'>
-                <label
-                  htmlFor='productType'
-                  className='text-neutral-10 text-base font-semibold'
-                >
-                  Product Type
-                </label>
-                <ConfigProvider
-                  theme={{
-                    components: {
-                      Button: {
-                        fontWeight: 600,
-                      },
-                    },
-                    token: {
-                      controlHeight: 48,
-                      colorBorder: '#BFBFBF',
-                    },
-                  }}
-                >
-                  <Select
-                    id='productType'
-                    placeholder='Select Product Type'
-                    options={[
-                      { value: 'type1', label: 'Type 1' },
-                      { value: 'type2', label: 'Type 2' },
-                      { value: 'type3', label: 'Type 3' },
-                      { value: 'type4', label: 'Type 4' },
-                    ]}
-                  />
-                </ConfigProvider>
-              </div>
-              <div className='flex flex-col gap-2 col-span-2'>
-                <label
-                  htmlFor='technologies'
-                  className='text-neutral-10 text-base font-semibold'
-                >
-                  Technologies
-                </label>
-                <ConfigProvider
-                  theme={{
-                    components: {
-                      Select: {
-                        multipleItemHeight: 42,
-                      },
-                    },
-                    token: {
-                      colorBorder: '#bfbfbf',
-                    },
-                  }}
-                >
-                  <Select
-                    id='technologies'
-                    mode='multiple'
-                    allowClear
-                    placeholder={
-                      <p className='text-[#cbcbcb] pl-[10px]'>
-                        Select technologies
-                      </p>
-                    }
-                    options={techOptions}
-                    tagRender={techTagRender}
-                  />
-                </ConfigProvider>
-              </div>
               <div className='flex flex-col gap-2 col-span-2'>
                 <label
                   htmlFor='excerpt'
@@ -200,92 +142,74 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
 
           <div className='border-b border-neutral-4 pb-10 mb-8'>
             <p className='text-neutral-6 font-semibold uppercase mb-4'>
-              Description
+              Picture
             </p>
-            <div className='flex flex-col gap-2 col-span-2'>
-              <textarea
-                placeholder='Description...'
-                className='p-3 border border-neutral-6 outline-none placeholder:text-neutral-6 rounded hover:border-royalBlue resize-y h-24'
-              />
+            <div className='border border-neutral-6 rounded px-10 py-24'>
+              <div className='flexCenter flex-col gap-6'>
+                <PictureOutlined className='text-[48px] !text-royalBlue' />
+                <p className='text-base'>
+                  You only can upload JPG,PNG file. Maximum file size is 5MB.
+                </p>
+                <Button type='primary' size='large'>
+                  <span className='font-semibold px-6'>Update Picture</span>
+                </Button>
+              </div>
             </div>
           </div>
+
           <div className='border-b border-neutral-4 pb-10 mb-8'>
             <p className='text-neutral-6 font-semibold uppercase mb-4'>
-              GALLERY
+              attachments
             </p>
-            <div className='py-8 rounded border border-neutral-6'>
-              <div className='border-b border-neutral-6 px-8'>
-                <AntdImg.PreviewGroup
-                  preview={{
-                    onChange: (current, prev) =>
-                      console.log(
-                        `current index: ${current}, prev index: ${prev}`
-                      ),
-                    toolbarRender: () => <></>,
-                  }}
-                >
-                  <div className='grid grid-cols-4 gap-5  h-[260px] overflow-y-scroll pr-2 -mr-4'>
-                    {[...Array(10)].map((_, index) => (
-                      <div
-                        className='relative w-full h-32 bg-neutral-2 overflow-hidden'
-                        key={index}
-                      >
-                        <AntdImg
-                          src='/images/banner.png'
-                          alt='placeholder'
-                          width={'100%'}
-                          height={'100%'}
-                          className='object-cover'
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </AntdImg.PreviewGroup>
-              </div>
-              <div className=' px-8 pt-8 grid grid-cols-4 gap-5'>
-                <Button className='col-start-4' type='primary' size='large'>
-                  <span className='font-semibold'>Add to Gallery</span>
-                </Button>
-              </div>
+            <div className='flex gap-20'>
+              <label
+                htmlFor='attachment'
+                className='text-neutral-10 text-base font-semibold'
+              >
+                Choose a attachment
+              </label>
+              <Radio.Group
+                onChange={onAttachmentChange}
+                value={attachmentValue}
+                id='attachment'
+                className='flexStart gap-20'
+              >
+                <Radio value={1}>File (.pdf,.doc,.xxls,...)</Radio>
+                <Radio value={2}>Link</Radio>
+              </Radio.Group>
             </div>
-          </div>
-          <div className='border-b border-neutral-4 pb-10 mb-8'>
-            <p className='text-neutral-6 font-semibold uppercase mb-4'>video</p>
-            <div className='py-8 rounded border border-neutral-6'>
-              <div className='border-b border-neutral-6 px-8'>
-                <AntdImg.PreviewGroup
-                  preview={{
-                    onChange: (current, prev) =>
-                      console.log(
-                        `current index: ${current}, prev index: ${prev}`
-                      ),
-                    toolbarRender: () => <></>,
-                  }}
+            {attachmentValue == 1 && (
+              <div className='border border-neutral-6 rounded px-10 py-24 mt-8'>
+                <div className='flexCenter flex-col gap-6'>
+                  <UploadOutlined className='text-[48px] !text-royalBlue' />
+                  <p className='text-base'>
+                    You only can upload .pdf, .doc, .xxls file. Maximum file
+                    size is 20MB.
+                  </p>
+                  <Button type='primary' size='large'>
+                    <span className='font-semibold px-6'>
+                      Update Attachment
+                    </span>
+                  </Button>
+                </div>
+              </div>
+            )}
+            {attachmentValue == 2 && (
+              <div className='flex flex-col gap-2 mt-8'>
+                <label
+                  htmlFor='link'
+                  className='text-neutral-10 text-base font-semibold'
                 >
-                  <div className='grid grid-cols-4 gap-5  h-[260px] overflow-y-scroll pr-2 -mr-4'>
-                    {[...Array(10)].map((_, index) => (
-                      <div
-                        className='relative w-full h-32 bg-neutral-2 overflow-hidden'
-                        key={index}
-                      >
-                        <AntdImg
-                          src='/images/banner.png'
-                          alt='placeholder'
-                          width={'100%'}
-                          height={'100%'}
-                          className='object-cover'
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </AntdImg.PreviewGroup>
+                  Import a link
+                </label>
+                <input
+                  type='text'
+                  id='link'
+                  placeholder='Add a link'
+                  className='h-12 p-3 border border-neutral-6 outline-none placeholder:text-neutral-6 rounded hover:border-royalBlue'
+                />
               </div>
-              <div className=' px-8 pt-8 grid grid-cols-4 gap-5'>
-                <Button className='col-start-4' type='primary' size='large'>
-                  <span className='font-semibold'>Add to Videos</span>
-                </Button>
-              </div>
-            </div>
+            )}
           </div>
           <div className='mb-8 pb-10'>
             <div className='flex gap-20'>
@@ -296,7 +220,7 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
                 Choose a status
               </label>
               <Radio.Group
-                onChange={onChange}
+                onChange={onStatusChange}
                 value={statusValue}
                 id='status'
                 className='flexStart gap-20'
@@ -384,7 +308,7 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
                   Cancel
                 </Button>
                 <Button type='primary' size='large' block>
-                  {productId == 'new' ? 'Create' : 'Save'}
+                  {portfolioId == 'new' ? 'Create' : 'Save'}
                 </Button>
               </ConfigProvider>
             </div>
@@ -395,4 +319,4 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
   );
 };
 
-export default ProductBasicInfo;
+export default PortfolioBasicInfo;

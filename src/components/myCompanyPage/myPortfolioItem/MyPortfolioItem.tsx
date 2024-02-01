@@ -1,29 +1,30 @@
 import { useState, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import * as portfolioServices from '@/apiServices/portfolioServices';
 import Image from 'next/image';
-import * as productsServices from '@/apiServices/productServices';
+import TabToggle from '../TabToggle';
+import SortBy from '@/components/shared/SortBy';
+import SearchBar from '@/components/shared/SearchBar';
 import ItemTitle from '../ItemTitle';
+import { Button, ConfigProvider, Empty } from 'antd';
 import {
-  SearchOutlined,
   EyeFilled,
   UserOutlined,
   PlusOutlined,
   ClockCircleFilled,
 } from '@ant-design/icons';
-import { Button, ConfigProvider, Select, Empty } from 'antd';
-import EditingProduct from './EditingProduct';
-import SearchBar from '@/components/shared/SearchBar';
-import TabToggle from '../TabToggle';
-import SortBy from '@/components/shared/SortBy';
+import EditingPortfolio from './EditingPortfolio';
+import { PdfViewer } from '@/components/companyPage';
+
 const tabs = [
   {
-    id: 'published',
-    name: 'Published',
+    id: 'active',
+    name: 'Active',
     icon: { location: '/icons/paper-plane.svg', id: 'published' },
   },
   {
-    id: 'pending',
-    name: 'Pending',
+    id: 'inactive',
+    name: 'Inactive',
     icon: { location: '/icons/pending.svg', id: 'pending' },
   },
   {
@@ -32,31 +33,29 @@ const tabs = [
     icon: { location: '/icons/draft.svg', id: 'draft' },
   },
 ];
-const MyProductItem = ({ companyId }: { companyId: string }) => {
+
+const MyPortfolioItem = ({ companyId }: { companyId: string }) => {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const [editingProduct, setEditingProduct] = useState('');
+  const [editingPortfolio, setEditingPortfolio] = useState('');
   const [editing, setEditing] = useState(false);
-  const path = usePathname();
   const router = useRouter();
-  const searchParam = useSearchParams().get('product');
+  const path = usePathname();
+  const searchParam = useSearchParams().get('portfolio');
 
-  //   START: fetch data
+  // fetch api
   useEffect(() => {
     const fetchData = async () => {
-      const res = await productsServices.getAll({
-        params: { companyId: companyId },
-      });
+      const res = await portfolioServices.getAll();
       setData(res);
       setLoading(false);
     };
     fetchData();
   }, [companyId]);
-  //   END: fetch data
 
-  const handleEditProduct = (productId: string) => {
-    setEditingProduct(productId);
-    router.push(`${path}?page=product&product=${productId}`);
+  const handleEditPortfolio = (portfolioId: string) => {
+    setEditingPortfolio(portfolioId);
+    router.push(`${path}?page=portfolio&portfolio=${portfolioId}`);
   };
 
   useEffect(() => {
@@ -68,14 +67,14 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
   }, [searchParam]);
 
   return !editing ? (
-    <div>
+    <div className=''>
       <ItemTitle
-        title='Product'
-        subtitle='This is the place to add products to your company.'
+        title='Portfolio'
+        subtitle='This is the place to add portfolio to your company.'
       />
       <div className='flexBetween mb-8'>
         <div className='flexStart gap-6'>
-          <SearchBar placeholder='Search your product' />
+          <SearchBar placeholder='Search your portfolio' />
           <TabToggle tabs={tabs} />
         </div>
         <SortBy />
@@ -84,42 +83,35 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
         (data?.length > 0 ? (
           <>
             <div className='h-[600px] overflow-y-scroll pr-2 mb-6'>
-              {data.map((product: any, index: number) => (
+              {data.map((portfolio: any, index: number) => (
                 <div
-                  className='bg-neutral-1 rounded-2xl flex justify-between px-12 py-6 mb-6'
+                  className='bg-neutral-1 rounded-2xl flex justify-between px-12 py-6 mb-6 '
                   key={index}
                 >
                   <div className='left flex gap-6'>
-                    <div className='shrink-0 w-[135px] h-[135px] relative'>
-                      <Image
-                        src={product.coverPhoto.location}
-                        alt='product img'
-                        fill
-                        className='object-cover rounded'
-                        sizes='(max-width: 767px) 100vw, 430px'
-                      />
-                    </div>
+                    <PdfViewer
+                      downloadUrl={portfolio.downloadUrl}
+                      thumbnailUrl={portfolio.thumbnailUrl}
+                    />
 
-                    <div className='w-full max-w-[430px]'>
-                      <h5 className='mb-2 truncate'>{product.name}</h5>
-                      <p className='mb-4 truncate'>{product.excerpt}</p>
-                      <div className='grid grid-cols-2 gap-x-4 gap-y-2'>
-                        <div className='flexStart gap-2'>
-                          <EyeFilled className='text-base !text-sunsetOrange-6' />
-                          <span>1000 views</span>
-                        </div>
-                        <div className='flexStart gap-2'>
-                          <UserOutlined className='text-base !text-sunsetOrange-6' />
-                          <span>Ha Nguyen Phuong</span>
-                        </div>
-                        <div className='flexStart gap-2'>
-                          <Image
-                            src='/icons/flag-vi.svg'
-                            alt='icon'
-                            width={16}
-                            height={16}
-                          />
-                          <span>VI</span>
+                    <div className='w-full max-w-[500px]'>
+                      <h5 className='mb-2 truncate'>{portfolio.name}</h5>
+                      <p className='mb-4 line-clamp-2'>{portfolio.excerpt}</p>
+                      <div className='flex justify-between'>
+                        <div className='flexStart gap-8'>
+                          <div className='flexStart gap-2'>
+                            <Image
+                              src='/icons/flag-vi.svg'
+                              alt='icon'
+                              width={16}
+                              height={16}
+                            />
+                            <span>VI</span>
+                          </div>
+                          <div className='flexStart gap-2'>
+                            <UserOutlined className='text-base !text-sunsetOrange-6' />
+                            <span>Ha Nguyen Phuong</span>
+                          </div>
                         </div>
                         <div className='flexStart gap-2'>
                           <ClockCircleFilled className='text-base !text-sunsetOrange-6' />
@@ -128,8 +120,8 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
                       </div>
                     </div>
                   </div>
-                  <div className='right w-[200px]  ml-6'>
-                    <div className=' w-full'>
+                  <div className='right w-[200px] ml-6 shrink-0'>
+                    <div className='w-full'>
                       <ConfigProvider
                         theme={{
                           components: {
@@ -144,7 +136,7 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
                           type='primary'
                           size='large'
                           block
-                          onClick={() => handleEditProduct(product.id)}
+                          onClick={() => handleEditPortfolio(portfolio.id)}
                         >
                           <div className='flexCenter gap-2 font-semibold'>
                             <Image
@@ -153,7 +145,7 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
                               height={14}
                               alt='icon'
                             />
-                            Edit Product
+                            Edit Portfolio
                           </div>
                         </Button>
                         <Button type='link' size='large' block className='mt-3'>
@@ -174,14 +166,14 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
                   style={{ color: '#2f61e6' }}
                 />
                 <p className='text-base text-neutral-8 mt-2 mb-4'>
-                  Add a Product for your company
+                  Add a Portfolio for your company
                 </p>
                 <Button
                   type='primary'
                   size='large'
-                  onClick={() => handleEditProduct('new')}
+                  onClick={() => handleEditPortfolio('new')}
                 >
-                  <p className='font-semibold px-4'>Add a Product</p>
+                  <p className='font-semibold px-4'>Add a Portfolio</p>
                 </Button>
               </div>
             </div>
@@ -191,14 +183,14 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
             <div className='flexCenter flex-col'>
               <Empty description={false} />
               <p className='text-base text-neutral-8 mt-2 mb-4'>
-                No products have been updated, update now!
+                No portfolios have been updated, update now!
               </p>
               <Button
                 type='primary'
                 size='large'
-                onClick={() => handleEditProduct('new')}
+                onClick={() => handleEditPortfolio('new')}
               >
-                <span className='font-semibold px-4'>Add a Product</span>
+                <span className='font-semibold px-4'>Add a Portfolio</span>
               </Button>
             </div>
           </div>
@@ -207,14 +199,16 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
   ) : (
     <div>
       <ItemTitle
-        title={editingProduct === 'new' ? 'Add a Product' : 'Edit a Product'}
-        subtitle='This is the place to edit a product to your company.'
-        backLink={`${path}?page=product`}
-        onClick={() => setEditingProduct('')}
+        title={
+          editingPortfolio === 'new' ? 'Add a Portfolio' : 'Edit a Portfolio'
+        }
+        subtitle='This is the place to add a portfolio to your company.'
+        backLink={`${path}?page=portfolio`}
+        onClick={() => setEditingPortfolio('')}
       />
-      <EditingProduct productId={editingProduct} />
+      <EditingPortfolio portfolioId={editingPortfolio} />
     </div>
   );
 };
 
-export default MyProductItem;
+export default MyPortfolioItem;

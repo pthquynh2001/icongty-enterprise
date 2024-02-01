@@ -17,6 +17,7 @@ import { Company } from '@/types';
 import PreviewItem from '@/components/myCompanyPage/PreviewItem';
 import SummaryItem from '@/components/myCompanyPage/summaryItem/SummaryItem';
 import MyProductItem from '@/components/myCompanyPage/myProductItem/MyProductItem';
+import MyPortfolioItem from '@/components/myCompanyPage/myPortfolioItem/MyPortfolioItem';
 
 const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
   const companyId = params.slug;
@@ -102,6 +103,9 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
           {activeItem === 'preview' && <PreviewItem companyId={companyId} />}
           {activeItem === 'summary' && <SummaryItem companyId={companyId} />}
           {activeItem === 'product' && <MyProductItem companyId={companyId} />}
+          {activeItem === 'portfolio' && (
+            <MyPortfolioItem companyId={companyId} />
+          )}
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ props, size }) => {
     <div className='flex '>
       <div className='min-h-[131px] min-w-[95px] shrink-0'>
         {props.fileType === 'pdf' && (
-          <div className='relative before:content-[""] before:absolute before:inset-[1px]  before:w-[6px] before:z-[1] before:bg-gradient-to-r before:from-black/10 before:from-5% before:via-black/30 before:to-transparent before:to-95% before:rounded-l'>
+          <div className='relative'>
             <PdfViewer
               downloadUrl={props.downloadUrl}
               thumbnailUrl={props.thumbnailUrl}

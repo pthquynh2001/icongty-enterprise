@@ -62,9 +62,7 @@ const Thumbnail = ({ item, title }: { item?: any; title: string }) => {
           </div>
           <div className='mx-12 grow'>
             <p className='font-semibold text-lg text-neutral-11 mb-2'>
-              {item.name
-                ? item.name
-                : 'The Corporate Name will be displayed here'}
+              {item.name ? item.name : 'The Name will be displayed here'}
             </p>
             <div className='flex'>
               {item.categories?.map((cat: any, index: number) => (

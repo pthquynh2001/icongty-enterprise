@@ -449,33 +449,7 @@ export const MY_COMPANY_MENU = [
         },
         link: '/dashboard/favorites',
       },
-      {
-        id: 'media',
-        name: 'Media',
-        icon: {
-          src: '/icons/star.svg',
-          id: 'favorites-icon',
-        },
-        link: '/dashboard/favorites',
-      },
-      {
-        id: 'job',
-        name: 'Job',
-        icon: {
-          src: '/icons/star.svg',
-          id: 'favorites-icon',
-        },
-        link: '/dashboard/favorites',
-      },
-      {
-        id: 'event',
-        name: 'Event',
-        icon: {
-          src: '/icons/star.svg',
-          id: 'favorites-icon',
-        },
-        link: '/dashboard/favorites',
-      },
+
       {
         id: 'portfolio',
         name: 'Portfolio',
