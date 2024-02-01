@@ -202,7 +202,11 @@ const MyPortfolioItem = ({ companyId }: { companyId: string }) => {
         title={
           editingPortfolio === 'new' ? 'Add a Portfolio' : 'Edit a Portfolio'
         }
-        subtitle='This is the place to add a portfolio to your company.'
+        subtitle={
+          editingPortfolio === 'new'
+            ? 'This is the place to add a portfolio to your company.'
+            : "This is the place to edit your company's portfolio."
+        }
         backLink={`${path}?page=portfolio`}
         onClick={() => setEditingPortfolio('')}
       />

@@ -5,19 +5,18 @@ import Image from 'next/image';
 import { UserInfo } from '@/components/form';
 import { Header } from '@/components/shared';
 import { MY_COMPANY_MENU } from '@/constants';
-import { SubpageBreadcrumb } from '@/components/subpage';
 import { useSession } from 'next-auth/react';
 import SideBar from '@/components/dashboardPage/SideBar';
 import { LeftOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'next/navigation';
 import * as companyServices from '@/apiServices/companyServices';
 
-import { Button } from 'antd';
 import { Company } from '@/types';
 import PreviewItem from '@/components/myCompanyPage/PreviewItem';
 import SummaryItem from '@/components/myCompanyPage/summaryItem/SummaryItem';
 import MyProductItem from '@/components/myCompanyPage/myProductItem/MyProductItem';
 import MyPortfolioItem from '@/components/myCompanyPage/myPortfolioItem/MyPortfolioItem';
+import EditorItem from '@/components/myCompanyPage/EditorItem';
 
 const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
   const companyId = params.slug;
@@ -106,6 +105,7 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
           {activeItem === 'portfolio' && (
             <MyPortfolioItem companyId={companyId} />
           )}
+          {activeItem === 'editor' && <EditorItem companyId={companyId} />}
         </div>
       </div>
     </div>

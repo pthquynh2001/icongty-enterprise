@@ -208,7 +208,11 @@ const MyProductItem = ({ companyId }: { companyId: string }) => {
     <div>
       <ItemTitle
         title={editingProduct === 'new' ? 'Add a Product' : 'Edit a Product'}
-        subtitle='This is the place to edit a product to your company.'
+        subtitle={
+          editingProduct === 'new'
+            ? 'This is the place to add a product to your company.'
+            : "This is the place to edit your company's product."
+        }
         backLink={`${path}?page=product`}
         onClick={() => setEditingProduct('')}
       />
