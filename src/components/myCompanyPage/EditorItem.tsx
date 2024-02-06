@@ -156,7 +156,7 @@ const EditorItem = ({ companyId }: { companyId: string }) => {
                       The Sliding Mr. Bones
                     </span>
                   </td>
-                  <td className='text-center py-3 '>Owner</td>
+                  <td className='text-center py-3 '>Editor</td>
                   <td className='text-center py-3'>1961112412</td>
                   <td className='py-3 text-center'>
                     <div className='flexCenter'>

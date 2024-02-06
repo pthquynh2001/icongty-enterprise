@@ -10,7 +10,7 @@ import {
   PlusOutlined,
   ClockCircleFilled,
 } from '@ant-design/icons';
-import { Button, ConfigProvider, Select, Empty } from 'antd';
+import { Button, ConfigProvider, Empty } from 'antd';
 import EditingProduct from './EditingProduct';
 import SearchBar from '@/components/shared/SearchBar';
 import TabToggle from '../TabToggle';

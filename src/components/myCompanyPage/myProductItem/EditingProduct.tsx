@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { ContentFrame } from '@/components/subpage';
 import Thumbnail from '../Thumbnail';
 import * as productServices from '@/apiServices/productServices';
 import ProductBasicInfo from './ProductBasicInfo';

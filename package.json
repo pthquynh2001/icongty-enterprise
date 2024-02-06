@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.0-alpha.5",
+    "@uploadthing/react": "^6.2.2",
     "antd": "^5.11.4",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
@@ -21,7 +22,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-pdf": "^7.6.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "uploadthing": "^6.3.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

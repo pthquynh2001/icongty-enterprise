@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { CloseOutlined } from '@ant-design/icons';
+import { UploadButton } from '@/utils/uploadthing';
 import { ContentFrame } from '@/components/subpage';
 import {
   Button,
@@ -11,7 +12,7 @@ import {
   Radio,
 } from 'antd';
 import type { SelectProps, RadioChangeEvent } from 'antd';
-
+import { set } from 'mongoose';
 type TagRender = SelectProps['tagRender'];
 
 const techOptions: SelectProps['options'] = [
@@ -85,9 +86,52 @@ const langTagRender: TagRender = (props) => {
   );
 };
 
+const gallery = [
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+  {
+    url: '/images/banner.png',
+  },
+];
+
 const ProductBasicInfo = ({ productId }: { productId: string }) => {
   const [statusValue, setStatusValue] = useState(1);
-
+  const [galleryData, setGalleryData] = useState<any[]>(gallery); // [
+  const [videoData, setVideoData] = useState<any[]>([...Array(10)]); // [
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrls, setImageUrls] = useState<any>([]);
+  useEffect(() => {
+    if (imageUrl) {
+      setGalleryData((prev) => [...prev, { url: imageUrl }]);
+    }
+  }, [imageUrl]);
+  useEffect(() => {
+    if (imageUrls) {
+      setGalleryData((prev) => [...prev, ...imageUrls]);
+    }
+  }, [imageUrls]);
   const onChange = (e: RadioChangeEvent) => {
     setStatusValue(e.target.value);
   };
@@ -217,35 +261,64 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
               <div className='border-b border-neutral-6 px-8'>
                 <AntdImg.PreviewGroup
                   preview={{
-                    onChange: (current, prev) =>
-                      console.log(
-                        `current index: ${current}, prev index: ${prev}`
-                      ),
                     toolbarRender: () => <></>,
                   }}
                 >
                   <div className='grid grid-cols-4 gap-5  h-[260px] overflow-y-scroll pr-2 -mr-4'>
-                    {[...Array(10)].map((_, index) => (
+                    {galleryData.map((image, index) => (
                       <div
-                        className='relative w-full h-32 bg-neutral-2 overflow-hidden'
+                        className='group relative w-full h-32 bg-neutral-2 overflow-hidden'
                         key={index}
                       >
                         <AntdImg
-                          src='/images/banner.png'
+                          src={image.url}
                           alt='placeholder'
                           width={'100%'}
                           height={'100%'}
                           className='object-cover'
+                          onMouseEnter={(e) => {
+                            e.stopPropagation();
+                          }}
                         />
+                        <div
+                          className='hidden group-hover:flex align-middle justify-center absolute top-0 right-0 bg-red-500 rounded-bl w-5 h-5 cursor-pointer'
+                          onClick={() => {
+                            galleryData.splice(index, 1);
+                            setGalleryData([...galleryData]);
+                          }}
+                        >
+                          <CloseOutlined className='text-[10px] !text-neutral-1' />
+                        </div>
                       </div>
                     ))}
                   </div>
                 </AntdImg.PreviewGroup>
               </div>
               <div className=' px-8 pt-8 grid grid-cols-4 gap-5'>
-                <Button className='col-start-4' type='primary' size='large'>
-                  <span className='font-semibold'>Add to Gallery</span>
-                </Button>
+                <UploadButton
+                  className='col-start-4 ut-button:rounded ut-button:hover:opacity-80 ut-button:w-full   ut-button:text-base  ut-button:font-semibold ut-button:bg-royalBlue ut-button:ut-uploading:bg-royalBlue/60 ut-button:ut-uploading:text-neutral-1'
+                  content={{
+                    button({ ready, isUploading }) {
+                      if (ready) return <div>Add to Gallery</div>;
+                      if (isUploading) return <div>Uploading...</div>;
+                    },
+                    allowedContent() {
+                      return '';
+                    },
+                  }}
+                  endpoint={'imageUploader'}
+                  onClientUploadComplete={(res) => {
+                    if (res.length > 1) {
+                      setImageUrls(res.map((item) => ({ url: item.url })));
+                    } else {
+                      setImageUrl(res[0].url);
+                    }
+                  }}
+                  onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    alert(`ERROR! ${error.message}`);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -263,18 +336,27 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
                   }}
                 >
                   <div className='grid grid-cols-4 gap-5  h-[260px] overflow-y-scroll pr-2 -mr-4'>
-                    {[...Array(10)].map((_, index) => (
+                    {videoData.map((_, index) => (
                       <div
-                        className='relative w-full h-32 bg-neutral-2 overflow-hidden'
+                        className='group relative w-full h-32 bg-neutral-2 overflow-hidden'
                         key={index}
                       >
                         <AntdImg
-                          src='/images/banner.png'
+                          src='/images/login.png'
                           alt='placeholder'
                           width={'100%'}
                           height={'100%'}
                           className='object-cover'
                         />
+                        <div
+                          className='hidden group-hover:flex align-middle justify-center absolute top-0 right-0 bg-red-500 rounded-bl w-5 h-5 cursor-pointer'
+                          onClick={() => {
+                            videoData.splice(index, 1);
+                            setVideoData([...videoData]);
+                          }}
+                        >
+                          <CloseOutlined className='text-[10px] !text-neutral-1' />
+                        </div>
                       </div>
                     ))}
                   </div>
