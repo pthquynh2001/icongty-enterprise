@@ -23,18 +23,17 @@ const items = [
 ];
 const CompaniesPage = () => {
   const [companiesData, setCompaniesData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const pagination = { limit: 6, totalItems: 9, page: page };
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       const res = await companyServices.getAll({
         params: { page: page, limit: pagination.limit },
       });
-      setLoading(false);
       setCompaniesData(res);
+      setLoading(false);
     };
     fetchData();
   }, [page, pagination.limit]);
@@ -78,19 +77,27 @@ const CompaniesPage = () => {
             </ConfigProvider>
           </div>
         </div>
-        {companiesData && (
-          <div>
-            <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
-              {companiesData.map((card, index) => {
-                return <CompanyCard key={index} card={card} />;
-              })}
-            </div>
-            <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
-              {companiesData.map((card, index) => {
-                return <CompanyCard key={index} card={card} />;
-              })}
-            </div>
+        {loading ? (
+          <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+            {[...Array(9)].map((_, index) => (
+              <CompanyCard skeleton key={index} />
+            ))}
           </div>
+        ) : (
+          companiesData && (
+            <div>
+              <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+                {companiesData.map((card, index) => (
+                  <CompanyCard key={index} card={card} />
+                ))}
+              </div>
+              <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
+                {companiesData.map((card, index) => (
+                  <CompanyCard key={index} card={card} />
+                ))}
+              </div>
+            </div>
+          )
         )}
         <div className='flexEnd'>
           {pagination.totalItems / pagination.limit > 1 && (

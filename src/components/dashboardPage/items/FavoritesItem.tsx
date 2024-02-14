@@ -1,6 +1,6 @@
 import { User } from 'next-auth';
 import { useEffect, useState } from 'react';
-import {  ConfigProvider, Select } from 'antd';
+import { ConfigProvider, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import CompanyCard from '@/components/shared/card/CompanyCard';
 import * as companyServices from '@/apiServices/companyServices';
@@ -33,6 +33,7 @@ const tabs = [
 ];
 
 const FavoritesItem = ({ user }: FavoritesItemProps) => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pagination = { limit: 6, totalItems: 9, page: currentPage };
@@ -44,6 +45,7 @@ const FavoritesItem = ({ user }: FavoritesItemProps) => {
         params: { page: currentPage, limit: pagination.limit },
       });
       setData(res);
+      setLoading(false);
     };
     fetchData();
   }, [currentPage, pagination.limit]);
@@ -103,10 +105,13 @@ const FavoritesItem = ({ user }: FavoritesItemProps) => {
         </div>
       </div>
       <div className='grid grid-cols-3  gap-6'>
-        {data &&
-          data.map((card, index) => {
-            return <CompanyCard card={card} key={index} favorite />;
-          })}
+        {loading
+          ? [...Array(3)].map((_, index) => (
+              <CompanyCard skeleton favorite key={index} />
+            ))
+          : data.map((card, index) => (
+              <CompanyCard card={card} key={index} favorite />
+            ))}
       </div>
       {pagination.totalItems > pagination.limit && (
         <div className='flexEnd mt-10'>

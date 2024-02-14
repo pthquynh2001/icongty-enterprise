@@ -10,7 +10,7 @@ import * as postServices from '@/apiServices/postServices';
 import type { SearchProps } from 'antd/lib/input/Search';
 const { Search } = Input;
 
-const topNews = HOME_NEWS_ARTICLES;
+// const topNews = HOME_NEWS_ARTICLES;
 
 const items = [
   {
@@ -20,6 +20,7 @@ const items = [
   { title: 'Tin tức' },
 ];
 const NewsPage = () => {
+  const [topNews, setTopNews] = useState<any[]>([]);
   const [postsData, setPostsData] = useState<any[]>([]);
   const [activeCat, setActiveCat] = useState(0);
   // pagination
@@ -29,6 +30,18 @@ const NewsPage = () => {
     totalItems: 6,
     page: page,
   };
+
+  // START: fetch data
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await postServices.getAll({
+        params: { page: 1, limit: 4 },
+      });
+      setTopNews(res);
+    };
+    fetchData();
+  }, []);
+  // END: fetch data
 
   // START: fetch data
   useEffect(() => {
@@ -61,92 +74,118 @@ const NewsPage = () => {
       activeBorder.style.top = `${activeCat.offsetTop}px`;
     }
   }, [activeCat]);
+
+  const formattedDate = (string: string) => {
+    const date = new Date(string);
+    return `${
+      date.getUTCDate() < 10 ? '0' + date.getUTCDate() : date.getUTCDate()
+    }/${
+      date.getUTCMonth() + 1 < 10
+        ? '0' + (date.getUTCMonth() + 1)
+        : date.getUTCMonth() + 1
+    }/${date.getUTCFullYear()}`;
+  };
+
   return (
     <>
-      <div className='padding-container max-container mb-[120px]'>
-        <div className='mt-8 mb-14'>
-          <SubpageBreadcrumb items={items} />
-        </div>
-
-        <div className='flexBetween flex-wrap lg:flex-nowrap mb-20'>
-          <div className=' relative w-full h-[300px] lg:h-[416px] rounded-2xl overflow-hidden lg:mr-[84px]'>
-            <Link href={`/post/1`} className='relative w-full h-full block'>
-              <Image
-                src='/images/news1.png'
-                alt='news'
-                fill
-                sizes='(max-width: 767px) 100vw'
-                className='object-cover'
-              />
-            </Link>
+      {topNews && (
+        <div className='padding-container max-container mb-[120px]'>
+          <div className='mt-8 mb-14'>
+            <SubpageBreadcrumb items={items} />
           </div>
-          <div className='w-full mt-8 lg:my-8 lg:max-w-[450px]'>
-            <div className='flex'>
-              {topNews[0].tags.map((tag, index) => (
-                <Tag type='block' key={index}>
-                  {tag}
-                </Tag>
-              ))}
-            </div>
-            <Link href={`/post/1`}>
-              <h3 className='lg:hidden line-clamp-3 mt-4 mb-8'>
-                {topNews[0].title}
-              </h3>
-              <h2 className='hidden lg:block line-clamp-3 mt-4 mb-8'>
-                {topNews[0].title}
-              </h2>
-            </Link>
-            <p className='line-clamp-3 mb-4 font-base text-neutral-8'>
-              {topNews[0].desc}
-            </p>
-            <div className='flex gap-4 text-neutral-6 font-base'>
-              <span className=''>
-                Theo <b>{topNews[0].credit}</b>
-              </span>
-              <p>|</p>
-              <span className=''>{topNews[0].publishedDate}</span>
-            </div>
-          </div>
-        </div>
-        <div className='md:-mx-10'>
-          <div className='grid  lg:grid-cols-3 '>
-            {topNews.slice(1, 4).map((article, index) => (
-              <div
-                key={index}
-                className='gap-8 md:px-10 py-10 flex even:border-y even:border-neutral-5 lg:py-0  lg:even:border-y-0 lg:even:border-x  lg:flex-col'
-              >
-                <div className='relative rounded-2xl h-[120px] w-[120px] md:w-[220px] md:h-[220px] overflow-hidden shrink-0 lg:h-[220px] lg:w-full'>
-                  <Link
-                    href={`/post/${index}`}
-                    className='block h-full w-full relative'
-                  >
-                    <Image
-                      src={article.image}
-                      alt='news-img'
-                      fill
-                      sizes='(max-width: 768px) 100vw'
-                      className='object-cover'
-                    />
-                  </Link>
+          {topNews[0] && (
+            <div className='flexBetween flex-wrap lg:flex-nowrap mb-20'>
+              <div className=' relative w-full h-[300px] lg:h-[416px] rounded-2xl overflow-hidden lg:mr-[84px]'>
+                <Link
+                  href={`/news/${topNews[0].slug}-${topNews[0]._id}`}
+                  className='relative w-full h-full block'
+                >
+                  <Image
+                    src={topNews[0].thumbnail?.location}
+                    alt='news'
+                    fill
+                    sizes='(max-width: 767px) 100vw'
+                    className='object-cover'
+                  />
+                </Link>
+              </div>
+              <div className='w-full mt-8 lg:my-8 lg:max-w-[450px]'>
+                <div className='flex'>
+                  {topNews[0].categories?.map((tag: any, index: number) => (
+                    <Tag type='block' key={index}>
+                      {tag.name}
+                    </Tag>
+                  ))}
                 </div>
-                <div className='lg:w-full relative'>
-                  <div className='flex flex-wrap gap-y-2 max-h-[24px] overflow-hidden '>
-                    {article.tags.map((tag, index) => (
-                      <Tag type='block' key={index} className='h-6 text-sm'>
-                        {tag}
-                      </Tag>
-                    ))}
-                  </div>
-                  <Link href={`/post/${index}`}>
-                    <h5 className='mt-2 mb-4 line-clamp-2'>{article.title}</h5>
-                  </Link>
-                  <p className='text-neutral-8 line-clamp-3'>{article.desc}</p>
+                <Link href={`/news/${topNews[0].slug}-${topNews[0]._id}`}>
+                  <h3 className='lg:hidden line-clamp-3 mt-4 mb-8'>
+                    {topNews[0].name}
+                  </h3>
+                  <h2 className='hidden lg:block line-clamp-3 mt-4 mb-8'>
+                    {topNews[0].name}
+                  </h2>
+                </Link>
+                <p className='line-clamp-3 mb-4 font-base text-neutral-8'>
+                  {topNews[0].excerpt}
+                </p>
+                <div className='flex gap-4 text-neutral-6 font-base'>
+                  <span className=''>
+                    Theo <b>{topNews[0].source.name}</b>
+                  </span>
+                  <p>|</p>
+                  <span className=''>
+                    {formattedDate(topNews[0].createdAt)}
+                  </span>
                 </div>
               </div>
-            ))}
+            </div>
+          )}
+          <div className='md:-mx-10'>
+            <div className='grid  lg:grid-cols-3 '>
+              {topNews.slice(1, 4).map((article, index) => (
+                <div
+                  key={index}
+                  className='gap-8 md:px-10 py-10 flex even:border-y even:border-neutral-5 lg:py-0  lg:even:border-y-0 lg:even:border-x  lg:flex-col'
+                >
+                  <div className='relative rounded-2xl h-[120px] w-[120px] md:w-[220px] md:h-[220px] overflow-hidden shrink-0 lg:h-[220px] lg:w-full'>
+                    <Link
+                      href={`/news/${article.slug}-${article._id}`}
+                      className='block h-full w-full relative'
+                    >
+                      <Image
+                        src={article.thumbnail?.location}
+                        alt='news-img'
+                        fill
+                        sizes='(max-width: 768px) 100vw'
+                        className='object-cover'
+                      />
+                    </Link>
+                  </div>
+                  <div className='lg:w-full relative'>
+                    <div className='absolute flex flex-wrap gap-y-2 max-h-[24px] overflow-hidden '>
+                      {article.categories?.map((tag: any, index: number) => (
+                        <Tag type='block' key={index} className='h-6 text-sm'>
+                          {tag.name}
+                        </Tag>
+                      ))}
+                    </div>
+                    <div className='mt-7'>
+                      <Link href={`/news/${article.slug}-${article._id}`}>
+                        <h5 className='mt-2 mb-4 line-clamp-2'>
+                          {article.name}
+                        </h5>
+                      </Link>
+                      <p className='text-neutral-8 line-clamp-3'>
+                        {article.excerpt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className='bg-neutral-3 rounded-t-[32px] w-full pb-[120px]'>
         <div className='padding-container max-container relative pt-[120px]'>
           <div className='relative flex justify-between gap-10'>
@@ -228,29 +267,31 @@ const NewsPage = () => {
                 </div>
               </div>
               <div className='mb-12 w-full'>
-                {postsData.map((post, index) => (
+                {postsData.map((article, index) => (
                   <div
                     key={index}
                     className='flexBetween gap-6 border-b border-neutral-5 py-8'
                   >
                     <div className='left-article'>
                       <div className='flex flex-wrap max-h-[24px] overflow-hidden'>
-                        {post.categories.map((tag: any, index: number) => (
+                        {article.categories.map((tag: any, index: number) => (
                           <Tag key={index} type='block' className='h-6 text-sm'>
                             {tag.name}
                           </Tag>
                         ))}
                       </div>
-                      <Link href={`/post/${post.slug}`}>
-                        <h5 className='mt-2 mb-4 line-clamp-3'>{post.name}</h5>
+                      <Link href={`/news/${article.slug}-${article._id}`}>
+                        <h5 className='mt-2 mb-4 line-clamp-3'>
+                          {article.name}
+                        </h5>
                       </Link>
-                      <div className='line-clamp-3'>{post.excerpt}</div>
+                      <div className='line-clamp-3'>{article.excerpt}</div>
                     </div>
-                    <Link href={`/post/${post.slug}`}>
+                    <Link href={`/news/${article.slug}-${article._id}`}>
                       <div className='relative w-[120px] h-[120px] rounded-lg overflow-hidden shrink-0 md:w-[270px] md:h-[180px]'>
                         <Image
-                          src={post.thumbnail.location}
-                          alt={post.thumbnail.alt || 'article thumbnail'}
+                          src={article.thumbnail.location}
+                          alt={article.thumbnail.alt || 'article thumbnail'}
                           fill
                           sizes='(max-width: 767px) 100vw'
                           className='object-cover'

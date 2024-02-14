@@ -1,11 +1,46 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Divider } from 'antd';
+import { Divider, Skeleton } from 'antd';
 import CategoryTags from '@/components/shared/tag/CategoryTags';
 
-const CompanyCardSmall = ({ card }: any) => {
-  return (
+const CompanyCardSmall = ({
+  card,
+  skeleton,
+}: {
+  card?: any;
+  skeleton?: boolean;
+}) => {
+  return skeleton ? (
+    <div className='flex relative w-full h-[162px] p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
+      <div className='mr-[18px]'>
+        <Skeleton.Avatar
+          size={64}
+          active
+          shape='square'
+          className='shadow-card'
+        />
+      </div>
+      <div className='relative w-full'>
+        <Skeleton
+          active
+          title={false}
+          paragraph={{ rows: 2, width: ['100%', '50%'] }}
+          className='mb-4'
+        />
+
+        <div className='absolute bottom-0 left-0 flex gap-3 w-full'>
+          {[...Array(3)].map((_, index) => (
+            <Skeleton
+              key={index}
+              title={false}
+              paragraph={{ rows: 1, width: '100%' }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  ) : (
     card && (
       <div className='flex relative w-full h-[162px] p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all	'>
         <div className='mr-[18px]'>
