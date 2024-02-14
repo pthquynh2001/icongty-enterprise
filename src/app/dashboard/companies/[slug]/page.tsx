@@ -10,7 +10,7 @@ import SideBar from '@/components/dashboardPage/SideBar';
 import { LeftOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'next/navigation';
 import * as companyServices from '@/apiServices/companyServices';
-
+import { Skeleton } from 'antd';
 import { Company } from '@/types';
 import PreviewItem from '@/components/myCompanyPage/PreviewItem';
 import SummaryItem from '@/components/myCompanyPage/summaryItem/SummaryItem';
@@ -22,6 +22,7 @@ import ServiceItem from '@/components/myCompanyPage/ServiceItem';
 const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
   const companyId = params.slug;
   const [company, setCompany] = useState<Company>({} as Company);
+  const [loading, setLoading] = useState(true);
 
   const { data: session } = useSession();
   const user = session?.user;
@@ -45,6 +46,7 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
         params: { _id: companyId },
       });
       setCompany(res[0]);
+      setLoading(false);
     };
     fetchData();
   }, [companyId]);
@@ -84,18 +86,25 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
               <span className='font-semibold'>Back to My Companies</span>
             </Link>
           </div>
-          <div className='flex gap-2 mb-8'>
-            <Image
-              src={company.logo?.location}
-              alt='logo'
-              width={35}
-              height={35}
-              className='rounded shadow-lg'
-            />
-            <h5 className='text-base font-semibold text-neutral-11'>
-              {company.name}
-            </h5>
-          </div>
+          {loading ? (
+            <div className='flexStart gap-2 mb-8 pr-10'>
+              <Skeleton.Avatar active shape='square' size={35} />
+              <Skeleton title={false} paragraph={{ rows: 1, width: '100%' }} />
+            </div>
+          ) : (
+            <div className='flex gap-2 mb-8 pr-10'>
+              <Image
+                src={company.logo?.location}
+                alt='logo'
+                width={35}
+                height={35}
+                className='rounded shadow-lg'
+              />
+              <h5 className='text-base font-semibold text-neutral-11'>
+                {company.name}
+              </h5>
+            </div>
+          )}
           <SideBar menu={menu} />
           <UserInfo />
         </div>

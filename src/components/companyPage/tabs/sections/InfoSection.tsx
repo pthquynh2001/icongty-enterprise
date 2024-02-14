@@ -18,7 +18,7 @@ const InfoSection = ({
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    console.log('Đã copy nội dung thành công!');
+    console.log('Đã sao chép nội dung!');
   };
 
   return (

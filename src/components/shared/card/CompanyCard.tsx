@@ -23,7 +23,7 @@ const CompanyCard = ({
   const success = () => {
     messageApi.open({
       type: 'success',
-      content: 'Đã copy nội dung thành công!',
+      content: 'Đã sao chép nội dung!',
     });
   };
 
@@ -34,126 +34,144 @@ const CompanyCard = ({
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    console.log('Đã copy nội dung thành công!');
+    console.log('Đã sao chép nội dung!');
     success();
   };
   return skeleton ? (
-    <div className='relative w-full p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all flexBetween flex-col	'>
-      <div className='w-full'>
-        <div className='w-full h-[92px] relative'>
-          <div className='w-full h-full absolute bg-neutral-4 rounded'></div>
-          <Skeleton.Avatar
-            active
-            size={76}
-            shape='square'
-            className='z-10 absolute top-2 left-2'
-          />
-          <Skeleton
-            className='absolute right-5 bottom-2 max-w-[130px] w-full'
-            title={false}
-            paragraph={{ rows: 1, width: '100%' }}
-          />
+    list ? (
+      <div className='flexBetween gap-5 px-10 py-[14px] bg-neutral-1 rounded-lg shadow-card hover:shadow-cardHover'>
+        <Skeleton.Avatar active size={62} shape='square' />
+        <div className='grow w-full'>
+          <Skeleton title={false} active paragraph={{ rows: 1, width: 200 }} />
         </div>
-
-        <div className=''>
-          <Skeleton
-            active
-            title={false}
-            paragraph={{ rows: 1, width: '100%' }}
-            className='mt-6 mb-2'
-          />
-          <div className='w-full flex gap-3'>
-            {[...Array(4)].map((_, index) => (
-              <Skeleton
-                key={index}
-                title={false}
-                paragraph={{ rows: 1, width: '100%' }}
-              />
-            ))}
-          </div>
+        <div className='w-[145px] shrink-0'>
+          <Skeleton title={false} paragraph={{ rows: 1, width: '100%' }} />
         </div>
-
-        <Divider className='mt-4 mb-2' />
-        <div className='text-xs'>
-          <div className='grid grid-cols-8'>
-            <div className='col-span-3'>
-              <div className='flexStart gap-2'>
-                <Image
-                  src={'/icons/location.svg'}
-                  width={12}
-                  height={12}
-                  alt='Location-icon'
-                />
-                <span className='font-semibold inline-block '>Địa điểm</span>
-              </div>
-            </div>
-            <Skeleton
-              paragraph={{ rows: 1, width: '100%' }}
-              title={false}
-              className='col-span-5'
-            />
-          </div>
-          <div className='grid grid-cols-8 mt-2 mb-2'>
-            <div className='col-span-3'>
-              <div className='flexStart gap-2'>
-                <Image
-                  src={'/icons/company.svg'}
-                  width={12}
-                  height={12}
-                  alt='company-icon'
-                />
-                <span className='font-semibold  inline-block'>Quy mô</span>
-              </div>
-            </div>
-            <Skeleton
-              paragraph={{ rows: 1, width: '50%' }}
-              title={false}
-              className='col-span-5'
-            />
-          </div>
-          <div className='grid grid-cols-8'>
-            <div className='col-span-3'>
-              <div className='flexStart gap-2'>
-                <Image
-                  src={'/icons/members.svg'}
-                  width={12}
-                  height={12}
-                  alt='members-icon'
-                />
-                <span className='font-semibold'>Năm thành lập</span>
-              </div>
-            </div>
-            <Skeleton
-              paragraph={{ rows: 1 }}
-              title={false}
-              className='col-span-5'
-            />
-          </div>
+        <div className='w-[145px] shrink-0'>
+          <Skeleton title={false} paragraph={{ rows: 1, width: '100%' }} />
+        </div>
+        <div className='w-[100px] shrink-0'>
+          <Skeleton title={false} paragraph={{ rows: 1, width: '100%' }} />
         </div>
       </div>
-      {favorite && (
-        <div className='flexEnd w-full mt-4 hover:opacity-90'>
-          <ConfigProvider
-            theme={{
-              components: {
-                Button: { defaultBg: '#FA8C16' },
-              },
-              token: {
-                colorPrimaryHover: 'none',
-                colorBgContainer: '#FA8C16',
-              },
-            }}
-          >
-            <Button block>
-              <p className='flexCenter gap-2 text-neutral-1 font-semibold'>
-                <StarFilled />
-                Yêu thích
-              </p>
-            </Button>
-          </ConfigProvider>
+    ) : (
+      <div className='relative w-full p-6 bg-white rounded-lg shadow-card hover:shadow-cardHover transition-all flexBetween flex-col	'>
+        <div className='w-full'>
+          <div className='w-full h-[92px] relative'>
+            <div className='w-full h-full absolute bg-neutral-4 rounded'></div>
+            <Skeleton.Avatar
+              active
+              size={76}
+              shape='square'
+              className='z-10 absolute top-2 left-2'
+            />
+            <Skeleton
+              className='absolute right-5 bottom-2 max-w-[130px] w-full'
+              title={false}
+              paragraph={{ rows: 1, width: '100%' }}
+            />
+          </div>
+
+          <div className=''>
+            <Skeleton
+              active
+              title={false}
+              paragraph={{ rows: 1, width: '100%' }}
+              className='mt-6 mb-2'
+            />
+            <div className='w-full flex gap-3'>
+              {[...Array(4)].map((_, index) => (
+                <Skeleton
+                  key={index}
+                  title={false}
+                  paragraph={{ rows: 1, width: '100%' }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <Divider className='mt-4 mb-2' />
+          <div className='text-xs'>
+            <div className='grid grid-cols-8'>
+              <div className='col-span-3'>
+                <div className='flexStart gap-2'>
+                  <Image
+                    src={'/icons/location.svg'}
+                    width={12}
+                    height={12}
+                    alt='Location-icon'
+                  />
+                  <span className='font-semibold inline-block '>Địa điểm</span>
+                </div>
+              </div>
+              <Skeleton
+                paragraph={{ rows: 1, width: '100%' }}
+                title={false}
+                className='col-span-5'
+              />
+            </div>
+            <div className='grid grid-cols-8 mt-2 mb-2'>
+              <div className='col-span-3'>
+                <div className='flexStart gap-2'>
+                  <Image
+                    src={'/icons/company.svg'}
+                    width={12}
+                    height={12}
+                    alt='company-icon'
+                  />
+                  <span className='font-semibold  inline-block'>Quy mô</span>
+                </div>
+              </div>
+              <Skeleton
+                paragraph={{ rows: 1, width: '50%' }}
+                title={false}
+                className='col-span-5'
+              />
+            </div>
+            <div className='grid grid-cols-8'>
+              <div className='col-span-3'>
+                <div className='flexStart gap-2'>
+                  <Image
+                    src={'/icons/members.svg'}
+                    width={12}
+                    height={12}
+                    alt='members-icon'
+                  />
+                  <span className='font-semibold'>Năm thành lập</span>
+                </div>
+              </div>
+              <Skeleton
+                paragraph={{ rows: 1 }}
+                title={false}
+                className='col-span-5'
+              />
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+        {favorite && (
+          <div className='flexEnd w-full mt-4 hover:opacity-90'>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Button: { defaultBg: '#FA8C16' },
+                },
+                token: {
+                  colorPrimaryHover: 'none',
+                  colorBgContainer: '#FA8C16',
+                },
+              }}
+            >
+              <Button block>
+                <p className='flexCenter gap-2 text-neutral-1 font-semibold'>
+                  <StarFilled />
+                  Yêu thích
+                </p>
+              </Button>
+            </ConfigProvider>
+          </div>
+        )}
+      </div>
+    )
   ) : list ? (
     card && (
       <div className='flexBetween gap-5 px-10 py-[14px] bg-neutral-1 rounded-lg shadow-card hover:shadow-cardHover'>

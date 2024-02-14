@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 const PreviewItem = ({ companyId }: { companyId: string }) => {
   const [company, setCompany] = useState<Company>({} as Company);
+  const [loading, setLoading] = useState(true);
   //   START: fetch data
   useEffect(() => {
     const fetchData = async () => {
@@ -14,6 +15,7 @@ const PreviewItem = ({ companyId }: { companyId: string }) => {
         params: { _id: companyId },
       });
       setCompany(res[0]);
+      setLoading(false);
     };
     fetchData();
   }, [companyId]);
@@ -27,12 +29,16 @@ const PreviewItem = ({ companyId }: { companyId: string }) => {
       />
       <div className='mb-12'>
         <h4 className='mb-6'>List View</h4>
-        <CompanyCard card={company} list />
+        {loading ? (
+          <CompanyCard skeleton list />
+        ) : (
+          <CompanyCard card={company} list />
+        )}
       </div>
       <>
         <h4 className='mb-6'>Grid View</h4>
         <div className='grid grid-cols-3'>
-          <CompanyCard card={company} />
+          {loading ? <CompanyCard skeleton /> : <CompanyCard card={company} />}
         </div>
       </>
     </div>
