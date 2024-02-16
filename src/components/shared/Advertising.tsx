@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Advertising = () => {
   return (
-    <div className='w-full h-[640px] mt-16 rounded-2xl overflow-hidden'>
+    <div className='w-full h-[640px] rounded-2xl overflow-hidden'>
       <Link href='/' className='block relative w-full h-full'>
         <Image
           src='/images/banner-ads.png'

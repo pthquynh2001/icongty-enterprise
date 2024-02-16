@@ -101,53 +101,47 @@ const ArticlePage = ({ params }: { params: { slug: string } }) => {
 
   return (
     article && (
-      <>
-        <div className='padding-container max-container pb-[120px]'>
-          <div className='mt-8 mb-14'>
-            <SubpageBreadcrumb items={items} />
+      <div className='padding-container max-container pb-[120px]'>
+        <div className='mt-8 mb-14'>
+          <SubpageBreadcrumb items={items} />
+        </div>
+        <div className='flex gap-[84px] w-full'>
+          <div className='grow'>
+            <h2 className='mb-8'>{article.name}</h2>
+            <div className='flexBetween gap-10 mb-12'>
+              <div className='flex flex-wrap max-h-[26px] overflow-hidden'>
+                {article.categories?.map((category: any, index: number) => (
+                  <Tag key={index} type='block' className='h-[26px] text-base'>
+                    {category.name}
+                  </Tag>
+                ))}
+              </div>
+              <div className='flexEnd gap-2 shrink-0'>
+                <ClockCircleFilled className='text-sm !text-sunsetOrange-6' />
+                {formattedDate(article.createdAt)}
+              </div>
+            </div>
+            <div className='w-full'>
+              <div className='relative w-full h-[535px] bg-red-100'>
+                <Image
+                  src={article.thumbnail?.location}
+                  alt='cover photo'
+                  fill
+                  className='object-cover rounded-2xl '
+                  sizes='(max-width: 639px) 100vw'
+                />
+              </div>
+              <p className='text-xs text-neutral-7'>
+                Nhân viên một cây xăng tại TP Thủ Đức (TP HCM) bơm nhiên liệu
+                cho khách hàng, tháng 11/2022. Ảnh: Thanh Tùng
+              </p>
+            </div>
           </div>
-          <div className='flex gap-[84px] w-full'>
-            <div className='bg-yellow-100 grow'>
-              <h2 className='mb-8'>{article.name}</h2>
-              <div className='flexBetween gap-10 mb-12'>
-                <div className='flex flex-wrap max-h-[26px] overflow-hidden'>
-                  {article.categories?.map((category: any, index: number) => (
-                    <Tag
-                      key={index}
-                      type='block'
-                      className='h-[26px] text-base'
-                    >
-                      {category.name}
-                    </Tag>
-                  ))}
-                </div>
-                <div className='flexEnd gap-2 shrink-0'>
-                  <ClockCircleFilled className='text-sm !text-sunsetOrange-6' />
-                  {formattedDate(article.createdAt)}
-                </div>
-              </div>
-              <div className='w-full'>
-                <div className='relative w-full h-[535px] bg-red-100'>
-                  <Image
-                    src={article.thumbnail?.location}
-                    alt='cover photo'
-                    fill
-                    className='object-cover rounded-2xl '
-                    sizes='(max-width: 639px) 100vw'
-                  />
-                </div>
-                <p className='text-xs text-neutral-7'>
-                  Nhân viên một cây xăng tại TP Thủ Đức (TP HCM) bơm nhiên liệu
-                  cho khách hàng, tháng 11/2022. Ảnh: Thanh Tùng
-                </p>
-              </div>
-            </div>
-            <div className='bg-pink-50 w-[270px] shrink-0'>
-              <Advertising />
-            </div>
+          <div className='bg-pink-50 w-[270px] shrink-0'>
+            <Advertising />
           </div>
         </div>
-      </>
+      </div>
     )
   );
 };

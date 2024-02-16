@@ -230,7 +230,9 @@ const CompanyPage = ({ params }: { params: { slug: string } }) => {
           <div className='hidden lg:flex w-[320px] shrink-0  flex-col'>
             <ContactInfo company={company} loading={loading} />
             <RelatedCompany />
-            <Advertising />
+            <div className='mt-16'>
+              <Advertising />
+            </div>
           </div>
           {/* END: Right content */}
         </div>

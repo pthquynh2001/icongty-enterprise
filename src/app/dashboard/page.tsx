@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserInfo } from '@/components/form';
 import { Header } from '@/components/shared';
 import { DASHBOARD_MENU } from '@/constants';
 import { SubpageBreadcrumb } from '@/components/subpage';
@@ -58,7 +57,6 @@ const DashboardPage = () => {
       <div className='flex  w-full h-full'>
         <div className='shrink-0 left w-[320px] py-6 pl-6 my-6'>
           <SideBar menu={menu} />
-          <UserInfo />
         </div>
         {user && (
           <div className='right border-l border-neutral-5 w-full pl-[60px] pr-[84px] py-6 my-6'>

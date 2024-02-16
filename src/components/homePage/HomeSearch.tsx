@@ -6,7 +6,7 @@ import { Input, Select, ConfigProvider, Button } from 'antd';
 import Search from 'antd/lib/input/Search';
 import type { SearchProps } from 'antd/lib/input/Search';
 import { HOME_SEARCH_SELECT } from '@/constants';
-
+import { VerticalAlignTopOutlined } from '@ant-design/icons';
 // START: search bar setting
 const suffix = (
   <AudioOutlined
@@ -112,14 +112,7 @@ const HomeSearch: React.FC = () => {
               <Button
                 type='primary'
                 className='flexBetween'
-                icon={
-                  <Image
-                    src='/icons/collapse.svg'
-                    alt='collapse'
-                    width={16}
-                    height={16}
-                  />
-                }
+                icon={<VerticalAlignTopOutlined />}
                 onClick={btnCollapse}
               >
                 Thu gọn

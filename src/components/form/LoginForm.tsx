@@ -14,8 +14,8 @@ const LoginForm = () => {
   const { data: session } = useSession();
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('');
+  const [account, setAccount] = useState('quynh2001');
+  const [password, setPassword] = useState('123123123');
   const [isChecked, setIsChecked] = useState(false);
   const [isShowed, setIsShowed] = useState(false);
   const [errMessage, setErrMessage] = useState('');

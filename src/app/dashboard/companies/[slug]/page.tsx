@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserInfo } from '@/components/form';
 import { Header } from '@/components/shared';
 import { MY_COMPANY_MENU } from '@/constants';
 import { useSession } from 'next-auth/react';
@@ -106,7 +105,6 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
             </div>
           )}
           <SideBar menu={menu} />
-          <UserInfo />
         </div>
         <div className='right border-l border-neutral-5 w-full pl-[60px] pr-[84px] py-6 my-6'>
           {activeItem === 'preview' && <PreviewItem companyId={companyId} />}

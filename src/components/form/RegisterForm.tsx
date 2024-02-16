@@ -6,12 +6,15 @@ import {
   FormEvent,
   useRef,
   use,
+  MouseEvent,
 } from 'react';
 import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
+import { set } from 'mongoose';
 const RegisterForm = () => {
+  const [loading, setLoading] = useState(false);
   const [isShowed, setIsShowed] = useState(false);
   const [isShowed2, setIsShowed2] = useState(false);
   const [password, setPassword] = useState('');
@@ -72,8 +75,9 @@ const RegisterForm = () => {
   // END: Handle password change
 
   // START: KHI SUBMIT FORM: kiem tra do dai va chinh xac
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    setLoading(true);
     if (isValidUsername && username.length > 0) {
       if (password === confirmPassword && password.length >= 8) {
         try {
@@ -90,6 +94,8 @@ const RegisterForm = () => {
           const { user } = await resUserExists.json();
           if (user) {
             console.log('Người dùng đã tồn tại');
+            setLoading(false);
+
             return;
           }
           const res = await fetch('/api/register', {
@@ -114,6 +120,7 @@ const RegisterForm = () => {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
+            setLoading(false);
             formRef.current?.reset();
             router.push('/register/pending');
           } else {
@@ -129,10 +136,12 @@ const RegisterForm = () => {
           console.log('Mật khẩu không trùng khớp');
         }
         setPasswordsMatch(false);
+        setLoading(false);
       }
     } else {
       console.log('Username không hợp lệ');
       setIsValidUsername(false);
+      setLoading(false);
     }
   };
   // END: KHI SUBMIT FORM
@@ -146,7 +155,7 @@ const RegisterForm = () => {
           Tạo tài khoản để tìm cơ hội mới cho doanh nghiệp.
         </p>
         {/* START: Register form*/}
-        <form onSubmit={handleSubmit} ref={formRef}>
+        <form ref={formRef}>
           <div className='grid grid-cols-2 gap-6'>
             <label htmlFor='fName' className='mb-4 w-full block'>
               <p className='w-full block font-semibold text-base text-neutral-10 mb-2'>
@@ -302,12 +311,15 @@ const RegisterForm = () => {
               },
             }}
           >
-            <Button type='primary' block>
-              <input
-                type='submit'
-                value='Đăng ký'
-                className='bg-transparent font-semibold text-base text-neutral-1 w-full h-full cursor-pointer'
-              />
+            <Button
+              type='primary'
+              block
+              loading={loading}
+              onClick={(e: React.MouseEvent<HTMLElement>) => handleSubmit(e)}
+            >
+              <span className='bg-transparent font-semibold text-base text-neutral-1  cursor-pointer'>
+                Đăng ký
+              </span>
             </Button>
           </ConfigProvider>
         </form>
