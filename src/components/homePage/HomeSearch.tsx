@@ -74,7 +74,7 @@ const HomeSearch: React.FC = () => {
     }
   };
 
-  const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
+  const onSearch: SearchProps['onSearch'] = (value) => {
     if (value) {
       router.push(`/companies?name=${value}`);
     }
@@ -134,6 +134,9 @@ const HomeSearch: React.FC = () => {
             value={searchValue}
             className='h-[40px]'
             onChange={(e) => handleInput(e)}
+            onPressEnter={(event: React.KeyboardEvent<HTMLInputElement>) => {
+              onSearch(event.currentTarget.value);
+            }}
           />
         </ConfigProvider>
       </div>

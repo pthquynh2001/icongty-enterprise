@@ -39,7 +39,7 @@ const CompaniesPage = () => {
 
   // fetch api ban dau
   useEffect(() => {
-    if (searchParams) return;
+    if (Object.keys(searchParams).length !== 0) return;
     const fetchData = async () => {
       setLoading(true);
       const res = await companyServices.getAll({
@@ -56,7 +56,7 @@ const CompaniesPage = () => {
 
   // fetch data dua tren filter (khong co api nen khong lam duoc) chi search tren name
   useEffect(() => {
-    if (!searchParams) return;
+    if (Object.keys(searchParams).length === 0) return;
     const fetchData = async () => {
       setLoading(true);
       setSearchLoading(true);
@@ -93,7 +93,7 @@ const CompaniesPage = () => {
           </div>
           <SortBy />
         </div>
-        {searchParams && companiesData && (
+        {Object.keys(searchParams).length !== 0 && companiesData && (
           <div className='mb-10 '>
             Có {companiesData.length} kết quả tìm kiếm cho:{' '}
             <span className='text-royalBlue font-semibold'>
@@ -129,8 +129,8 @@ const CompaniesPage = () => {
           />
         )}
         <div className='flexEnd'>
-          {pagination.totalItems / pagination.limit > 1 ||
-            (companiesData.length < 6 && (
+          {Object.keys(searchParams).length === 0 &&
+            pagination.totalItems / pagination.limit > 1 && (
               <div className='mt-12'>
                 <Pagination
                   pagination={pagination}
@@ -139,7 +139,7 @@ const CompaniesPage = () => {
                   }}
                 />
               </div>
-            ))}
+            )}
         </div>
       </div>
     </div>

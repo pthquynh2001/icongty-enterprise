@@ -117,6 +117,7 @@ const SubpageSearch: React.FC<props> = ({ onSearch, loading }) => {
             suffix={<AudioOutlined className='text-base text-royalBlue-60' />}
             value={searchValue}
             onChange={(e) => handleInput(e)}
+            onPressEnter={handleSearch}
           />
         </div>
         <div className='grow align-middle'>
