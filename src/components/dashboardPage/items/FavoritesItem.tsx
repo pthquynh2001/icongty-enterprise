@@ -5,6 +5,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import CompanyCard from '@/components/shared/card/CompanyCard';
 import * as companyServices from '@/apiServices/companyServices';
 import Pagination from '@/components/shared/pagination/Pagination';
+import SortBy from '@/components/shared/SortBy';
 
 interface FavoritesItemProps {
   user: User;
@@ -83,26 +84,7 @@ const FavoritesItem = ({ user }: FavoritesItemProps) => {
             placeholder='Search your favorite'
           />
         </div>
-        <div className='flexEnd'>
-          <p className='text-xs'>Sắp xếp theo:</p>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorText: '#2f61e6',
-              },
-            }}
-          >
-            <Select
-              defaultValue='Từ A-Z'
-              style={{ width: 102 }}
-              bordered={false}
-              options={[
-                { value: 'asc', label: 'Từ A-Z' },
-                { value: 'desc', label: 'Từ Z-A' },
-              ]}
-            />
-          </ConfigProvider>
-        </div>
+        <SortBy />
       </div>
       <div className='grid grid-cols-3  gap-6'>
         {loading

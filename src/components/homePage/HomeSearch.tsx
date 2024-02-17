@@ -1,52 +1,100 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AudioOutlined } from '@ant-design/icons';
 import { Input, Select, ConfigProvider, Button } from 'antd';
 import Search from 'antd/lib/input/Search';
+import * as categoryServices from '@/apiServices/categoryServices';
 import type { SearchProps } from 'antd/lib/input/Search';
-import { HOME_SEARCH_SELECT } from '@/constants';
+import {
+  COMPANY_SIZE_OPTIONS,
+  HOME_SEARCH_SELECT,
+  PROVINCE_OPTIONS,
+} from '@/constants';
 import { VerticalAlignTopOutlined } from '@ant-design/icons';
-// START: search bar setting
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#2f61e6',
-      opacity: 0.6,
-    }}
-  />
-);
+import { useRouter } from 'next/navigation';
 
-const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
-  console.log(info?.source, value);
-
-// END: search bar setting
-
-// START Select menu setting
-const handleChange = (value: string) => {
-  console.log(value);
+type SelectOption = {
+  label: string;
+  value: string;
+  key: number;
 };
-
-// END: Select menu setting
-
-//
-const onSearchActive = (value: string) => {
-  console.log(value);
-};
-
-//
 
 const HomeSearch: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [selectedCat, setSelectedCat] = useState('Ngành nghề');
+  const [selectedProvince, setSelectedProvince] = useState('Địa điểm');
+  const [selectedSize, setSelectedSize] = useState('Quy mô');
+  const [catOptions, setCatOptions] = useState<SelectOption[]>([]);
+  const router = useRouter();
+
+  const provinceOptions = PROVINCE_OPTIONS.map((item, index) => ({
+    label: item.name,
+    value: item.id,
+    key: index,
+  }));
+  const companySizeOptions = COMPANY_SIZE_OPTIONS.map((item, index) => ({
+    label: item.name,
+    value: item.id,
+    key: index,
+  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await categoryServices.getAll();
+      setCatOptions(
+        res.map((item: { name: any; _id: any }, index: any) => ({
+          label: item.name,
+          value: item._id,
+          key: index,
+        }))
+      );
+    };
+    fetchData();
+  }, []);
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
   const onFocus = () => {
     setIsFocused(true);
   };
   const btnCollapse = () => {
     setIsFocused(false);
-    console.log(isFocused);
+    handleClear();
   };
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const search = e.target.value;
+    if (search == ' ') {
+      setSearchValue('');
+    } else {
+      setSearchValue(search);
+    }
+  };
+
+  const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
+    if (value) {
+      router.push(`/companies?name=${value}`);
+    }
+  };
+
+  const onSelectCat = (value: string) => {
+    setSelectedCat(value);
+  };
+  const onSelectProvince = (value: string) => {
+    setSelectedProvince(value);
+  };
+  const onSelectSize = (value: string) => {
+    setSelectedSize(value);
+  };
+
+  const handleClear = () => {
+    setSelectedCat('Ngành nghề');
+    setSelectedProvince('Địa điểm');
+    setSelectedSize('Quy mô');
+  };
   return (
     <div
       className={`${
@@ -73,16 +121,34 @@ const HomeSearch: React.FC = () => {
             placeholder='Nhập tên công ty, mã số thuế, ngành nghề...'
             enterButton={true}
             size='large'
-            suffix={suffix}
+            suffix={
+              <AudioOutlined
+                style={{
+                  fontSize: 16,
+                  color: '#2f61e6',
+                  opacity: 0.6,
+                }}
+              />
+            }
             onSearch={onSearch}
+            value={searchValue}
             className='h-[40px]'
+            onChange={(e) => handleInput(e)}
           />
         </ConfigProvider>
       </div>
       <div className='w-full block md:hidden'>
         <Input
           placeholder='Nhập tên công ty...'
-          suffix={suffix}
+          suffix={
+            <AudioOutlined
+              style={{
+                fontSize: 16,
+                color: '#2f61e6',
+                opacity: 0.6,
+              }}
+            />
+          }
           className='h-[38px] md:hidden'
           onFocus={onFocus}
         />
@@ -130,16 +196,30 @@ const HomeSearch: React.FC = () => {
           }}
         >
           <div className=' w-full grid grid-cols-2 grid-flow-row gap-2 md:grid-cols-3 md:grid-flow-row md:gap-6'>
-            {HOME_SEARCH_SELECT.map((menu, index) => (
-              <Select
-                key={index}
-                className='w-full h-[38px]'
-                defaultValue={menu.title}
-                onChange={handleChange}
-                options={menu.options}
-                allowClear
-              />
-            ))}
+            <Select
+              defaultValue='Ngành nghề'
+              options={catOptions}
+              filterOption={filterOption}
+              showSearch
+              value={selectedCat}
+              onSelect={onSelectCat}
+            />
+            <Select
+              defaultValue='Địa Điểm'
+              options={provinceOptions}
+              filterOption={filterOption}
+              showSearch
+              value={selectedProvince}
+              onSelect={onSelectProvince}
+            />
+            <Select
+              defaultValue='Quy mô'
+              options={companySizeOptions}
+              filterOption={filterOption}
+              showSearch
+              value={selectedSize}
+              onSelect={onSelectSize}
+            />
           </div>
         </ConfigProvider>
       </div>

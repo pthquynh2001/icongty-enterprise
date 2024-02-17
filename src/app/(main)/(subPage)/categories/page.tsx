@@ -8,6 +8,7 @@ import {
   SubpageSearch,
 } from '@/components/subpage';
 import { CategoryCard, Pagination, Tag, Header } from '@/components/shared';
+import SortBy from '@/components/shared/SortBy';
 
 // import { Metadata } from 'next';
 
@@ -121,33 +122,14 @@ const CategoriesPage = () => {
         desc='Khám phá đối tác tiềm năng của bạn trong hơn 3,000+ doanh nghiệp trên iCongty'
         image='/images/categories-banner.png'
       />
-      <SubpageSearch />
+      {/* <SubpageSearch  /> */}
       <div className='max-container padding-container mb-[120px]'>
         <div className='flexBetween pb-4 mb-8 '>
           <div className='flexStart gap-4 max-w-[50%]'>
             <h3 className=''>Tất cả ngành nghề</h3>
             <Tag type='block'>6,545</Tag>
           </div>
-          <div className='flexEnd '>
-            <p>Sắp xếp theo:</p>
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorText: '#2f61e6',
-                },
-              }}
-            >
-              <Select
-                defaultValue='Từ A-Z'
-                style={{ width: 102 }}
-                bordered={false}
-                options={[
-                  { value: 'asc', label: 'Từ A-Z' },
-                  { value: 'desc', label: 'Từ Z-A' },
-                ]}
-              />
-            </ConfigProvider>
-          </div>
+          <SortBy />
         </div>
         <div className='block  w-full  border-b border-black border-opacity-5 pb-6 mb-12'>
           <h5 className=' text-base font-semibold max-w-[550px] flexBetween '>

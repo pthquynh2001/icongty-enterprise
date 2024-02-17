@@ -4,7 +4,7 @@ import React from 'react';
 const SortBy = () => {
   return (
     <div className='flexEnd'>
-      <p className='text-xs'>Sắp xếp theo:</p>
+      <p>Sắp xếp theo:</p>
       <ConfigProvider
         theme={{
           token: {

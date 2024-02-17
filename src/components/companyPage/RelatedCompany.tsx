@@ -36,7 +36,7 @@ const RelatedCompany = () => {
             ))}
           </div>
         ) : (
-          relatedCompanies.map((company: any, index: number) => (
+          relatedCompanies?.map((company: any, index: number) => (
             <div
               className='relative flex gap-4 w-full border-b border-neutral-4 pb-6'
               key={index}

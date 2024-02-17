@@ -9,6 +9,7 @@ import { AddCompanyModal } from '@/components/modals';
 import Link from 'next/link';
 import * as companyServices from '@/apiServices/companyServices';
 import { Company } from '@/types';
+import SortBy from '@/components/shared/SortBy';
 interface CompaniesItemProps {
   user: User;
 }
@@ -90,24 +91,7 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
             ))}
           </div>
           <div className='col-start-3 flexEnd'>
-            <p className='text-xs'>Sắp xếp theo:</p>
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorText: '#2f61e6',
-                },
-              }}
-            >
-              <Select
-                defaultValue='Từ A-Z'
-                style={{ width: 102 }}
-                bordered={false}
-                options={[
-                  { value: 'asc', label: 'Từ A-Z' },
-                  { value: 'desc', label: 'Từ Z-A' },
-                ]}
-              />
-            </ConfigProvider>
+            <SortBy />
           </div>
         </div>
         <div className='grid grid-cols-3 w-full gap-6'>

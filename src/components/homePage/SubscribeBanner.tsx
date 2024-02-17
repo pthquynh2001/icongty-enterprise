@@ -26,6 +26,7 @@ const SubscribeBanner = () => {
               fill
               sizes='max-width:100%; max-height:100%'
               className='object-contain object-bottom'
+              quality={100}
             />
           </div>
           <div className='absolute w-[193px] h-[193px] bottom-0 -left-7 md:hidden'>
@@ -34,7 +35,6 @@ const SubscribeBanner = () => {
               alt='ele left img'
               fill
               sizes='max-width:100%; max-height:100%'
-              quality={100}
               className='object-contain '
             />
           </div>
