@@ -1,6 +1,6 @@
 export interface Company {
   service?: any[];
-  _id: string;
+  id: string;
   author: {
     _id: string;
     username: string;

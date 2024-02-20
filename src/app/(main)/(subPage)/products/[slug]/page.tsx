@@ -24,7 +24,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   const productId = params.slug.split('-').slice(-1)[0];
   const companyId = product?.companyId || '';
   const companyParams = company
-    ? `/companies/${company?.slug}-${company?._id}`
+    ? `/companies/${company?.slug}-${company?.id}`
     : '';
 
   // fetch API product
@@ -45,7 +45,7 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
   useEffect(() => {
     const getCompany = async () => {
       const res = await companyServices.getAll({
-        params: { page: 1, limit: 1, _id: companyId },
+        params: { page: 1, limit: 1, id: companyId },
       });
       setCompany(res[0]);
     };

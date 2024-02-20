@@ -18,8 +18,8 @@ import MyPortfolioItem from '@/components/myCompanyPage/myPortfolioItem/MyPortfo
 import EditorItem from '@/components/myCompanyPage/EditorItem';
 import ServiceItem from '@/components/myCompanyPage/ServiceItem';
 
-const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
-  const companyId = params.slug;
+const MyCompanyPage = ({ params }: { params: { id: string } }) => {
+  const companyId = params.id;
   const [company, setCompany] = useState<Company>({} as Company);
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +42,7 @@ const MyCompanyPage = ({ params }: { params: { slug: string } }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await companyServices.getAll({
-        params: { _id: companyId },
+        params: { id: companyId },
       });
       setCompany(res[0]);
       setLoading(false);

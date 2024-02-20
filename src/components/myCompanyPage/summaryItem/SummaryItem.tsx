@@ -11,7 +11,7 @@ const SummaryItem = ({ companyId }: { companyId: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await companyServices.getAll({
-        params: { _id: companyId },
+        params: { id: companyId },
       });
       setCompany(res[0]);
     };
@@ -22,7 +22,7 @@ const SummaryItem = ({ companyId }: { companyId: string }) => {
   return (
     <div className='flex flex-col gap-6'>
       <Thumbnail title='Brand Identity' item={company} />
-      <CompanyBasicInfo />
+      <CompanyBasicInfo companyId={companyId} />
     </div>
   );
 };

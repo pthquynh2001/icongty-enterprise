@@ -12,7 +12,7 @@ const PreviewItem = ({ companyId }: { companyId: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await companyServices.getAll({
-        params: { _id: companyId },
+        params: { id: companyId },
       });
       setCompany(res[0]);
       setLoading(false);

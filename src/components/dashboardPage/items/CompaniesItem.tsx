@@ -233,7 +233,7 @@ const CompaniesItem = ({ user }: CompaniesItemProps) => {
                       }}
                     >
                       <Link
-                        href={`/dashboard/companies/${company._id}`}
+                        href={`/dashboard/companies/${company.id}`}
                         className='w-full'
                       >
                         <Button type='primary' block>

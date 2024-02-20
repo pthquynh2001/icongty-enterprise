@@ -43,7 +43,7 @@ const RelatedCompany = () => {
             >
               <div className='relative w-16 h-16 rounded overflow-hidden shadow-banner flex-shrink-0'>
                 <Link
-                  href={`/companies/${company.slug}-${company._id}`}
+                  href={`/companies/${company.slug}-${company.id}`}
                   className='block relative w-full h-full'
                 >
                   <Image
@@ -56,7 +56,7 @@ const RelatedCompany = () => {
                 </Link>
               </div>
               <div className=''>
-                <Link href={`/companies/${company.slug}-${company._id}`}>
+                <Link href={`/companies/${company.slug}-${company.id}`}>
                   <p
                     className='text-xs font-semibold text-neutral-10 line-clamp-2 mb-2'
                     title={company.name}

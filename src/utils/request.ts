@@ -9,6 +9,18 @@ export const getCompany = async (path: string, params?: {}) => {
   const res = await requestCompany.get(path, params);
   return res.data;
 };
+export const createCompany = async (path: string) => {
+  const res = await requestCompany.post(path);
+  return res.data;
+};
+export const updateCompany = async (path: string) => {
+  const res = await requestCompany.put(path);
+  return res.data;
+};
+export const deleteCompany = async (path: string, params?: {}) => {
+  const res = await requestCompany.delete(path, params);
+  return res.data;
+};
 
 // GET POST
 export const requestPost = axios.create({

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Image from 'next/image';
 import {
   CalendarOutlined,
@@ -85,7 +86,7 @@ const langTagRender: TagRender = (props) => {
   );
 };
 
-const CompanyBasicInfo = () => {
+const CompanyBasicInfo = ({ companyId }: { companyId: string }) => {
   return (
     <ContentFrame title='Basic Information'>
       <form className=''>

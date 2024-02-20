@@ -222,7 +222,7 @@ const CompanyCard = ({
         <div className='w-full'>
           <div className='w-full h-[92px] relative'>
             <Link
-              href={`/companies/${card.slug}-${card._id}`}
+              href={`/companies/${card.slug}-${card.id}`}
               className='block w-full h-full absolute'
             >
               <Image
@@ -251,7 +251,7 @@ const CompanyCard = ({
           </div>
 
           <div className='min-h-[78px]'>
-            <Link href={`/companies/${card.slug}-${card._id}`}>
+            <Link href={`/companies/${card.slug}-${card.id}`}>
               <h5 className='text-base text-neutral-10 line-clamp-2 mt-6 mb-2 hover:text-royalBlue'>
                 {card.name}
               </h5>

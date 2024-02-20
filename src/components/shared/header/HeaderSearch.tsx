@@ -25,7 +25,7 @@ const HeaderSearch = () => {
           res.slice(0, 5).map((item: Company, index: number) => ({
             key: index,
             label: (
-              <Link href={`/companies/${item.slug}-${item._id}`}>
+              <Link href={`/companies/${item.slug}-${item.id}`}>
                 {item.name}
               </Link>
             ),
@@ -43,9 +43,7 @@ const HeaderSearch = () => {
         allData.slice(0, 5).map((item: Company, index: number) => ({
           key: index,
           label: (
-            <Link href={`/companies/${item.slug}-${item._id}`}>
-              {item.name}
-            </Link>
+            <Link href={`/companies/${item.slug}-${item.id}`}>{item.name}</Link>
           ),
         })) as MenuProps['items']
       );
@@ -60,7 +58,7 @@ const HeaderSearch = () => {
           res?.slice(0, 5).map((item: Company, index: number) => ({
             key: index,
             label: (
-              <Link href={`/companies/${item.slug}-${item._id}`}>
+              <Link href={`/companies/${item.slug}-${item.id}`}>
                 {item.name}
               </Link>
             ),
