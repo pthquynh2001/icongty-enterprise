@@ -10,19 +10,19 @@ const nextConfig = {
         pathname: '/icongty-upload/**',
       },
       {
-        protocol: 'https',
         hostname: 'loremflickr.com',
-        port: '',
       },
       {
-        protocol: 'https',
         hostname: 'cloudflare-ipfs.com',
-        port: '',
       },
       {
-        protocol: 'https',
         hostname: 'gw.alipayobjects.com',
-        port: '',
+      },
+      {
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        hostname: 'utfs.io',
       },
     ],
   },
