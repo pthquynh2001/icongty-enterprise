@@ -12,7 +12,8 @@ import Link from 'next/link';
 import { Button, ConfigProvider } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
-import { set } from 'mongoose';
+import axios from 'axios';
+
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const [isShowed, setIsShowed] = useState(false);
@@ -81,38 +82,25 @@ const RegisterForm = () => {
     if (isValidUsername && username.length > 0) {
       if (password === confirmPassword && password.length >= 8) {
         try {
-          const resUserExists = await fetch('/api/userExists', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email,
-              username,
-            }),
+          const resUserExists = await axios.post('/api/userExists', {
+            email,
+            username,
           });
-          const { user } = await resUserExists.json();
+          const { user } = await resUserExists.data;
           if (user) {
             console.log('Người dùng đã tồn tại');
             setLoading(false);
-
             return;
           }
-          const res = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              firstName,
-              lastName,
-              username,
-              email,
-              password,
-            }),
+          const res = await axios.post('/api/register', {
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
           });
 
-          if (res.ok) {
+          if (res.status == 201) {
             console.log('Đăng ký thành công');
             setFirstName('');
             setLastName('');
@@ -125,6 +113,7 @@ const RegisterForm = () => {
             router.push('/register/pending');
           } else {
             console.log('Đăng ký thất bại');
+            setLoading(false);
           }
         } catch (error) {
           console.error('Error during register', error);

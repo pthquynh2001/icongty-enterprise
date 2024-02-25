@@ -4,8 +4,16 @@ import bcrypt from 'bcryptjs';
 
 export async function PUT(req: Request) {
   try {
-    const { id, email, username, password, firstName, lastName, phone } =
-      await req.json();
+    const {
+      id,
+      email,
+      username,
+      password,
+      firstName,
+      lastName,
+      phone,
+      picture,
+    } = await req.json();
     await connectMongoDB();
 
     const hashedPassword = password
@@ -19,6 +27,7 @@ export async function PUT(req: Request) {
       firstName: firstName,
       lastName: lastName,
       phone: phone,
+      picture: picture,
     };
 
     if (Object.keys(updateData).length > 0) {

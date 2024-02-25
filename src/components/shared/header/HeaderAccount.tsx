@@ -56,8 +56,9 @@ const HeaderAccount = ({
               }`}
             >{`Hi, ${user.firstName} ${user.lastName}`}</p>
             <Image
-              src='/images/banner.png'
+              src={user.picture || '/images/banner.png'}
               width={48}
+              priority
               height={48}
               alt='avatar'
               className='rounded-full object-cover'

@@ -21,30 +21,51 @@ const LoginForm = () => {
   const [errMessage, setErrMessage] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    type: 'credentials' | 'google'
+  ) => {
     e.preventDefault();
-    setLoading(true);
-    if (!account || !password) {
-      setErrMessage('Vui lòng nhập đầy đủ thông tin');
-      setLoading(false);
-      return;
-    } else {
+    if (type === 'credentials') {
+      setLoading(true);
+      if (!account || !password) {
+        setErrMessage('Vui lòng nhập đầy đủ thông tin');
+        setLoading(false);
+        return;
+      } else {
+        try {
+          const res = await signIn('credentials', {
+            account,
+            password,
+            redirect: false,
+          });
+          if (res?.error) {
+            setErrMessage('Email hoặc mật khẩu không đúng');
+            setLoading(false);
+            return;
+          }
+          if (rememberMe) {
+            // set remember password
+          }
+          setLoading(false);
+
+          router.replace('dashboard');
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    if (type === 'google') {
       try {
-        const res = await signIn('credentials', {
-          account,
-          password,
+        const res = await signIn('google', {
           redirect: false,
         });
         if (res?.error) {
-          setErrMessage('Email hoặc mật khẩu không đúng');
+          setErrMessage('Đăng nhập không thành công');
           setLoading(false);
           return;
         }
-        if (rememberMe) {
-          // set remember password
-        }
-        setLoading(false);
-
+        // ???
         router.replace('dashboard');
       } catch (error) {
         console.log(error);
@@ -161,7 +182,7 @@ const LoginForm = () => {
             <Button
               type='primary'
               block
-              onClick={(e) => handleSubmit(e)}
+              onClick={(e) => handleSubmit(e, 'credentials')}
               loading={loading}
             >
               <span className='font-semibold text-base text-neutral-1 h-full cursor-pointer'>
@@ -197,7 +218,12 @@ const LoginForm = () => {
               />
               <p className='font-semibold'>Đăng nhập với Facebook</p>
             </Button>
-            <Button type='default' block className='relative'>
+            <Button
+              type='default'
+              block
+              className='relative'
+              onClick={(e) => handleSubmit(e, 'google')}
+            >
               <Image
                 src='/icons/google-round.svg'
                 alt='google'

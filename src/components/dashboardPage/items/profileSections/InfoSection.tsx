@@ -8,6 +8,7 @@ import { Button, message } from 'antd';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { ContentFrame } from '@/components/subpage';
 import { validatePhone, validateUsername } from '@/utils/validationUtils';
+import { UploadButton } from '@/utils/uploadthing';
 
 const InfoSection = ({ user }: { user: User }) => {
   const { update } = useSession();
@@ -22,6 +23,7 @@ const InfoSection = ({ user }: { user: User }) => {
   const [errInput, setErrInput] = useState(0);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState(user.picture);
 
   // pop up message thong bao thanh cong
   const success = () => {
@@ -113,6 +115,7 @@ const InfoSection = ({ user }: { user: User }) => {
       success();
     } catch (err) {
       setErrMessage((err as Error).message);
+      setLoading(false);
     }
   };
   // reset khi out form
@@ -123,6 +126,7 @@ const InfoSection = ({ user }: { user: User }) => {
   };
   // cancel khi out form
   const handleCancel = () => {
+    setLoading(false);
     setFirstName(user.firstName);
     setLastName(user.lastName);
     setUsername(user.username);
@@ -131,6 +135,30 @@ const InfoSection = ({ user }: { user: User }) => {
       formRef.current.reset();
     }
     reset();
+  };
+
+  // handle update image
+
+  const handleUpdateImage = async (url: string) => {
+    if (url) {
+      try {
+        // cap nhat user trong session
+        await update({ picture: url });
+        // cap nhat user trong database
+        const res = await axios.put('/api/update', {
+          id: userId,
+          picture: url,
+        });
+        if (res.status === 200) {
+          console.log('Update anh dai dien thanh cong');
+        } else {
+          console.log('Update anh dai dien that bai');
+        }
+        success();
+      } catch (err) {
+        setErrMessage((err as Error).message);
+      }
+    }
   };
   return (
     <ContentFrame title='Basic Information' className='w-full relative'>
@@ -298,18 +326,40 @@ const InfoSection = ({ user }: { user: User }) => {
         </form>
         <div className='flexStart flex-col w-[128px] mx-auto'>
           <Image
-            src='/images/banner.png'
+            src={user.picture || '/images/banner.png'}
             width={128}
             height={128}
+            priority
             alt='avatar'
             className='rounded-full object-cover mb-6'
           />
-          <Button type='primary' block className='mb-2'>
+          {/* <Button type='primary' block className='mb-2'>
             <div className='flexCenter gap-2'>
               <CloudUploadOutlined />
               <p className='font-semibold'>Update</p>
             </div>
-          </Button>
+          </Button> */}
+          <UploadButton
+            className='w-full ut-button:h-8 ut-button:w-full ut-button:max-w-[100%] ut-button:rounded ut-button:hover:opacity-80  ut-button:font-semibold ut-button:bg-royalBlue ut-button:ut-uploading:bg-royalBlue/60 ut-button:ut-uploading:text-neutral-1'
+            content={{
+              button({ ready, isUploading }) {
+                if (ready) return <div>Update</div>;
+                if (isUploading) return <div>Uploading...</div>;
+              },
+              allowedContent() {
+                return '';
+              },
+            }}
+            endpoint={'imageUploader'}
+            onClientUploadComplete={(res) => {
+              setImageUrl(res[0].url);
+              handleUpdateImage(res[0].url);
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
           <Button type='primary' ghost block>
             <p className='font-semibold'>Delete</p>
           </Button>

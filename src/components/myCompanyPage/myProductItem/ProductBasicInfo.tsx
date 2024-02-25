@@ -306,7 +306,7 @@ const ProductBasicInfo = ({ productId }: { productId: string }) => {
                       return '';
                     },
                   }}
-                  endpoint={'imageUploader'}
+                  endpoint={'imagesUploader'}
                   onClientUploadComplete={(res) => {
                     if (res.length > 1) {
                       setImageUrls(res.map((item) => ({ url: item.url })));

@@ -60,7 +60,7 @@ const ImageUpload = () => {
               if (isUploading) return <div>Uploading...</div>;
             },
           }}
-          endpoint={'imageUploader'}
+          endpoint={'imagesUploader'}
           onClientUploadComplete={(res) => {
             console.log('file', res);
             setImageUrl(res[0].url);
